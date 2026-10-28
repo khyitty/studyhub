@@ -8,3 +8,5 @@ dev-dist
 .superpowers
 *.log
 .DS_Store
+*.tsbuildinfo
+firebase-debug.log
