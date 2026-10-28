@@ -1,1 +1,66 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+
+  --color-bg: #fffbf3;
+  --color-surface: #ffffff;
+  --color-surface-2: #fff3e6;
+  --color-ink: #2b2a33;
+  --color-ink-muted: #6b6878;
+  --color-line: #f1e4d6;
+
+  --color-peach: #ffd6c2;
+  --color-peach-deep: #e8835a;
+  --color-lilac: #e2d8fa;
+  --color-lilac-deep: #8a6bd6;
+  --color-mint: #cdeedd;
+  --color-mint-deep: #3f9a6e;
+  --color-butter: #ffeaa8;
+  --color-butter-deep: #c48a00;
+
+  --color-primary: #f6a48b;
+  --color-on-primary: #3a1f14;
+  --color-accent: #8a6bd6;
+  --color-danger: #d64545;
+  --color-success: #3f9a6e;
+
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 2px 12px rgba(120, 80, 40, 0.08);
+}
+
+@layer base {
+  :root { color-scheme: light; }
+  .dark { color-scheme: dark; }
+  .dark {
+    --color-bg: #1d1a22;
+    --color-surface: #28242f;
+    --color-surface-2: #332d3a;
+    --color-ink: #f3eff8;
+    --color-ink-muted: #b3adc2;
+    --color-line: #3b3544;
+    --color-peach: #5a3a2e;
+    --color-peach-deep: #ffb08f;
+    --color-lilac: #3e3458;
+    --color-lilac-deep: #c3aef8;
+    --color-mint: #2d4a3c;
+    --color-mint-deep: #8fdab5;
+    --color-butter: #4d4020;
+    --color-butter-deep: #ffd666;
+    --color-accent: #c3aef8;
+    --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+  html { font-family: var(--font-sans); }
+  body {
+    @apply bg-bg text-ink antialiased;
+    font-feature-settings: "tnum" 1;
+  }
+  button, [role="button"] { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
