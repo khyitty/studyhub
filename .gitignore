@@ -1,0 +1,10 @@
+node_modules
+dist
+dev-dist
+.env.local
+.env*.local
+.vercel
+.firebase
+.superpowers
+*.log
+.DS_Store
