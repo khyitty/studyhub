@@ -1,4 +1,4 @@
-import { mergeImport } from './mergeImport'
+import { importProblems, mergeImport } from './mergeImport'
 import type { Course, ParsedCourse, TermCode } from './types'
 
 const base: Omit<Course, 'id' | 'source'> = {
@@ -37,5 +37,21 @@ describe('mergeImport', () => {
     const { toWrite, deleteIds } = mergeImport([], parsed)
     expect(deleteIds).toEqual([])
     expect(toWrite).toHaveLength(3)
+  })
+})
+
+describe('importProblems', () => {
+  const term = { code: '2024-1', label: '', order: 20241, requested: 18, earned: 18, totalPoints: 73.5, gpaCert: 4.32, gpa: 4.32, gpa100: 98.2 }
+  test('both sides present → no problems', () => {
+    expect(importProblems({ terms: [term], assigned: [parsed[0]] })).toEqual([])
+  })
+  test('terms only → blocks save', () => {
+    expect(importProblems({ terms: [term], assigned: [] })).toEqual(['grades.errNoCourses'])
+  })
+  test('courses only → blocks save', () => {
+    expect(importProblems({ terms: [], assigned: [parsed[0]] })).toEqual(['grades.errNoTerms'])
+  })
+  test('nothing parsed → both problems', () => {
+    expect(importProblems({ terms: [], assigned: [] })).toEqual(['grades.errNoTerms', 'grades.errNoCourses'])
   })
 })

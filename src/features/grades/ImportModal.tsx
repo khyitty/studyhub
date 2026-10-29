@@ -3,6 +3,7 @@ import { Button, Modal, Textarea, useToast } from '../../components/ui'
 import { useLang, useT } from '../../i18n/useT'
 import { termLabel } from '../../lib/parsers/termCode'
 import { previewImport, type Grades } from './useGrades'
+import { importProblems } from '../../lib/mergeImport'
 
 type Preview = ReturnType<typeof previewImport>
 
@@ -30,14 +31,16 @@ export function ImportModal({ open, onClose, g }: { open: boolean; onClose: () =
     } finally { setBusy(false) }
   }
 
-  const empty = preview != null && preview.terms.length === 0 && preview.assigned.length === 0
+  const problems = preview ? importProblems(preview) : []
+  const empty = preview != null && problems.length === 2
+  const blocked = preview != null && problems.length > 0
   const replacing = g.courses.some((c) => c.source === 'portal')
 
   return (
     <Modal open={open} onClose={close} title={t('grades.import')}
       footer={<>
         <Button variant="secondary" onClick={close} disabled={busy}>{t('common.cancel')}</Button>
-        {preview && !empty
+        {preview && !blocked
           ? <Button onClick={save} disabled={busy}>{t('common.save')}</Button>
           : <Button onClick={doPreview} disabled={!termsText.trim() && !coursesText.trim()}>{t('grades.preview')}</Button>}
       </>}>
@@ -45,6 +48,11 @@ export function ImportModal({ open, onClose, g }: { open: boolean; onClose: () =
         <Textarea label={t('grades.importTerms')} rows={5} value={termsText} placeholder={t('grades.pasteTermsHint')} onChange={(e) => { setTermsText(e.target.value); setPreview(null) }} className="font-mono" />
         <Textarea label={t('grades.importCourses')} rows={5} value={coursesText} placeholder={t('grades.pasteCoursesHint')} onChange={(e) => { setCoursesText(e.target.value); setPreview(null) }} className="font-mono" />
         {empty && <p className="rounded-card bg-butter px-4 py-3 text-sm font-semibold text-butter-deep">{t('grades.nothingParsed')}</p>}
+        {blocked && !empty && (
+          <ul className="rounded-card bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
+            {problems.map((k) => <li key={k}>{t(k)}</li>)}
+          </ul>
+        )}
         {preview && !empty && (
           <div className="space-y-2">
             <table className="w-full text-sm">

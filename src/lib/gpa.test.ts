@@ -65,3 +65,22 @@ describe('gpa', () => {
     expect(projectedGpa(324, 77, [{ credits: 3, grade: 'A+' }, { credits: 3, grade: 'B+' }])).toBe(4.19)
   })
 })
+
+describe('applyRetakeRule ignores codes that are not real course codes', () => {
+  const mk = (id: string, code: string, termCode: string): Course => ({
+    id, code, section: '00', name: id, category: '전공선택', area: '', credits: 3, score: null, grade: 'A', point: 4.0,
+    termCode, source: 'manual', supersededBy: null, order: 0,
+  })
+  test('empty codes never supersede each other', () => {
+    const out = applyRetakeRule([mk('a', '', '2024-1'), mk('b', '', '2025-1')])
+    expect(out.map((c) => c.supersededBy)).toEqual([null, null])
+  })
+  test('numeric placeholder codes (exchange courses) never supersede each other', () => {
+    const out = applyRetakeRule([mk('a', '1', '2025-S'), mk('b', '1', '2026-1')])
+    expect(out.map((c) => c.supersededBy)).toEqual([null, null])
+  })
+  test('real codes still follow the latest-term-wins rule', () => {
+    const out = applyRetakeRule([mk('a', 'STAT201', '2024-1'), mk('b', 'STAT201', '2025-1')])
+    expect(out.find((c) => c.id === 'a')?.supersededBy).toBe('b')
+  })
+})

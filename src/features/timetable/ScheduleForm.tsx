@@ -57,7 +57,7 @@ export function ScheduleForm({ open, onClose, item, defaultDate, onSave, onDelet
     } finally { setBusy(false) }
   }
   const del = async () => {
-    if (!item || !onDelete) return
+    if (!item || !onDelete || !window.confirm(t('timetable.deleteConfirm'))) return
     setBusy(true)
     try { await onDelete(item.id); onClose() } finally { setBusy(false) }
   }

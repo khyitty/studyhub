@@ -24,6 +24,8 @@ export function applyRetakeRule(courses: Course[]): Course[] {
   const byCode = new Map<string, Course[]>()
   for (const c of courses) {
     if (!c.termCode) continue
+    // manual courses without a code, and exchange courses with numeric placeholder codes, are never retakes
+    if (!c.code || /^\d+$/.test(c.code)) continue
     const list = byCode.get(c.code) ?? []
     list.push(c)
     byCode.set(c.code, list)

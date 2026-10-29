@@ -26,7 +26,7 @@ export function normalizeTodo(raw: DocumentData, id: string): Todo {
 
 export function useTodos() {
   const col = useUserCollection<Todo>('todos', normalizeTodo)
-  const { profile, update: updateProfile } = useProfile()
+  const { profile, addXp } = useProfile()
   const toast = useToast()
   const t = useT()
   const today = todayISO()
@@ -46,15 +46,13 @@ export function useTodos() {
     const todo = col.items.find((x) => x.id === id)
     if (!todo) return
     const done = !todo.done
-    await col.update(id, { done, doneAt: done ? new Date().toISOString() : null })
+    const delta = done ? XP_TODO : -XP_TODO
+    // atomic increment: two quick taps or an offline queue never read a stale xp
+    await Promise.all([col.update(id, { done, doneAt: done ? new Date().toISOString() : null }), addXp(delta)])
     const before = profile.xp
-    const after = applyXp(before, done ? XP_TODO : -XP_TODO)
-    if (after !== before) {
-      await updateProfile({ xp: after })
-      const lv = levelFor(after)
-      if (lv > levelFor(before)) toast.show(t('home.levelUp', { level: lv }))
-    }
-  }, [col, profile.xp, updateProfile, toast, t])
+    const lv = levelFor(applyXp(before, delta))
+    if (lv > levelFor(before)) toast.show(t('home.levelUp', { level: lv }))
+  }, [col, profile.xp, addXp, toast, t])
 
   const remove = useCallback((id: string) => col.remove(id), [col])
 

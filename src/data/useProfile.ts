@@ -1,48 +1,17 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'
+import { doc, increment, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useUid } from '../features/auth/AuthProvider'
-import { DEFAULT_SCALE4 } from '../lib/gpa'
-import type { Grade, TermCode } from '../lib/types'
+import { DEFAULT_PROFILE, normalizeProfile, type Profile } from './profile'
 
-export interface Profile {
-  lang: 'ko' | 'en'
-  theme: 'system' | 'light' | 'dark'
-  xp: number
-  currentTerm: TermCode
-  termStart: string
-  termEnd: string
-  gradReq: { total: number; major: number; liberal: number }
-  gpa4Scale: Record<Grade, number>
-  gpaPortal: number | null
-  appName: string
-}
-
-export const DEFAULT_PROFILE: Profile = {
-  lang: 'ko',
-  theme: 'system',
-  xp: 0,
-  currentTerm: '2026-2',
-  termStart: '2026-09-01',
-  termEnd: '2026-12-20',
-  gradReq: { total: 130, major: 0, liberal: 0 },
-  gpa4Scale: DEFAULT_SCALE4,
-  gpaPortal: null,
-  appName: 'StudyHub',
-}
-
-export function normalizeProfile(raw: Partial<Profile> | undefined): Profile {
-  return {
-    ...DEFAULT_PROFILE,
-    ...raw,
-    gradReq: { ...DEFAULT_PROFILE.gradReq, ...(raw?.gradReq ?? {}) },
-    gpa4Scale: { ...DEFAULT_PROFILE.gpa4Scale, ...(raw?.gpa4Scale ?? {}) },
-  }
-}
+export { DEFAULT_PROFILE, normalizeProfile } from './profile'
+export type { Profile } from './profile'
 
 export interface ProfileCtx {
   profile: Profile
   update: (patch: Partial<Profile>) => Promise<void>
+  /** Atomic xp change (server-side increment), safe offline and across devices. */
+  addXp: (delta: number) => Promise<void>
   loading: boolean
 }
 
@@ -56,7 +25,9 @@ export function useProfileDoc(): ProfileCtx {
     const ref = doc(db, 'users', uid)
     return onSnapshot(ref, (snap) => {
       if (!snap.exists()) {
-        void setDoc(ref, DEFAULT_PROFILE)
+        // Only create once the server confirms the doc is missing; merge so a stale
+        // cache miss can never overwrite data written from another device.
+        if (!snap.metadata.fromCache) void setDoc(ref, DEFAULT_PROFILE, { merge: true })
         return
       }
       setProfile(normalizeProfile(snap.data() as Partial<Profile>))
@@ -67,11 +38,14 @@ export function useProfileDoc(): ProfileCtx {
   const update = async (patch: Partial<Profile>) => {
     await updateDoc(doc(db, 'users', uid), patch)
   }
+  const addXp = async (delta: number) => {
+    await updateDoc(doc(db, 'users', uid), { xp: increment(delta) })
+  }
 
-  return { profile, update, loading }
+  return { profile, update, addXp, loading }
 }
 
-export const ProfileContext = createContext<ProfileCtx>({ profile: DEFAULT_PROFILE, update: async () => {}, loading: true })
+export const ProfileContext = createContext<ProfileCtx>({ profile: DEFAULT_PROFILE, update: async () => {}, addXp: async () => {}, loading: true })
 
 export function useProfile(): ProfileCtx {
   return useContext(ProfileContext)
