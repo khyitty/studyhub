@@ -32,3 +32,7 @@ describe('shouldSeedCategories', () => {
     expect(DEFAULT_CATEGORIES.map((c) => [c.name, c.color])).toEqual([['공부', 'sky'], ['연구', 'mint'], ['대학원', 'pink']])
   })
 })
+
+test('default categories carry fixed ids so seeding twice overwrites instead of duplicating', () => {
+  expect(DEFAULT_CATEGORIES.map((c) => c.id)).toEqual(['seed-study', 'seed-research', 'seed-grad'])
+})

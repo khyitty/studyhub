@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import { collection, doc, getDocs, query, where, writeBatch } from 'firebase/firestore'
+import { collection, doc, getDocs, query, setDoc, where, writeBatch } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { useUid } from '../auth/AuthProvider'
 import { useUserCollection } from '../../data/useUserCollection'
@@ -17,6 +17,12 @@ export function useCategories() {
     const next = categories.length ? Math.max(...categories.map((c) => c.order)) + 1 : 0
     return col.add({ name: name.trim(), color, order: order ?? next })
   }, [col, categories])
+
+  /** Idempotent create with a fixed id (used for the default seed). */
+  const put = useCallback((c: Category) => {
+    const { id, ...data } = c
+    return setDoc(doc(db, 'users', uid, 'categories', id), data)
+  }, [uid])
 
   const update = useCallback((id: string, patch: Partial<Pick<Category, 'name' | 'color'>>) => col.update(id, patch), [col])
 
@@ -46,5 +52,5 @@ export function useCategories() {
     await batch.commit()
   }, [uid, categories])
 
-  return { categories, add, update, remove, move, loading: col.loading }
+  return { categories, add, put, update, remove, move, loading: col.loading }
 }

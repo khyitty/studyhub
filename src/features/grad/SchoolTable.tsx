@@ -50,10 +50,12 @@ export function SchoolTable({ schools, today, mine, sortKey, onSort, expandedId,
             const open = expandedId === s.id
             return (
               <Fragment key={s.id}>
-                <tr onClick={() => onToggle(s.id)} aria-expanded={open} className="cursor-pointer hover:bg-surface-2/60">
+                <tr onClick={() => onToggle(s.id)} className="cursor-pointer hover:bg-surface-2/60">
                   <td className={TD}>
-                    <span className="block font-bold">{s.name}</span>
-                    <span className="block text-[11px] font-normal text-ink-muted">{s.program}</span>
+                    <button type="button" aria-expanded={open} onClick={(e) => { e.stopPropagation(); onToggle(s.id) }} className="block text-left">
+                      <span className="block font-bold">{s.name}</span>
+                      <span className="block text-[11px] font-normal text-ink-muted">{s.program}</span>
+                    </button>
                   </td>
                   <td className={TD}><DeadlineCell school={s} today={today} /></td>
                   <td className={TD}><GreTag gre={s.gre} /></td>

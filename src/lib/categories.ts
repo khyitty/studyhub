@@ -14,10 +14,11 @@ export const PALETTE_CLASS: Record<PaletteColor, { fill: string; text: string; b
   peach: { fill: 'bg-peach', text: 'text-peach-text', border: 'border-peach', borderText: 'border-peach-text' },
 }
 
-export const DEFAULT_CATEGORIES: Omit<Category, 'id'>[] = [
-  { name: '공부', color: 'sky', order: 0 },
-  { name: '연구', color: 'mint', order: 1 },
-  { name: '대학원', color: 'pink', order: 2 },
+/** Fixed ids: seeding is written with setDoc, so a second seeder (another tab/device) overwrites instead of duplicating. */
+export const DEFAULT_CATEGORIES: Category[] = [
+  { id: 'seed-study', name: '공부', color: 'sky', order: 0 },
+  { id: 'seed-research', name: '연구', color: 'mint', order: 1 },
+  { id: 'seed-grad', name: '대학원', color: 'pink', order: 2 },
 ]
 
 export const OTHER_GROUP_ID = '__other__'

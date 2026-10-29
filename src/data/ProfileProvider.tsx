@@ -13,15 +13,15 @@ function applyTheme(theme: 'system' | 'light' | 'dark') {
 
 /** Creates the default categories once per user (also for users who existed before categories shipped). */
 function useSeedCategories(ctx: ReturnType<typeof useProfileDoc>) {
-  const { categories, add, loading } = useCategories()
+  const { categories, put, loading } = useCategories()
   const seeded = useRef(false)
   const { profile, update } = ctx
   useEffect(() => {
     if (seeded.current) return
     if (!shouldSeedCategories(profile, categories, loading, ctx.loading)) return
     seeded.current = true
-    void Promise.all(DEFAULT_CATEGORIES.map((c) => add(c.name, c.color, c.order))).then(() => update({ categoriesSeeded: true }))
-  }, [profile, categories, loading, ctx.loading, add, update])
+    void Promise.all(DEFAULT_CATEGORIES.map(put)).then(() => update({ categoriesSeeded: true }))
+  }, [profile, categories, loading, ctx.loading, put, update])
 }
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
