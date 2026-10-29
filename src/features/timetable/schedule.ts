@@ -1,4 +1,5 @@
 import type { DocumentData } from 'firebase/firestore'
+import { PALETTE_CLASS } from '../../lib/categories'
 import { isBetween, weekdayOf } from '../../lib/dates'
 import type { PaletteColor, ScheduleItem, ScheduleKind } from '../../lib/types'
 
@@ -9,13 +10,10 @@ export const KINDS: ScheduleKind[] = ['class', 'research', 'work', 'other']
 /** Pastel color per kind (shared by timetable blocks and the home schedule list). */
 export const KIND_COLOR: Record<ScheduleKind, PaletteColor> = { class: 'sky', research: 'mint', work: 'butter', other: 'lilac' }
 
-/** Tailwind classes per kind: block background + text. */
-export const KIND_STYLE: Record<ScheduleKind, { bg: string; text: string; dot: string }> = {
-  class: { bg: 'bg-peach', text: 'text-peach-deep', dot: 'bg-peach-deep' },
-  research: { bg: 'bg-lilac', text: 'text-lilac-deep', dot: 'bg-lilac-deep' },
-  work: { bg: 'bg-mint', text: 'text-mint-deep', dot: 'bg-mint-deep' },
-  other: { bg: 'bg-butter', text: 'text-butter-deep', dot: 'bg-butter-deep' },
-}
+/** Tailwind classes per kind, derived from the pastel palette: block background, darker text, left border. */
+export const KIND_STYLE: Record<ScheduleKind, { bg: string; text: string; border: string }> = Object.fromEntries(
+  KINDS.map((k) => { const c = PALETTE_CLASS[KIND_COLOR[k]]; return [k, { bg: c.fill, text: c.text, border: c.border }] }),
+) as Record<ScheduleKind, { bg: string; text: string; border: string }>
 
 export function toMinutes(hhmm: string): number {
   const [h, m] = hhmm.split(':').map(Number)

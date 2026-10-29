@@ -18,7 +18,7 @@ type Props = {
 function Chip({ active, onClick, children, className = '' }: { active: boolean; onClick: () => void; children: React.ReactNode; className?: string }) {
   return (
     <button type="button" aria-pressed={active} onClick={onClick}
-      className={`min-h-10 min-w-10 rounded-pill px-3 text-sm font-semibold transition ${active ? 'bg-ink text-bg' : 'bg-surface-2 text-ink-muted'} ${className}`}>
+      className={`min-h-10 min-w-10 rounded-pill border px-3 text-sm font-semibold transition ${active ? 'border-primary bg-primary text-on-primary' : 'border-line-strong text-ink-muted hover:text-ink'} ${className}`}>
       {children}
     </button>
   )
@@ -80,7 +80,7 @@ export function ScheduleForm({ open, onClose, item, defaultDate, onSave, onDelet
           <div className="flex flex-wrap gap-2">
             {KINDS.map((k: ScheduleKind) => (
               <button key={k} type="button" aria-pressed={d.kind === k} onClick={() => set('kind', k)}
-                className={`min-h-10 rounded-pill px-3 text-sm font-semibold transition ${KIND_STYLE[k].bg} ${KIND_STYLE[k].text} ${d.kind === k ? 'ring-2 ring-ink/60' : 'opacity-60'}`}>
+                className={`min-h-10 rounded-pill px-3 text-sm font-semibold text-ink transition ${KIND_STYLE[k].bg} ${d.kind === k ? 'ring-2 ring-ink ring-offset-1 ring-offset-surface' : 'opacity-70 hover:opacity-100'}`}>
                 {t(`timetable.${k}`)}
               </button>
             ))}
@@ -121,7 +121,7 @@ export function ScheduleForm({ open, onClose, item, defaultDate, onSave, onDelet
         <Input label={t('timetable.place')} value={d.place} onChange={(e) => set('place', e.target.value)} hint={t('common.optional')} />
 
         {errors.length > 0 && (
-          <ul className="rounded-card bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
+          <ul className="rounded-card border border-danger/40 px-4 py-3 text-sm font-semibold text-danger">
             {errors.map((k) => <li key={k}>{t(k)}</li>)}
           </ul>
         )}

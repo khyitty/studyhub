@@ -4,14 +4,14 @@ import type { Category, PaletteColor, Todo } from './types'
 
 export const PALETTE: PaletteColor[] = ['sky', 'mint', 'pink', 'butter', 'lilac', 'peach']
 
-/** Tailwind classes per pastel color: fill (bg), text (darker), border. Spelled out so Tailwind can see them. */
-export const PALETTE_CLASS: Record<PaletteColor, { fill: string; text: string; border: string }> = {
-  sky: { fill: 'bg-sky', text: 'text-sky-text', border: 'border-sky' },
-  mint: { fill: 'bg-mint', text: 'text-mint-text', border: 'border-mint' },
-  pink: { fill: 'bg-pink', text: 'text-pink-text', border: 'border-pink' },
-  butter: { fill: 'bg-butter', text: 'text-butter-text', border: 'border-butter' },
-  lilac: { fill: 'bg-lilac', text: 'text-lilac-text', border: 'border-lilac' },
-  peach: { fill: 'bg-peach', text: 'text-peach-text', border: 'border-peach' },
+/** Tailwind classes per pastel color: fill (bg), text (darker), border (fill color), borderText (darker). Spelled out so Tailwind can see them. */
+export const PALETTE_CLASS: Record<PaletteColor, { fill: string; text: string; border: string; borderText: string }> = {
+  sky: { fill: 'bg-sky', text: 'text-sky-text', border: 'border-sky', borderText: 'border-sky-text' },
+  mint: { fill: 'bg-mint', text: 'text-mint-text', border: 'border-mint', borderText: 'border-mint-text' },
+  pink: { fill: 'bg-pink', text: 'text-pink-text', border: 'border-pink', borderText: 'border-pink-text' },
+  butter: { fill: 'bg-butter', text: 'text-butter-text', border: 'border-butter', borderText: 'border-butter-text' },
+  lilac: { fill: 'bg-lilac', text: 'text-lilac-text', border: 'border-lilac', borderText: 'border-lilac-text' },
+  peach: { fill: 'bg-peach', text: 'text-peach-text', border: 'border-peach', borderText: 'border-peach-text' },
 }
 
 export const DEFAULT_CATEGORIES: Omit<Category, 'id'>[] = [

@@ -45,3 +45,9 @@ describe('itemsOnDate', () => {
     expect(itemsOnDate(all, '2026-08-31')).toEqual([]) // Monday before `from`
   })
 })
+
+import { KIND_COLOR, KIND_STYLE } from './schedule'
+test('schedule kinds map to pastel palette classes', () => {
+  expect(KIND_COLOR).toEqual({ class: 'sky', research: 'mint', work: 'butter', other: 'lilac' })
+  expect(KIND_STYLE.class).toEqual({ bg: 'bg-sky', text: 'text-sky-text', border: 'border-sky' })
+})
