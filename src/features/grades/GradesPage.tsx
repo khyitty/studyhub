@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Button, EmptyState } from '../../components/ui'
+import { Button, EmptyState, PageHeader } from '../../components/ui'
 import { IconGrades, IconUpload } from '../../components/icons'
-import { PageTitle } from '../../components/layout/Placeholder'
 import { useT } from '../../i18n/useT'
 import { useGrades } from './useGrades'
 import { ImportModal } from './ImportModal'
@@ -20,7 +19,7 @@ export function GradesPage() {
   return (
     <>
       <div className="mb-4 flex items-center justify-between gap-2">
-        <PageTitle>{t('grades.title')}</PageTitle>
+        <PageHeader title={t('grades.title')} />
         <Button size="sm" variant="secondary" onClick={() => setImporting(true)} className="mb-4"><IconUpload size={16} />{t('grades.import')}</Button>
       </div>
       {g.loading ? (

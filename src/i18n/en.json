@@ -1,5 +1,5 @@
 {
-  "nav": { "home": "Home", "grades": "Grades", "timetable": "Schedule", "papers": "Papers", "research": "Research", "more": "More" },
+  "nav": { "home": "Home", "grades": "Grades", "timetable": "Schedule", "papers": "Papers", "research": "Research", "grad": "Grad school", "more": "More", "settings": "Settings" },
   "common": {
     "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit", "add": "Add", "close": "Close", "confirm": "OK",
     "loading": "Loading…", "saved": "Saved", "error": "Something went wrong", "comingSoon": "Coming soon",
@@ -43,5 +43,6 @@
     "data": "Data", "export": "Export JSON", "import": "Import JSON", "importConfirm": "Importing replaces all existing data. Continue?",
     "importDone": "Imported", "importError": "Could not read file: {msg}", "account": "Account", "signOut": "Sign out", "version": "Version"
   },
-  "more": { "title": "More", "deadlines": "Deadlines", "gradSchool": "Grad school apps", "settings": "Settings" }
+  "auth": { "title": "StudyHub", "tagline": "Grades, to-dos, schedule and grad apps in one place", "google": "Continue with Google", "busy": "Signing in…" },
+  "more": { "title": "More", "settings": "Settings" }
 }

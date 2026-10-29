@@ -4,7 +4,7 @@ type P = SVGProps<SVGSVGElement> & { size?: number }
 
 function Svg({ size = 22, children, ...rest }: P) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...rest}>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...rest}>
       {children}
     </svg>
   )
@@ -28,3 +28,4 @@ export const IconCheck = (p: P) => <Svg {...p}><path d="m20 6-11 11-5-5" /></Svg
 export const IconTrash = (p: P) => <Svg {...p}><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /></Svg>
 export const IconChevronLeft = (p: P) => <Svg {...p}><path d="m15 18-6-6 6-6" /></Svg>
 export const IconSparkle = (p: P) => <Svg {...p}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" /></Svg>
+export const IconGrad = (p: P) => <Svg {...p}><path d="M3 9l9-5 9 5-9 5z" /><path d="M7 11v5c0 1 2 3 5 3s5-2 5-3v-5" /></Svg>

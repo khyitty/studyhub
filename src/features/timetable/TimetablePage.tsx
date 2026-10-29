@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Button, Modal, Textarea } from '../../components/ui'
+import { Button, Modal, PageHeader, Textarea } from '../../components/ui'
 import { IconPlus, IconUpload } from '../../components/icons'
-import { PageTitle } from '../../components/layout/Placeholder'
 import { useT } from '../../i18n/useT'
 import { todayISO } from '../../lib/dates'
 import { parseTimetable } from '../../lib/parsers/parseTimetable'
@@ -27,7 +26,7 @@ export function TimetablePage() {
   return (
     <>
       <div className="mb-4 flex items-center justify-between gap-2">
-        <PageTitle>{t('timetable.title')}</PageTitle>
+        <PageHeader title={t('timetable.title')} />
         <Button size="sm" variant="secondary" onClick={() => setPasting(true)} className="mb-4"><IconUpload size={16} />{t('timetable.pastePortal')}</Button>
       </div>
 

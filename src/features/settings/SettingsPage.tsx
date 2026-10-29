@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Button, Card, Input, Segmented, useToast } from '../../components/ui'
-import { PageTitle } from '../../components/layout/Placeholder'
+import { Button, Card, Input, PageHeader, Segmented, useToast } from '../../components/ui'
 import { IconDownload, IconLogout, IconUpload } from '../../components/icons'
 import { useT } from '../../i18n/useT'
 import { useProfile, type Profile } from '../../data/useProfile'
@@ -77,7 +76,7 @@ export function SettingsPage() {
 
   return (
     <>
-      <PageTitle>{t('settings.title')}</PageTitle>
+      <PageHeader title={t('settings.title')} />
       <div className="space-y-4">
         <Card>
           <div className="space-y-4">

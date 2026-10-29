@@ -1,5 +1,5 @@
 {
-  "nav": { "home": "홈", "grades": "학점", "timetable": "시간표", "papers": "논문", "research": "연구", "more": "더보기" },
+  "nav": { "home": "홈", "grades": "학점", "timetable": "시간표", "papers": "논문", "research": "연구", "grad": "대학원", "more": "더보기", "settings": "설정" },
   "common": {
     "save": "저장", "cancel": "취소", "delete": "삭제", "edit": "수정", "add": "추가", "close": "닫기", "confirm": "확인",
     "loading": "불러오는 중…", "saved": "저장됐어요", "error": "문제가 생겼어요", "comingSoon": "준비 중이에요",
@@ -43,5 +43,6 @@
     "data": "데이터", "export": "JSON 내보내기", "import": "JSON 가져오기", "importConfirm": "가져오면 기존 데이터가 모두 바뀌어요. 계속할까요?",
     "importDone": "가져왔어요", "importError": "파일을 읽을 수 없어요: {msg}", "account": "계정", "signOut": "로그아웃", "version": "버전"
   },
-  "more": { "title": "더보기", "deadlines": "마감 D-day", "gradSchool": "대학원 지원", "settings": "설정" }
+  "auth": { "title": "StudyHub", "tagline": "학점 · 할 일 · 시간표 · 대학원 지원을 한 곳에서", "google": "Google로 계속하기", "busy": "로그인 중…" },
+  "more": { "title": "더보기", "settings": "설정" }
 }
