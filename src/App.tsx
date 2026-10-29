@@ -7,6 +7,7 @@ import { Layout } from './components/layout/Layout'
 import { Placeholder } from './components/layout/Placeholder'
 import { MorePage } from './features/more/MorePage'
 import { SettingsPage } from './features/settings/SettingsPage'
+import { GradesPage } from './features/grades/GradesPage'
 
 function Gate() {
   const { user, loading } = useAuth()
@@ -17,7 +18,7 @@ function Gate() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Placeholder titleKey="nav.home" />} />
-          <Route path="grades" element={<Placeholder titleKey="nav.grades" />} />
+          <Route path="grades" element={<GradesPage />} />
           <Route path="timetable" element={<Placeholder titleKey="nav.timetable" />} />
           <Route path="papers" element={<Placeholder titleKey="nav.papers" />} />
           <Route path="research" element={<Placeholder titleKey="nav.research" />} />

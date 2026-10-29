@@ -33,6 +33,8 @@ export interface Course extends ParsedCourse {
   termCode: TermCode | null
   source: 'portal' | 'manual'
   supersededBy: string | null
+  /** display order inside a term: portal row index, or Date.now() for manual courses */
+  order: number
 }
 
 export interface Todo {

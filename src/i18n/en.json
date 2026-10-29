@@ -20,7 +20,12 @@
     "grade": "Grade", "point": "Points", "term": "Term", "retake": "Replaced by retake", "simulator": "Target simulator", "target": "Target GPA",
     "remaining": "Remaining credits", "needAvg": "Need {avg} average on remaining credits", "unreachable": "Not reachable with remaining credits", "planned": "Planned courses",
     "projected": "Projected GPA {gpa}", "empty": "Paste your grades from the portal to get started", "importDone": "Imported {terms} terms, {courses} courses",
-    "warnings": "Please check", "replaceConfirm": "Replace existing portal data with the pasted content?"
+    "warnings": "Please check", "replaceConfirm": "Saving replaces existing portal data with this content. Manually added courses are kept.",
+    "imported": "Imported {n} courses", "impossible": "Not possible: it would take more than 4.5", "pasteTermsHint": "Portal > Grades > select the whole term table, copy, and paste here",
+    "pasteCoursesHint": "Portal > Grades > select the whole course table, copy, and paste here", "courseCount": "{n} courses", "creditSum": "{n} credits",
+    "nothingParsed": "Nothing readable. Make sure you copied the whole table", "unassigned": "No term assigned", "assignTerm": "Pick a term",
+    "deleteConfirm": "Delete this course?", "setReqHint": "Enter graduation requirements in Settings to fill the gauges", "creditsOf": "{earned} / {required} credits",
+    "manual": "Manual", "noTerm": "No term", "addPlanned": "Add planned course", "currentCum": "Now {gpa}"
   },
   "timetable": {
     "title": "Schedule", "week": "Week", "month": "Month", "thisWeek": "This week", "weekend": "Weekend", "add": "Add item", "edit": "Edit item",
