@@ -13,7 +13,7 @@ describe('exportImport', () => {
     expect(typeof parsed.exportedAt).toBe('string')
     expect(parsed.profile.xp).toBe(30)
     expect(parsed.collections.terms).toHaveLength(1)
-    expect(Object.keys(parsed.collections).sort()).toEqual(['courses', 'schedule', 'terms', 'todos'])
+    expect(Object.keys(parsed.collections).sort()).toEqual(['categories', 'courses', 'schedule', 'schools', 'terms', 'todos'])
   })
 
   test('validateImport round-trips serialized data', () => {
@@ -35,5 +35,15 @@ describe('exportImport', () => {
     const data = validateImport(JSON.stringify({ version: EXPORT_VERSION, collections: { terms: [] } }))
     expect(data.collections.courses).toEqual([])
     expect(data.collections.todos).toEqual([])
+  })
+
+  test('serialize includes categories and schools', () => {
+    const parsed = JSON.parse(serialize({ ...sample, collections: { ...sample.collections, categories: [{ id: 'c', name: '공부' }], schools: [] } } as never))
+    expect(Object.keys(parsed.collections).sort()).toEqual(['categories', 'courses', 'schedule', 'schools', 'terms', 'todos'])
+  })
+  test('old backup without categories/schools still imports with empty arrays', () => {
+    const data = validateImport(JSON.stringify({ version: EXPORT_VERSION, collections: { terms: [], courses: [], todos: [], schedule: [] } }))
+    expect(data.collections.categories).toEqual([])
+    expect(data.collections.schools).toEqual([])
   })
 })

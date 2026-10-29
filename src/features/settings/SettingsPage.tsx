@@ -11,10 +11,10 @@ import { exportAll, importAll } from './exportImport'
 
 const SCALE_GRADES = GRADES.filter((g) => !GPA_EXCLUDED.includes(g))
 
-type Draft = Pick<Profile, 'appName' | 'currentTerm' | 'termStart' | 'termEnd' | 'gradReq' | 'gpaPortal' | 'gpa4Scale'>
+type Draft = Pick<Profile, 'appName' | 'currentTerm' | 'termStart' | 'termEnd' | 'gradReq' | 'gpaPortal' | 'gpa4Scale' | 'toeflScore'>
 const pick = (p: Profile): Draft => ({
   appName: p.appName, currentTerm: p.currentTerm, termStart: p.termStart, termEnd: p.termEnd,
-  gradReq: { ...p.gradReq }, gpaPortal: p.gpaPortal, gpa4Scale: { ...p.gpa4Scale },
+  gradReq: { ...p.gradReq }, gpaPortal: p.gpaPortal, gpa4Scale: { ...p.gpa4Scale }, toeflScore: p.toeflScore,
 })
 
 export function SettingsPage() {
@@ -77,7 +77,7 @@ export function SettingsPage() {
   return (
     <>
       <PageHeader title={t('settings.title')} />
-      <div className="space-y-4">
+      <div className="divide-y divide-line">
         <Card>
           <div className="space-y-4">
             <Input label={t('settings.appName')} value={draft.appName} onChange={(e) => set('appName', e.target.value)} maxLength={20} />
@@ -102,6 +102,11 @@ export function SettingsPage() {
           </div>
         </Card>
 
+        <Card title={t('settings.grad')}>
+          <Input label={t('settings.toefl')} type="number" inputMode="numeric" min={0} max={120} hint={t('settings.toeflHint')} className="sm:w-40"
+            value={draft.toeflScore ?? ''} onChange={(e) => set('toeflScore', e.target.value === '' ? null : Number(e.target.value))} />
+        </Card>
+
         <Card title={t('settings.gradReq')}>
           <div className="grid grid-cols-3 gap-3">
             {(['total', 'major', 'liberal'] as const).map((k) => (
@@ -116,8 +121,8 @@ export function SettingsPage() {
           </div>
         </Card>
 
-        <details className="rounded-card bg-surface p-4 shadow-soft">
-          <summary className="min-h-11 cursor-pointer font-bold">{t('settings.scale4')}</summary>
+        <details className="py-4">
+          <summary className="min-h-9 cursor-pointer list-none text-sm font-bold [&::-webkit-details-marker]:hidden">{t('settings.scale4')} ›</summary>
           <div className="mt-3 grid grid-cols-3 gap-3">
             {SCALE_GRADES.map((g: Grade) => (
               <Input key={g} label={g} type="number" inputMode="decimal" step="0.1" min={0} max={4}
@@ -126,7 +131,9 @@ export function SettingsPage() {
           </div>
         </details>
 
-        <Button onClick={save} disabled={!dirty || busy || !!termErr} className="w-full">{t('common.save')}</Button>
+        <div className="py-4">
+          <Button onClick={save} disabled={!dirty || busy || !!termErr} className="w-full sm:w-auto">{t('common.save')}</Button>
+        </div>
 
         <Card title={t('settings.data')}>
           <div className="flex flex-col gap-2 sm:flex-row">
@@ -138,7 +145,7 @@ export function SettingsPage() {
 
         <Card title={t('settings.account')}>
           <div className="flex items-center gap-3">
-            {user?.photoURL && <img src={user.photoURL} alt="" className="h-10 w-10 rounded-pill" referrerPolicy="no-referrer" />}
+            {user?.photoURL && <img src={user.photoURL} alt="" className="h-10 w-10 rounded-card" referrerPolicy="no-referrer" />}
             <div className="min-w-0 flex-1">
               <p className="truncate font-semibold">{user?.displayName}</p>
               <p className="truncate text-sm text-ink-muted">{user?.email}</p>

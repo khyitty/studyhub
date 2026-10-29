@@ -14,6 +14,8 @@ import { CategoryTodos } from './CategoryTodos'
 import { CompletionStat } from './CompletionStat'
 import { CategoryManager } from './CategoryManager'
 import { TodaySchedule } from './TodaySchedule'
+import { DeadlineList } from './DeadlineList'
+import { useSchools } from '../grad/useSchools'
 
 export function HomePage() {
   const t = useT()
@@ -25,6 +27,7 @@ export function HomePage() {
   const todos = useTodos(selected)
   const { categories } = useCategories()
   const schedule = useSchedule()
+  const { schools } = useSchools()
   const lp = levelProgress(profile.xp)
   const [manage, setManage] = useState(false)
 
@@ -80,6 +83,7 @@ export function HomePage() {
         <div className="divide-y divide-line">
           <CompletionStat stats={todos.selectedStats} title={completionTitle} />
           <TodaySchedule items={schedule.onDate(today)} />
+          <DeadlineList schools={schools} today={today} />
         </div>
       </div>
 

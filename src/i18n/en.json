@@ -43,7 +43,8 @@
     "gradReq": "Graduation requirements (credits)", "gradReqHint": "Check your department's requirements and enter them here", "reqTotal": "Total", "reqMajor": "Major", "reqLiberal": "Liberal arts",
     "portalGpa": "Portal cumulative GPA (optional)", "portalGpaHint": "Enter the GPA shown on the portal to compare with the computed one", "scale4": "4.0 scale table",
     "data": "Data", "export": "Export JSON", "import": "Import JSON", "importConfirm": "Importing replaces all existing data. Continue?",
-    "importDone": "Imported", "importError": "Could not read file: {msg}", "account": "Account", "signOut": "Sign out", "version": "Version"
+    "importDone": "Imported", "importError": "Could not read file: {msg}", "account": "Account", "signOut": "Sign out", "version": "Version",
+    "grad": "Grad school", "toefl": "My TOEFL score (optional)", "toeflHint": "Compared with each school's minimum"
   },
   "auth": { "title": "StudyHub", "tagline": "Grades, to-dos, schedule and grad apps in one place", "google": "Continue with Google", "busy": "Signing in…" },
   "grad": {

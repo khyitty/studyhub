@@ -1,17 +1,17 @@
 import { collection, doc, getDoc, getDocs, writeBatch } from 'firebase/firestore'
 import { db } from '../../firebase'
 import type { Profile } from '../../data/useProfile'
-import type { Course, ScheduleItem, Term, Todo } from '../../lib/types'
+import type { Category, Course, ScheduleItem, School, Term, Todo } from '../../lib/types'
 
 export const EXPORT_VERSION = 1
-export const COLLECTIONS = ['terms', 'courses', 'todos', 'schedule'] as const
+export const COLLECTIONS = ['terms', 'courses', 'todos', 'schedule', 'categories', 'schools'] as const
 type CollectionName = (typeof COLLECTIONS)[number]
 
 export interface ExportData {
   version: number
   exportedAt: string
   profile: Partial<Profile>
-  collections: { terms: Term[]; courses: Course[]; todos: Todo[]; schedule: ScheduleItem[] }
+  collections: { terms: Term[]; courses: Course[]; todos: Todo[]; schedule: ScheduleItem[]; categories: Category[]; schools: School[] }
 }
 
 type Payload = Pick<ExportData, 'profile' | 'collections'>
@@ -26,6 +26,8 @@ export function serialize(data: Payload): string {
       courses: data.collections.courses ?? [],
       todos: data.collections.todos ?? [],
       schedule: data.collections.schedule ?? [],
+      categories: data.collections.categories ?? [],
+      schools: data.collections.schools ?? [],
     },
   }
   return JSON.stringify(out, null, 2)
@@ -45,6 +47,8 @@ export function validateImport(json: string): ExportData {
       courses: Array.isArray(c.courses) ? c.courses : [],
       todos: Array.isArray(c.todos) ? c.todos : [],
       schedule: Array.isArray(c.schedule) ? c.schedule : [],
+      categories: Array.isArray(c.categories) ? c.categories : [],
+      schools: Array.isArray(c.schools) ? c.schools : [],
     },
   }
 }
