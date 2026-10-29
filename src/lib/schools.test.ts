@@ -31,3 +31,16 @@ test('normalizeSchool fills defaults', () => {
   const x = normalizeSchool({ name: 'X' }, 'x')
   expect(x).toMatchObject({ gre: 'none', sop: 'todo', recsRequired: 3, recsDone: 0, status: 'interested', links: [], professors: [], toeflMin: null, fee: '' })
 })
+
+import { gradSubtitle, validateSchool } from './schools'
+import { translate } from '../i18n/useT'
+const t = (k: string, v?: Record<string, string | number>) => translate('ko', k, v)
+test('validateSchool requires name, program, deadline', () => {
+  expect(validateSchool({ name: ' ', program: '', deadline: '' })).toEqual(['grad.errName', 'grad.errProgram', 'grad.errDeadline'])
+  expect(validateSchool({ name: 'X', program: 'Stat PhD', deadline: '2026-12-01' })).toEqual([])
+})
+test('gradSubtitle', () => {
+  expect(gradSubtitle([], '2026-10-29', t)).toBe('')
+  expect(gradSubtitle([s('a', '2026-10-01')], '2026-10-29', t)).toBe('1개 학교')
+  expect(gradSubtitle([s('Stanford', '2026-12-01'), s('b', '2026-12-10')], '2026-10-29', t)).toBe('2개 학교 · 가장 가까운 마감 D-33 (Stanford)')
+})

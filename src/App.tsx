@@ -10,6 +10,7 @@ import { SettingsPage } from './features/settings/SettingsPage'
 import { GradesPage } from './features/grades/GradesPage'
 import { HomePage } from './features/home/HomePage'
 import { TimetablePage } from './features/timetable/TimetablePage'
+import { GradPage } from './features/grad/GradPage'
 
 function Gate() {
   const { user, loading } = useAuth()
@@ -24,7 +25,7 @@ function Gate() {
           <Route path="timetable" element={<TimetablePage />} />
           <Route path="papers" element={<Placeholder titleKey="nav.papers" />} />
           <Route path="research" element={<Placeholder titleKey="nav.research" />} />
-          <Route path="grad" element={<Placeholder titleKey="nav.grad" />} />
+          <Route path="grad" element={<GradPage />} />
           <Route path="more" element={<MorePage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />

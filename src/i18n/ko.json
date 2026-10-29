@@ -46,5 +46,8 @@
     "importDone": "가져왔어요", "importError": "파일을 읽을 수 없어요: {msg}", "account": "계정", "signOut": "로그아웃", "version": "버전"
   },
   "auth": { "title": "StudyHub", "tagline": "학점 · 할 일 · 시간표 · 대학원 지원을 한 곳에서", "google": "Google로 계속하기", "busy": "로그인 중…" },
+  "grad": {
+    "title": "대학원 지원", "subtitle": "{n}개 학교", "subtitleNearest": "{n}개 학교 · 가장 가까운 마감 {dday} ({name})", "add": "학교 추가", "edit": "학교 수정", "view": "보기", "table": "표", "cards": "카드", "all": "전체", "status": "상태", "s_interested": "관심", "s_preparing": "준비 중", "s_submitted": "제출", "s_accepted": "합격", "s_rejected": "불합격", "result": "결과", "school": "학교 · 프로그램", "name": "학교명", "program": "프로그램", "programHint": "학위까지 한 줄로, 예: Statistics PhD", "deadline": "마감", "past": "지남", "gre": "GRE", "gre_required": "필수", "gre_optional": "선택", "gre_none": "불요", "toefl": "TOEFL", "toeflMin": "TOEFL 최소", "toeflOk": "충족", "toeflShort": "부족 (내 점수 {score})", "recs": "추천서", "recsRequired": "추천서 필요 수", "recsDone": "추천서 확보 수", "sop": "SOP", "sop_none": "—", "sop_todo": "미작성", "sop_draft": "초안", "sop_done": "완료", "fee": "지원비", "notes": "메모", "links": "링크", "linkTitle": "제목", "linkUrl": "URL", "addLink": "링크 추가", "professors": "관심 교수", "profName": "이름", "profNote": "한 줄 메모", "addProf": "교수 추가", "deleteConfirm": "이 학교를 삭제할까요?", "empty": "지원할 학교를 추가해 보세요", "errName": "학교명을 입력해주세요", "errProgram": "프로그램을 입력해주세요", "errDeadline": "마감일을 골라주세요", "sortHint": "열 머리글을 누르면 정렬돼요"
+  },
   "more": { "title": "더보기", "settings": "설정" }
 }

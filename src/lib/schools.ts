@@ -95,3 +95,22 @@ export function nearestDeadlines(list: School[], today: string, n = 3): School[]
     .sort((a, b) => dday(a.deadline, today) - dday(b.deadline, today))
     .slice(0, n)
 }
+
+/** Returns i18n keys of the problems; empty array means valid. */
+export function validateSchool(d: Pick<School, 'name' | 'program' | 'deadline'>): string[] {
+  const errors: string[] = []
+  if (!d.name.trim()) errors.push('grad.errName')
+  if (!d.program.trim()) errors.push('grad.errProgram')
+  if (!d.deadline) errors.push('grad.errDeadline')
+  return errors
+}
+
+type T = (key: string, vars?: Record<string, string | number>) => string
+
+/** "6개 학교 · 가장 가까운 마감 D-33 (Stanford)"; without an upcoming deadline just "n개 학교"; empty when no schools. */
+export function gradSubtitle(list: School[], today: string, t: T): string {
+  if (list.length === 0) return ''
+  const next = nearestDeadlines(list, today, 1)[0]
+  if (!next) return t('grad.subtitle', { n: list.length })
+  return t('grad.subtitleNearest', { n: list.length, dday: ddayLabel(dday(next.deadline, today)), name: next.name })
+}
