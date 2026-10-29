@@ -13,9 +13,9 @@ export function useCategories() {
   const col = useUserCollection<Category>('categories', normalizeCategory)
   const categories = useMemo(() => [...col.items].sort((a, b) => a.order - b.order), [col.items])
 
-  const add = useCallback(async (name: string, color: PaletteColor) => {
-    const order = categories.length ? Math.max(...categories.map((c) => c.order)) + 1 : 0
-    return col.add({ name: name.trim(), color, order })
+  const add = useCallback(async (name: string, color: PaletteColor, order?: number) => {
+    const next = categories.length ? Math.max(...categories.map((c) => c.order)) + 1 : 0
+    return col.add({ name: name.trim(), color, order: order ?? next })
   }, [col, categories])
 
   const update = useCallback((id: string, patch: Partial<Pick<Category, 'name' | 'color'>>) => col.update(id, patch), [col])

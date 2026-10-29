@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { Card } from '../../components/ui'
 import { useT } from '../../i18n/useT'
-import { KIND_STYLE, toMinutes, type ScheduleItem } from '../timetable/schedule'
+import { PALETTE_CLASS } from '../../lib/categories'
+import { KIND_COLOR, toMinutes, type ScheduleItem } from '../timetable/schedule'
 
 function nowMinutes() {
   const d = new Date()
@@ -18,28 +18,31 @@ export function TodaySchedule({ items }: { items: ScheduleItem[] }) {
   }, [])
 
   return (
-    <Card title={t('home.todaySchedule')} action={<Link to="/timetable" className="text-sm font-semibold text-ink-muted">{t('nav.timetable')} ›</Link>}>
+    <section className="py-4">
+      <header className="flex items-center justify-between">
+        <h2 className="text-sm font-bold">{t('home.todaySchedule')}</h2>
+        <Link to="/timetable" className="text-xs text-ink-muted hover:text-ink">{t('nav.timetable')} ›</Link>
+      </header>
       {items.length === 0 ? (
-        <p className="py-3 text-center text-sm text-ink-muted">{t('home.noSchedule')}</p>
+        <p className="py-3 text-[13px] text-ink-muted">{t('home.noSchedule')}</p>
       ) : (
-        <ul className="space-y-2">
+        <ul className="mt-1">
           {items.map((it) => {
-            const st = KIND_STYLE[it.kind]
             const live = now >= toMinutes(it.start) && now < toMinutes(it.end)
             const past = now >= toMinutes(it.end)
             return (
-              <li key={it.id} className={`flex items-center gap-3 rounded-xl px-3 py-2 ${live ? 'bg-surface-2 ring-2 ring-peach-deep' : ''} ${past ? 'opacity-50' : ''}`}>
-                <span className={`h-9 w-1.5 shrink-0 rounded-pill ${st.dot}`} />
-                <span className="w-24 shrink-0 text-sm tabular-nums text-ink-muted">{it.start}–{it.end}</span>
+              <li key={it.id} className={`flex items-center gap-3 py-1.5 text-[13px] ${past ? 'text-ink-faint' : ''}`}>
+                <span className={`w-11 shrink-0 text-xs tabular-nums ${past ? '' : 'text-ink-muted'}`}>{it.start}</span>
+                <span className={`h-[26px] w-[3px] shrink-0 ${PALETTE_CLASS[KIND_COLOR[it.kind]].fill}`} />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate font-semibold">{it.title}</span>
-                  {it.place && <span className="block truncate text-xs text-ink-muted">{it.place}</span>}
+                  <span className={`block truncate ${live ? 'font-bold' : ''}`}>{it.title}</span>
+                  {it.place && <span className="block truncate text-[11px] text-ink-muted">{it.place}</span>}
                 </span>
               </li>
             )
           })}
         </ul>
       )}
-    </Card>
+    </section>
   )
 }

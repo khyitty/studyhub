@@ -20,7 +20,7 @@ function useSeedCategories(ctx: ReturnType<typeof useProfileDoc>) {
     if (seeded.current) return
     if (!shouldSeedCategories(profile, categories, loading, ctx.loading)) return
     seeded.current = true
-    void Promise.all(DEFAULT_CATEGORIES.map((c) => add(c.name, c.color))).then(() => update({ categoriesSeeded: true }))
+    void Promise.all(DEFAULT_CATEGORIES.map((c) => add(c.name, c.color, c.order))).then(() => update({ categoriesSeeded: true }))
   }, [profile, categories, loading, ctx.loading, add, update])
 }
 

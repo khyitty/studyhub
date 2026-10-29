@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
-import { Button, Confetti, Gauge } from '../../components/ui'
+import { Button, Confetti } from '../../components/ui'
 import { useLang, useT } from '../../i18n/useT'
 import { useAuth } from '../auth/AuthProvider'
 import { useProfile } from '../../data/useProfile'
 import { levelProgress } from '../../lib/xp'
-import { todayISO } from '../../lib/dates'
+import { formatDateHeading, formatShortDate, todayISO } from '../../lib/dates'
+import { groupTodos } from '../../lib/categories'
 import { useTodos } from '../todos/useTodos'
+import { useCategories } from '../todos/useCategories'
 import { useSchedule } from '../timetable/useSchedule'
-import { TodayGauge } from './TodayGauge'
-import { TodayTodos } from './TodayTodos'
+import { WeekStrip } from './WeekStrip'
+import { CategoryTodos } from './CategoryTodos'
+import { CompletionStat } from './CompletionStat'
+import { CategoryManager } from './CategoryManager'
 import { TodaySchedule } from './TodaySchedule'
 
 export function HomePage() {
@@ -16,10 +20,13 @@ export function HomePage() {
   const lang = useLang()
   const { user } = useAuth()
   const { profile } = useProfile()
-  const todos = useTodos()
-  const schedule = useSchedule()
   const today = todayISO()
+  const [selected, setSelected] = useState(today)
+  const todos = useTodos(selected)
+  const { categories } = useCategories()
+  const schedule = useSchedule()
   const lp = levelProgress(profile.xp)
+  const [manage, setManage] = useState(false)
 
   // confetti once when today's completion crosses to 100%
   const [burst, setBurst] = useState(0)
@@ -29,36 +36,54 @@ export function HomePage() {
     prevRatio.current = todos.completionRatio
   }, [todos.completionRatio, todos.today.length])
 
-  const dateLabel = new Date().toLocaleDateString(lang === 'ko' ? 'ko-KR' : 'en-US', { month: 'long', day: 'numeric', weekday: 'long' })
+  const isToday = selected === today
   const name = user?.displayName?.split(' ')[0] ?? ''
+  const groups = groupTodos(todos.selected, categories)
+  const dateWord = isToday ? t('common.today') : formatShortDate(selected)
+  const completionTitle = isToday ? t('home.completion') : t('home.completionOn', { date: dateWord })
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <Confetti fire={burst} />
       <header className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-ink-muted">{dateLabel}</p>
-          <h1 className="mt-0.5 truncate text-2xl font-bold">{t('home.greeting', { name })}</h1>
+          <h1 className="text-[22px] font-bold tracking-[-0.4px]">{formatDateHeading(selected, lang)}</h1>
+          <p className="mt-1 text-[13px] text-ink-muted">{t('home.summary', { name, date: dateWord, total: todos.selectedStats.total, done: todos.selectedStats.done })}</p>
         </div>
-        <div className="w-28 shrink-0 rounded-card bg-lilac px-3 py-2 text-lilac-deep">
-          <div className="flex items-baseline justify-between">
-            <span className="text-sm font-bold">{t('home.level', { level: lp.level })}</span>
-            <span className="text-[10px] font-semibold tabular-nums">{lp.current}/{lp.needed}</span>
-          </div>
-          <div className="mt-1"><Gauge value={lp.ratio} color="var(--color-lilac-deep)" /></div>
-        </div>
+        <span className="shrink-0 rounded-pill border border-line-strong px-2.5 py-1 text-xs font-semibold tabular-nums">
+          {t('home.level', { level: lp.level })} · {t('home.xp', { current: lp.current, needed: lp.needed })}
+        </span>
       </header>
 
       {todos.overdue.length > 0 && (
-        <div className="flex items-center gap-2 rounded-card bg-butter px-4 py-2 text-sm font-semibold text-butter-deep">
+        <div className="flex items-center gap-2 rounded-card border border-line-strong px-4 py-2 text-sm">
           <span className="flex-1">{t('home.overdue', { count: todos.overdue.length })}</span>
           <Button size="sm" variant="secondary" onClick={() => void todos.moveOverdueToToday()}>{t('home.moveToToday')}</Button>
         </div>
       )}
 
-      <TodayGauge today={todos.today} ratio={todos.completionRatio} />
-      <TodayTodos todos={todos} />
-      <TodaySchedule items={schedule.onDate(today)} />
+      <WeekStrip selected={selected} onSelect={setSelected} />
+
+      <div className="grid gap-6 md:grid-cols-[1.25fr_0.75fr]">
+        <CategoryTodos
+          groups={groups}
+          categories={categories}
+          selected={selected}
+          isToday={isToday}
+          stats={todos.selectedStats}
+          onToggle={(id) => void todos.toggle(id)}
+          onAdd={(title, categoryId) => todos.add(title, { categoryId })}
+          onUpdate={(id, patch) => void todos.update(id, patch)}
+          onRemove={(id) => void todos.remove(id)}
+          onManage={() => setManage(true)}
+        />
+        <div className="divide-y divide-line">
+          <CompletionStat stats={todos.selectedStats} title={completionTitle} />
+          <TodaySchedule items={schedule.onDate(today)} />
+        </div>
+      </div>
+
+      <CategoryManager open={manage} onClose={() => setManage(false)} />
     </div>
   )
 }

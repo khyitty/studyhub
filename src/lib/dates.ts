@@ -40,3 +40,19 @@ export function isBetween(iso: string, from: string, to: string): boolean {
 export function nowISOTime(): string {
   return new Date().toISOString()
 }
+
+/** The 7 ISO dates Mon..Sun starting at `weekStart` (a Monday). */
+export function weekDays(weekStart: string): string[] {
+  return Array.from({ length: 7 }, (_, i) => addDays(weekStart, i))
+}
+
+/** ko: "10월 29일 목요일", en: "Thursday, October 29" */
+export function formatDateHeading(iso: string, lang: 'ko' | 'en'): string {
+  return fromISO(iso).toLocaleDateString(lang === 'ko' ? 'ko-KR' : 'en-US', { month: 'long', day: 'numeric', weekday: 'long' })
+}
+
+/** "10/5" */
+export function formatShortDate(iso: string): string {
+  const d = fromISO(iso)
+  return `${d.getMonth() + 1}/${d.getDate()}`
+}

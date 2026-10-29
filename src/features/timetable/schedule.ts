@@ -1,10 +1,13 @@
 import type { DocumentData } from 'firebase/firestore'
 import { isBetween, weekdayOf } from '../../lib/dates'
-import type { ScheduleItem, ScheduleKind } from '../../lib/types'
+import type { PaletteColor, ScheduleItem, ScheduleKind } from '../../lib/types'
 
 export type { ScheduleItem, ScheduleKind }
 
 export const KINDS: ScheduleKind[] = ['class', 'research', 'work', 'other']
+
+/** Pastel color per kind (shared by timetable blocks and the home schedule list). */
+export const KIND_COLOR: Record<ScheduleKind, PaletteColor> = { class: 'sky', research: 'mint', work: 'butter', other: 'lilac' }
 
 /** Tailwind classes per kind: block background + text. */
 export const KIND_STYLE: Record<ScheduleKind, { bg: string; text: string; dot: string }> = {

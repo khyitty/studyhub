@@ -9,7 +9,8 @@
     "greeting": "Hi, {name}", "level": "Lv.{level}", "xp": "{current} / {needed} XP", "todayTodos": "Today's to-dos",
     "todaySchedule": "Today's schedule", "progress": "Today's progress", "allDone": "All done for today!", "noTodos": "Add something to do today",
     "noSchedule": "Nothing scheduled today", "overdue": "{count} overdue", "moveToToday": "Move to today", "levelUp": "Reached level {level}!",
-    "addTodo": "Add to-do", "todoPlaceholder": "What's next?"
+    "addTodo": "Add to-do", "todoPlaceholder": "What's next?",
+    "summary": "Hi {name}. {done} of {total} done for {date}.", "todos": "to-dos", "completion": "Today's progress", "completionOn": "Progress on {date}", "deadlines": "Deadlines", "noSchools": "Add schools under Grad school", "addTodoHere": "Add to-do", "other": "Other", "manageCategories": "Manage categories", "categoryName": "Name", "categoryColor": "Color", "addCategory": "Add category", "deleteCategoryConfirm": "To-dos in this category move to Other. Delete?", "moveDate": "Move to date", "changeCategory": "Change category", "prevWeek": "Previous week", "nextWeek": "Next week", "backToToday": "Today"
   },
   "grades": {
     "title": "Grades", "import": "Paste from portal", "importTerms": "Term summary table", "importCourses": "Course table", "preview": "Preview",

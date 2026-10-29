@@ -3,9 +3,11 @@ type Props = {
   label?: string
   size?: 'sm' | 'lg'
   color?: string
+  /** keep the aria-label but do not render the label/percent row */
+  hideLabel?: boolean
 }
 
-export function Gauge({ value, label, size = 'sm', color = 'var(--color-primary)' }: Props) {
+export function Gauge({ value, label, size = 'sm', color = 'var(--color-primary)', hideLabel = false }: Props) {
   const v = Math.min(1, Math.max(0, Number.isFinite(value) ? value : 0))
   const pct = Math.round(v * 100)
   const complete = v >= 1 ? { 'data-complete': 'true' } : {}
@@ -13,7 +15,7 @@ export function Gauge({ value, label, size = 'sm', color = 'var(--color-primary)
 
   return (
     <div {...aria} {...complete} className="w-full">
-      {label && (
+      {label && !hideLabel && (
         <div className="mb-1 flex justify-between text-xs text-ink-muted">
           <span>{label}</span><span>{pct}%</span>
         </div>

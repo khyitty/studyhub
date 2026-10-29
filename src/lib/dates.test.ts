@@ -1,4 +1,4 @@
-import { addDays, isBetween, startOfWeek, todayISO, weekdayOf } from './dates'
+import { addDays, formatDateHeading, formatShortDate, isBetween, startOfWeek, todayISO, weekDays, weekdayOf } from './dates'
 
 describe('dates', () => {
   test('weekdayOf: Mon=1 … Sun=7', () => {
@@ -27,4 +27,15 @@ describe('dates', () => {
     const expected = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
     expect(todayISO()).toBe(expected)
   })
+})
+
+test('weekDays returns Mon..Sun from a Monday', () => {
+  expect(weekDays('2026-10-26')).toEqual(['2026-10-26','2026-10-27','2026-10-28','2026-10-29','2026-10-30','2026-10-31','2026-11-01'])
+})
+test('formatDateHeading ko/en', () => {
+  expect(formatDateHeading('2026-10-29', 'ko')).toBe('10월 29일 목요일')
+  expect(formatDateHeading('2026-10-29', 'en')).toBe('Thursday, October 29')
+})
+test('formatShortDate drops leading zeros', () => {
+  expect(formatShortDate('2026-10-05')).toBe('10/5')
 })
