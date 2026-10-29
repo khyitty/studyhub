@@ -67,7 +67,7 @@ export function TermAccordion({ g }: { g: Grades }) {
       </div>
 
       {unassigned.length > 0 && (
-        <Card title={t('grades.unassigned')} tone="butter" className="mt-4">
+        <Card title={t('grades.unassigned')} className="mt-4">
           <ul className="divide-y divide-line">
             {unassigned.map((c) => (
               <li key={c.id} className="flex items-center gap-2 py-2">

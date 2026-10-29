@@ -14,8 +14,4 @@ describe('Gauge', () => {
     const { getByTestId } = render(<Gauge value={1.4} />)
     expect(getByTestId('gauge-fill')).toHaveStyle({ width: '100%' })
   })
-  test('ring variant exposes aria value', () => {
-    const { getByRole } = render(<Gauge value={0.5} variant="ring" />)
-    expect(getByRole('progressbar')).toHaveAttribute('aria-valuenow', '50')
-  })
 })

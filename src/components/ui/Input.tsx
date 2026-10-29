@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes, ReactNode } from 'react'
 
-const base = 'w-full rounded-xl border border-line bg-surface px-3 text-base text-ink placeholder:text-ink-muted/60 focus:border-accent focus:outline-none'
+const base = 'w-full rounded-card border border-line-strong bg-surface px-3 text-base text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none'
 
 type FieldProps = { label?: string; hint?: string; error?: string }
 

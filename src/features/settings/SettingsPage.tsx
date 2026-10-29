@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Button, Card, Input, useToast } from '../../components/ui'
+import { Button, Card, Input, Segmented, useToast } from '../../components/ui'
 import { PageTitle } from '../../components/layout/Placeholder'
 import { IconDownload, IconLogout, IconUpload } from '../../components/icons'
 import { useT } from '../../i18n/useT'
@@ -11,25 +11,6 @@ import { GPA_EXCLUDED } from '../../lib/gpa'
 import { exportAll, importAll } from './exportImport'
 
 const SCALE_GRADES = GRADES.filter((g) => !GPA_EXCLUDED.includes(g))
-
-function Segmented<T extends string>({ value, options, onChange, label }: { value: T; options: { value: T; label: string }[]; onChange: (v: T) => void; label: string }) {
-  return (
-    <div role="radiogroup" aria-label={label} className="flex rounded-pill bg-surface-2 p-1">
-      {options.map((o) => (
-        <button
-          key={o.value}
-          type="button"
-          role="radio"
-          aria-checked={value === o.value}
-          onClick={() => onChange(o.value)}
-          className={`min-h-9 flex-1 rounded-pill text-sm font-semibold transition ${value === o.value ? 'bg-surface text-ink shadow-soft' : 'text-ink-muted'}`}
-        >
-          {o.label}
-        </button>
-      ))}
-    </div>
-  )
-}
 
 type Draft = Pick<Profile, 'appName' | 'currentTerm' | 'termStart' | 'termEnd' | 'gradReq' | 'gpaPortal' | 'gpa4Scale'>
 const pick = (p: Profile): Draft => ({

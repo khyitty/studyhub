@@ -5,17 +5,15 @@ type Props = {
   action?: ReactNode
   children: ReactNode
   className?: string
-  tone?: 'surface' | 'peach' | 'lilac' | 'mint' | 'butter'
+  bordered?: boolean
 }
 
-const tones = { surface: 'bg-surface', peach: 'bg-peach', lilac: 'bg-lilac', mint: 'bg-mint', butter: 'bg-butter' }
-
-export function Card({ title, action, children, className = '', tone = 'surface' }: Props) {
+export function Card({ title, action, children, className = '', bordered = false }: Props) {
   return (
-    <section className={`rounded-card p-4 shadow-soft ${tones[tone]} ${className}`}>
+    <section className={`${bordered ? 'rounded-card border border-line-strong p-4' : 'py-4'} ${className}`}>
       {(title || action) && (
         <header className="mb-3 flex items-center justify-between gap-2">
-          {title && <h2 className="text-base font-bold">{title}</h2>}
+          {title && <h2 className="text-sm font-bold">{title}</h2>}
           {action}
         </header>
       )}
