@@ -73,3 +73,26 @@ export interface ScheduleItem {
   from: string
   to: string
 }
+
+export type GreReq = 'required' | 'optional' | 'none'
+export type SopState = 'none' | 'todo' | 'draft' | 'done'
+export type SchoolStatus = 'interested' | 'preparing' | 'submitted' | 'accepted' | 'rejected'
+
+export interface School {
+  id: string
+  name: string
+  /** program incl. degree, e.g. "Statistics PhD" */
+  program: string
+  deadline: string
+  gre: GreReq
+  toeflMin: number | null
+  recsRequired: number
+  recsDone: number
+  sop: SopState
+  fee: string
+  status: SchoolStatus
+  notes: string
+  links: { title: string; url: string }[]
+  professors: { name: string; note: string }[]
+  createdAt: string
+}
