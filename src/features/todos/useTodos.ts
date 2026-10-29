@@ -7,6 +7,7 @@ import { useT } from '../../i18n/useT'
 import { XP_TODO, applyXp, levelFor } from '../../lib/xp'
 import { todayISO } from '../../lib/dates'
 import type { Todo } from '../../lib/types'
+import { completion, newTodoDoc, todosOn } from './todos'
 
 export type { Todo }
 
@@ -25,7 +26,8 @@ export function normalizeTodo(raw: DocumentData, id: string): Todo {
   }
 }
 
-export function useTodos() {
+/** @param selectedDate drives `selected`/`selectedStats`; `today`/`completionRatio` always use today (confetti). */
+export function useTodos(selectedDate: string = todayISO()) {
   const col = useUserCollection<Todo>('todos', normalizeTodo)
   const { profile, addXp } = useProfile()
   const toast = useToast()
@@ -36,12 +38,16 @@ export function useTodos() {
   const todayList = useMemo(() => todos.filter((x) => x.date === today), [todos, today])
   const overdue = useMemo(() => todos.filter((x) => x.date < today && !x.done), [todos, today])
   const completionRatio = todayList.length ? todayList.filter((x) => x.done).length / todayList.length : 0
+  const selected = useMemo(() => todosOn(todos, selectedDate), [todos, selectedDate])
+  const selectedStats = useMemo(() => completion(selected), [selected])
 
-  const add = useCallback(async (title: string, date: string = todayISO()) => {
-    const clean = title.trim()
-    if (!clean) return
-    await col.add({ title: clean, date, done: false, doneAt: null, source: null, createdAt: new Date().toISOString(), categoryId: null })
-  }, [col])
+  const add = useCallback(async (title: string, opts?: { categoryId?: string | null; date?: string }) => {
+    const docData = newTodoDoc(title, selectedDate, opts)
+    if (!docData) return
+    await col.add(docData)
+  }, [col, selectedDate])
+
+  const update = useCallback((id: string, patch: Partial<Pick<Todo, 'title' | 'categoryId' | 'date'>>) => col.update(id, patch), [col])
 
   const toggle = useCallback(async (id: string) => {
     const todo = col.items.find((x) => x.id === id)
@@ -62,5 +68,5 @@ export function useTodos() {
     await Promise.all(overdue.map((x) => col.update(x.id, { date: d })))
   }, [col, overdue])
 
-  return { todos, today: todayList, overdue, add, toggle, remove, moveOverdueToToday, completionRatio, loading: col.loading }
+  return { todos, today: todayList, overdue, selected, selectedStats, add, update, toggle, remove, moveOverdueToToday, completionRatio, loading: col.loading }
 }
