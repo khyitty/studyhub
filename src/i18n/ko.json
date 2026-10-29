@@ -1,0 +1,42 @@
+{
+  "nav": { "home": "홈", "grades": "학점", "timetable": "시간표", "papers": "논문", "research": "연구", "more": "더보기" },
+  "common": {
+    "save": "저장", "cancel": "취소", "delete": "삭제", "edit": "수정", "add": "추가", "close": "닫기", "confirm": "확인",
+    "loading": "불러오는 중…", "saved": "저장됐어요", "error": "문제가 생겼어요", "comingSoon": "준비 중이에요",
+    "today": "오늘", "yes": "예", "no": "아니오", "required": "필수", "optional": "선택", "search": "검색", "empty": "아직 없어요"
+  },
+  "home": {
+    "greeting": "안녕, {name}", "level": "Lv.{level}", "xp": "{current} / {needed} XP", "todayTodos": "오늘 할 일",
+    "todaySchedule": "오늘 일정", "progress": "오늘 완료율", "allDone": "오늘 할 일을 다 했어요!", "noTodos": "오늘 할 일을 추가해 보세요",
+    "noSchedule": "오늘 일정이 없어요", "overdue": "지난 할 일 {count}개", "moveToToday": "오늘로 옮기기", "levelUp": "레벨 {level} 달성!",
+    "addTodo": "할 일 추가", "todoPlaceholder": "무엇을 할까요?"
+  },
+  "grades": {
+    "title": "학점", "import": "포탈 붙여넣기", "importTerms": "학기별 성적 표", "importCourses": "과목별 성적 표", "preview": "미리보기",
+    "cumulative": "누적 평점", "major": "전공 평점", "earned": "취득 학점", "scale4": "4.0 환산", "portalGpa": "포탈: {gpa}",
+    "portalMismatch": "포탈 평점과 {diff} 차이가 나요", "gradReq": "졸업 요건", "reqTotal": "총학점", "reqMajor": "전공", "reqLiberal": "교양",
+    "trend": "학기별 추이", "termGpa": "학기 평점", "cumGpa": "누적 평점", "terms": "학기", "addCourse": "과목 추가", "editCourse": "과목 수정",
+    "course": "과목명", "code": "학수번호", "section": "분반", "category": "이수구분", "area": "교과영역", "credits": "학점", "score": "점수",
+    "grade": "등급", "point": "평점", "term": "학기", "retake": "재수강으로 대체됨", "simulator": "목표 시뮬레이터", "target": "목표 평점",
+    "remaining": "남은 학점", "needAvg": "남은 학점 평균 {avg} 필요", "unreachable": "남은 학점으로는 도달할 수 없어요", "planned": "예상 과목",
+    "projected": "예상 누적 평점 {gpa}", "empty": "포탈에서 성적을 붙여넣어 시작해 보세요", "importDone": "{terms}개 학기, {courses}개 과목을 가져왔어요",
+    "warnings": "확인이 필요해요", "replaceConfirm": "기존 포탈 데이터를 새로 붙여넣은 내용으로 바꿀까요?"
+  },
+  "timetable": {
+    "title": "시간표", "week": "주간", "month": "월간", "thisWeek": "이번 주", "weekend": "주말", "add": "일정 추가", "edit": "일정 수정",
+    "kind": "종류", "class": "수업", "research": "연구", "work": "일", "other": "기타", "days": "요일", "start": "시작", "end": "종료",
+    "place": "장소", "repeat": "반복", "weekly": "매주", "once": "한 번", "date": "날짜", "period": "기간", "from": "부터", "to": "까지",
+    "pastePortal": "포탈 붙여넣기", "parserNotReady": "포탈 시간표 형식을 아직 몰라요. 포탈에서 복사한 텍스트를 Claude에게 보여주면 파서를 채울 수 있어요.",
+    "errEndBeforeStart": "종료 시간이 시작보다 빨라요", "errNoDays": "요일을 하나 이상 골라주세요", "errNoDate": "날짜를 골라주세요", "errNoTitle": "제목을 입력해주세요",
+    "dayNames": "일,월,화,수,목,금,토", "empty": "일정을 추가해 보세요"
+  },
+  "settings": {
+    "title": "설정", "appName": "앱 이름", "language": "언어", "theme": "테마", "themeSystem": "시스템", "themeLight": "라이트", "themeDark": "다크",
+    "currentTerm": "현재 학기", "termCode": "학기 코드", "termCodeHint": "예: 2026-2 (1, S, 2, W)", "termStart": "학기 시작", "termEnd": "학기 종료",
+    "gradReq": "졸업 요건 (학점)", "gradReqHint": "학과 졸업 요건을 확인해서 입력하세요", "reqTotal": "총학점", "reqMajor": "전공", "reqLiberal": "교양",
+    "portalGpa": "포탈 누적 평점 (선택)", "portalGpaHint": "포탈에 표시된 누적 평점을 적으면 계산값과 비교해요", "scale4": "4.0 환산표",
+    "data": "데이터", "export": "JSON 내보내기", "import": "JSON 가져오기", "importConfirm": "가져오면 기존 데이터가 모두 바뀌어요. 계속할까요?",
+    "importDone": "가져왔어요", "importError": "파일을 읽을 수 없어요: {msg}", "account": "계정", "signOut": "로그아웃", "version": "버전"
+  },
+  "more": { "title": "더보기", "deadlines": "마감 D-day", "gradSchool": "대학원 지원", "settings": "설정" }
+}

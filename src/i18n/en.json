@@ -1,0 +1,42 @@
+{
+  "nav": { "home": "Home", "grades": "Grades", "timetable": "Schedule", "papers": "Papers", "research": "Research", "more": "More" },
+  "common": {
+    "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit", "add": "Add", "close": "Close", "confirm": "OK",
+    "loading": "Loading…", "saved": "Saved", "error": "Something went wrong", "comingSoon": "Coming soon",
+    "today": "Today", "yes": "Yes", "no": "No", "required": "Required", "optional": "Optional", "search": "Search", "empty": "Nothing here yet"
+  },
+  "home": {
+    "greeting": "Hi, {name}", "level": "Lv.{level}", "xp": "{current} / {needed} XP", "todayTodos": "Today's to-dos",
+    "todaySchedule": "Today's schedule", "progress": "Today's progress", "allDone": "All done for today!", "noTodos": "Add something to do today",
+    "noSchedule": "Nothing scheduled today", "overdue": "{count} overdue", "moveToToday": "Move to today", "levelUp": "Reached level {level}!",
+    "addTodo": "Add to-do", "todoPlaceholder": "What's next?"
+  },
+  "grades": {
+    "title": "Grades", "import": "Paste from portal", "importTerms": "Term summary table", "importCourses": "Course table", "preview": "Preview",
+    "cumulative": "Cumulative GPA", "major": "Major GPA", "earned": "Credits earned", "scale4": "4.0 scale", "portalGpa": "Portal: {gpa}",
+    "portalMismatch": "Differs from portal by {diff}", "gradReq": "Graduation requirements", "reqTotal": "Total", "reqMajor": "Major", "reqLiberal": "Liberal arts",
+    "trend": "GPA by term", "termGpa": "Term GPA", "cumGpa": "Cumulative", "terms": "Terms", "addCourse": "Add course", "editCourse": "Edit course",
+    "course": "Course", "code": "Code", "section": "Section", "category": "Category", "area": "Area", "credits": "Credits", "score": "Score",
+    "grade": "Grade", "point": "Points", "term": "Term", "retake": "Replaced by retake", "simulator": "Target simulator", "target": "Target GPA",
+    "remaining": "Remaining credits", "needAvg": "Need {avg} average on remaining credits", "unreachable": "Not reachable with remaining credits", "planned": "Planned courses",
+    "projected": "Projected GPA {gpa}", "empty": "Paste your grades from the portal to get started", "importDone": "Imported {terms} terms, {courses} courses",
+    "warnings": "Please check", "replaceConfirm": "Replace existing portal data with the pasted content?"
+  },
+  "timetable": {
+    "title": "Schedule", "week": "Week", "month": "Month", "thisWeek": "This week", "weekend": "Weekend", "add": "Add item", "edit": "Edit item",
+    "kind": "Type", "class": "Class", "research": "Research", "work": "Work", "other": "Other", "days": "Days", "start": "Start", "end": "End",
+    "place": "Place", "repeat": "Repeat", "weekly": "Weekly", "once": "Once", "date": "Date", "period": "Period", "from": "From", "to": "To",
+    "pastePortal": "Paste from portal", "parserNotReady": "The portal timetable format isn't known yet. Show the copied text to Claude to fill in the parser.",
+    "errEndBeforeStart": "End time is before start", "errNoDays": "Pick at least one day", "errNoDate": "Pick a date", "errNoTitle": "Enter a title",
+    "dayNames": "Sun,Mon,Tue,Wed,Thu,Fri,Sat", "empty": "Add your first item"
+  },
+  "settings": {
+    "title": "Settings", "appName": "App name", "language": "Language", "theme": "Theme", "themeSystem": "System", "themeLight": "Light", "themeDark": "Dark",
+    "currentTerm": "Current term", "termCode": "Term code", "termCodeHint": "e.g. 2026-2 (1, S, 2, W)", "termStart": "Term start", "termEnd": "Term end",
+    "gradReq": "Graduation requirements (credits)", "gradReqHint": "Check your department's requirements and enter them here", "reqTotal": "Total", "reqMajor": "Major", "reqLiberal": "Liberal arts",
+    "portalGpa": "Portal cumulative GPA (optional)", "portalGpaHint": "Enter the GPA shown on the portal to compare with the computed one", "scale4": "4.0 scale table",
+    "data": "Data", "export": "Export JSON", "import": "Import JSON", "importConfirm": "Importing replaces all existing data. Continue?",
+    "importDone": "Imported", "importError": "Could not read file: {msg}", "account": "Account", "signOut": "Sign out", "version": "Version"
+  },
+  "more": { "title": "More", "deadlines": "Deadlines", "gradSchool": "Grad school apps", "settings": "Settings" }
+}

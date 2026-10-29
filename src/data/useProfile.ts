@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useUid } from '../features/auth/AuthProvider'
@@ -40,7 +40,14 @@ export function normalizeProfile(raw: Partial<Profile> | undefined): Profile {
   }
 }
 
-export function useProfile() {
+export interface ProfileCtx {
+  profile: Profile
+  update: (patch: Partial<Profile>) => Promise<void>
+  loading: boolean
+}
+
+/** Subscribes to users/{uid}. Mount once (ProfileProvider); screens use useProfile(). */
+export function useProfileDoc(): ProfileCtx {
   const uid = useUid()
   const [profile, setProfile] = useState<Profile>(DEFAULT_PROFILE)
   const [loading, setLoading] = useState(true)
@@ -62,4 +69,10 @@ export function useProfile() {
   }
 
   return { profile, update, loading }
+}
+
+export const ProfileContext = createContext<ProfileCtx>({ profile: DEFAULT_PROFILE, update: async () => {}, loading: true })
+
+export function useProfile(): ProfileCtx {
+  return useContext(ProfileContext)
 }

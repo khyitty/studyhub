@@ -34,3 +34,29 @@ export interface Course extends ParsedCourse {
   source: 'portal' | 'manual'
   supersededBy: string | null
 }
+
+export interface Todo {
+  id: string
+  title: string
+  date: string
+  done: boolean
+  doneAt: string | null
+  source: { type: 'general' | 'project' | 'course'; refId: string | null; label: string } | null
+  createdAt: string
+}
+
+export type ScheduleKind = 'class' | 'research' | 'work' | 'other'
+
+export interface ScheduleItem {
+  id: string
+  title: string
+  kind: ScheduleKind
+  days: number[]
+  start: string
+  end: string
+  place: string
+  repeat: 'weekly' | 'once'
+  date: string | null
+  from: string
+  to: string
+}
