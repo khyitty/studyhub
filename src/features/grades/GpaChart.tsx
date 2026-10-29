@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { Card } from '../../components/ui'
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { useLang, useT } from '../../i18n/useT'
 import { gpaOf, GPA_EXCLUDED } from '../../lib/gpa'
 import { termLabel } from '../../lib/parsers/termCode'
@@ -35,20 +34,24 @@ export function GpaChart({ g }: { g: Grades }) {
   const floor = Math.floor(min * 2) / 2
 
   return (
-    <Card title={t('grades.trend')}>
-      <div className="h-56 w-full text-xs">
+    <section>
+      <header className="flex items-center justify-between">
+        <h2 className="text-sm font-bold">{t('grades.trend')}</h2>
+        <span className="text-xs text-ink-muted">{t('grades.chartLegend')}</span>
+      </header>
+      <div className="mt-2 h-40 w-full text-xs">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 8, right: 8, left: -16, bottom: 0 }}>
+          <LineChart data={data} margin={{ top: 8, right: 16, left: -16, bottom: 0 }}>
             <CartesianGrid stroke="var(--color-line)" vertical={false} />
             <XAxis dataKey="label" tick={{ fill: 'var(--color-ink-muted)' }} tickLine={false} axisLine={false} interval={0} />
             <YAxis domain={[floor, 4.5]} tick={{ fill: 'var(--color-ink-muted)' }} tickLine={false} axisLine={false} tickCount={4} />
-            <Tooltip labelFormatter={(_, p) => (p?.[0]?.payload as { full?: string } | undefined)?.full ?? ''} contentStyle={{ borderRadius: 12, border: '1px solid var(--color-line)', background: 'var(--color-surface)', color: 'var(--color-ink)' }} />
-            <Legend iconType="circle" />
-            <Line type="monotone" dataKey="term" name={t('grades.termGpa')} stroke="var(--color-peach-deep)" strokeWidth={2.5} dot={{ r: 4 }} connectNulls />
-            <Line type="monotone" dataKey="cum" name={t('grades.cumGpa')} stroke="var(--color-lilac-deep)" strokeWidth={2.5} dot={{ r: 4 }} connectNulls />
+            <Tooltip labelFormatter={(_, p) => (p?.[0]?.payload as { full?: string } | undefined)?.full ?? ''}
+              contentStyle={{ borderRadius: 4, border: '1px solid var(--color-line-strong)', background: 'var(--color-surface)', color: 'var(--color-ink)', boxShadow: 'none', fontSize: 12 }} />
+            <Line type="monotone" dataKey="term" name={t('grades.termGpa')} stroke="var(--color-ink)" strokeWidth={2.2} dot={{ r: 3.5, fill: 'var(--color-ink)', strokeWidth: 0 }} connectNulls />
+            <Line type="monotone" dataKey="cum" name={t('grades.cumGpa')} stroke="var(--color-ink-faint)" strokeWidth={2} dot={false} connectNulls />
           </LineChart>
         </ResponsiveContainer>
       </div>
-    </Card>
+    </section>
   )
 }

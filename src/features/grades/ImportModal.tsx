@@ -47,7 +47,7 @@ export function ImportModal({ open, onClose, g }: { open: boolean; onClose: () =
       <div className="space-y-3">
         <Textarea label={t('grades.importTerms')} rows={5} value={termsText} placeholder={t('grades.pasteTermsHint')} onChange={(e) => { setTermsText(e.target.value); setPreview(null) }} className="font-mono" />
         <Textarea label={t('grades.importCourses')} rows={5} value={coursesText} placeholder={t('grades.pasteCoursesHint')} onChange={(e) => { setCoursesText(e.target.value); setPreview(null) }} className="font-mono" />
-        {empty && <p className="rounded-card bg-butter px-4 py-3 text-sm font-semibold text-butter-deep">{t('grades.nothingParsed')}</p>}
+        {empty && <p className="rounded-card border border-warn/40 px-4 py-3 text-sm font-semibold text-warn">{t('grades.nothingParsed')}</p>}
         {blocked && !empty && (
           <ul className="rounded-card bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
             {problems.map((k) => <li key={k}>{t(k)}</li>)}
@@ -69,15 +69,15 @@ export function ImportModal({ open, onClose, g }: { open: boolean; onClose: () =
                   )
                 })}
                 {preview.assigned.some((c) => c.termCode == null) && (
-                  <tr className="border-t border-line text-butter-deep"><td className="py-1.5 font-semibold">{t('grades.unassigned')}</td>
+                  <tr className="border-t border-line text-warn"><td className="py-1.5 font-semibold">{t('grades.unassigned')}</td>
                     <td className="text-right">{t('grades.courseCount', { n: preview.assigned.filter((c) => c.termCode == null).length })}</td><td /></tr>
                 )}
               </tbody>
             </table>
             {replacing && <p className="text-xs text-ink-muted">{t('grades.replaceConfirm')}</p>}
             {preview.warnings.length > 0 && (
-              <div className="rounded-card bg-butter px-4 py-3 text-sm">
-                <p className="font-semibold text-butter-deep">{t('grades.warnings')}</p>
+              <div className="rounded-card border border-warn/40 px-4 py-3 text-sm">
+                <p className="font-semibold text-warn">{t('grades.warnings')}</p>
                 <ul className="mt-1 list-disc pl-4 text-ink">{preview.warnings.map((w, i) => <li key={i}>{w}</li>)}</ul>
               </div>
             )}

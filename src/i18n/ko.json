@@ -26,7 +26,8 @@
     "pasteCoursesHint": "포탈 > 성적조회 > 과목별 성적 표를 전체 선택해 복사해서 붙여넣기", "courseCount": "{n}과목", "creditSum": "{n}학점",
     "nothingParsed": "읽을 수 있는 내용이 없어요. 표 전체를 복사했는지 확인해 주세요", "errNoTerms": "학기별 성적 표가 비어 있어요. 두 표를 모두 붙여넣어야 저장할 수 있어요", "errNoCourses": "과목별 성적 표가 비어 있어요. 두 표를 모두 붙여넣어야 저장할 수 있어요", "unassigned": "학기 미배정", "assignTerm": "학기 선택",
     "deleteConfirm": "이 과목을 삭제할까요?", "setReqHint": "설정에서 졸업 요건을 입력하면 게이지가 채워져요", "creditsOf": "{earned} / {required}학점",
-    "manual": "직접 입력", "noTerm": "학기 없음", "addPlanned": "예상 과목 추가", "currentCum": "현재 {gpa}"
+    "manual": "직접 입력", "noTerm": "학기 없음", "addPlanned": "예상 과목 추가", "currentCum": "현재 {gpa}",
+    "subtitle": "{from} ~ {to} · {n}개 학기", "portalMatch": "포탈과 일치", "portalDiff": "포탈과 {diff} 차이", "chartLegend": "학기 · 누적"
   },
   "timetable": {
     "title": "시간표", "name": "제목", "week": "주간", "month": "월간", "thisWeek": "이번 주", "weekend": "주말", "add": "일정 추가", "edit": "일정 수정",

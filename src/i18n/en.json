@@ -26,7 +26,8 @@
     "pasteCoursesHint": "Portal > Grades > select the whole course table, copy, and paste here", "courseCount": "{n} courses", "creditSum": "{n} credits",
     "nothingParsed": "Nothing readable. Make sure you copied the whole table", "errNoTerms": "The term table is empty. Paste both tables to save", "errNoCourses": "The course table is empty. Paste both tables to save", "unassigned": "No term assigned", "assignTerm": "Pick a term",
     "deleteConfirm": "Delete this course?", "setReqHint": "Enter graduation requirements in Settings to fill the gauges", "creditsOf": "{earned} / {required} credits",
-    "manual": "Manual", "noTerm": "No term", "addPlanned": "Add planned course", "currentCum": "Now {gpa}"
+    "manual": "Manual", "noTerm": "No term", "addPlanned": "Add planned course", "currentCum": "Now {gpa}",
+    "subtitle": "{from} – {to} · {n} terms", "portalMatch": "Matches portal", "portalDiff": "{diff} off portal", "chartLegend": "term · cumulative"
   },
   "timetable": {
     "title": "Schedule", "name": "Title", "week": "Week", "month": "Month", "thisWeek": "This week", "weekend": "Weekend", "add": "Add item", "edit": "Edit item",
