@@ -3,7 +3,7 @@
   "common": {
     "save": "저장", "cancel": "취소", "delete": "삭제", "edit": "수정", "add": "추가", "close": "닫기", "confirm": "확인",
     "loading": "불러오는 중…", "saved": "저장됐어요", "error": "문제가 생겼어요", "comingSoon": "준비 중이에요",
-    "today": "오늘", "yes": "예", "no": "아니오", "required": "필수", "optional": "선택", "search": "검색", "empty": "아직 없어요"
+    "today": "오늘", "yes": "예", "no": "아니오", "required": "필수", "optional": "선택", "search": "검색", "empty": "아직 없어요", "prev": "이전", "next": "다음"
   },
   "home": {
     "greeting": "안녕, {name}", "level": "Lv.{level}", "xp": "{current} / {needed} XP", "todayTodos": "오늘 할 일",
@@ -28,7 +28,7 @@
     "manual": "직접 입력", "noTerm": "학기 없음", "addPlanned": "예상 과목 추가", "currentCum": "현재 {gpa}"
   },
   "timetable": {
-    "title": "시간표", "week": "주간", "month": "월간", "thisWeek": "이번 주", "weekend": "주말", "add": "일정 추가", "edit": "일정 수정",
+    "title": "시간표", "name": "제목", "week": "주간", "month": "월간", "thisWeek": "이번 주", "weekend": "주말", "add": "일정 추가", "edit": "일정 수정",
     "kind": "종류", "class": "수업", "research": "연구", "work": "일", "other": "기타", "days": "요일", "start": "시작", "end": "종료",
     "place": "장소", "repeat": "반복", "weekly": "매주", "once": "한 번", "date": "날짜", "period": "기간", "from": "부터", "to": "까지",
     "pastePortal": "포탈 붙여넣기", "parserNotReady": "포탈 시간표 형식을 아직 몰라요. 포탈에서 복사한 텍스트를 Claude에게 보여주면 파서를 채울 수 있어요.",

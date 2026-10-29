@@ -3,7 +3,7 @@
   "common": {
     "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit", "add": "Add", "close": "Close", "confirm": "OK",
     "loading": "Loading…", "saved": "Saved", "error": "Something went wrong", "comingSoon": "Coming soon",
-    "today": "Today", "yes": "Yes", "no": "No", "required": "Required", "optional": "Optional", "search": "Search", "empty": "Nothing here yet"
+    "today": "Today", "yes": "Yes", "no": "No", "required": "Required", "optional": "Optional", "search": "Search", "empty": "Nothing here yet", "prev": "Previous", "next": "Next"
   },
   "home": {
     "greeting": "Hi, {name}", "level": "Lv.{level}", "xp": "{current} / {needed} XP", "todayTodos": "Today's to-dos",
@@ -28,7 +28,7 @@
     "manual": "Manual", "noTerm": "No term", "addPlanned": "Add planned course", "currentCum": "Now {gpa}"
   },
   "timetable": {
-    "title": "Schedule", "week": "Week", "month": "Month", "thisWeek": "This week", "weekend": "Weekend", "add": "Add item", "edit": "Edit item",
+    "title": "Schedule", "name": "Title", "week": "Week", "month": "Month", "thisWeek": "This week", "weekend": "Weekend", "add": "Add item", "edit": "Edit item",
     "kind": "Type", "class": "Class", "research": "Research", "work": "Work", "other": "Other", "days": "Days", "start": "Start", "end": "End",
     "place": "Place", "repeat": "Repeat", "weekly": "Weekly", "once": "Once", "date": "Date", "period": "Period", "from": "From", "to": "To",
     "pastePortal": "Paste from portal", "parserNotReady": "The portal timetable format isn't known yet. Show the copied text to Claude to fill in the parser.",
