@@ -37,6 +37,15 @@ export interface Course extends ParsedCourse {
   order: number
 }
 
+export type PaletteColor = 'sky' | 'mint' | 'pink' | 'butter' | 'lilac' | 'peach'
+
+export interface Category {
+  id: string
+  name: string
+  color: PaletteColor
+  order: number
+}
+
 export interface Todo {
   id: string
   title: string
@@ -45,6 +54,8 @@ export interface Todo {
   doneAt: string | null
   source: { type: 'general' | 'project' | 'course'; refId: string | null; label: string } | null
   createdAt: string
+  /** null = 기타 (no category) */
+  categoryId: string | null
 }
 
 export type ScheduleKind = 'class' | 'research' | 'work' | 'other'

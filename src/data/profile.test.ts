@@ -11,3 +11,9 @@ describe('normalizeProfile', () => {
     expect(normalizeProfile({ gradReq: { total: 120 } as never }).gradReq).toEqual({ total: 120, major: 0, liberal: 0 })
   })
 })
+
+test('new fields default: categoriesSeeded false, toeflScore null', () => {
+  const p = normalizeProfile({})
+  expect(p.categoriesSeeded).toBe(false)
+  expect(p.toeflScore).toBeNull()
+})

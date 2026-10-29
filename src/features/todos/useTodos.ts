@@ -21,6 +21,7 @@ export function normalizeTodo(raw: DocumentData, id: string): Todo {
       ? { type: raw.source.type ?? 'general', refId: raw.source.refId ?? null, label: String(raw.source.label ?? '') }
       : null,
     createdAt: String(raw.createdAt ?? new Date().toISOString()),
+    categoryId: raw.categoryId ? String(raw.categoryId) : null,
   }
 }
 
@@ -39,7 +40,7 @@ export function useTodos() {
   const add = useCallback(async (title: string, date: string = todayISO()) => {
     const clean = title.trim()
     if (!clean) return
-    await col.add({ title: clean, date, done: false, doneAt: null, source: null, createdAt: new Date().toISOString() })
+    await col.add({ title: clean, date, done: false, doneAt: null, source: null, createdAt: new Date().toISOString(), categoryId: null })
   }, [col])
 
   const toggle = useCallback(async (id: string) => {

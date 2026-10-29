@@ -12,6 +12,10 @@ export interface Profile {
   gpa4Scale: Record<Grade, number>
   gpaPortal: number | null
   appName: string
+  /** default categories were created once for this user */
+  categoriesSeeded: boolean
+  /** my TOEFL score, compared against each school's minimum */
+  toeflScore: number | null
 }
 
 export const DEFAULT_PROFILE: Profile = {
@@ -25,6 +29,8 @@ export const DEFAULT_PROFILE: Profile = {
   gpa4Scale: DEFAULT_SCALE4,
   gpaPortal: null,
   appName: 'StudyHub',
+  categoriesSeeded: false,
+  toeflScore: null,
 }
 
 /** Fill defaults for missing fields; xp is stored with increment() so it is clamped on read. */
