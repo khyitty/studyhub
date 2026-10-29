@@ -1,14 +1,15 @@
 # StudyHub
 
-학점 · 논문 · 시간표 · 할 일을 한 곳에서 관리하는 개인 학업 앱. 노트북 브라우저와 아이폰·아이패드 홈 화면에서 같은 데이터를 봅니다.
+학점 · 할 일 · 시간표 · 대학원 지원을 한 곳에서 관리하는 개인 학업 앱. 노트북 브라우저와 아이폰·아이패드 홈 화면에서 같은 데이터를 봅니다. 흰 바탕·검정 글자·각진 모서리의 "페이퍼" 스타일로, 색은 카테고리 라벨과 체크박스에만 씁니다.
 
 ## 이게 뭔가
 
-- **홈**: 오늘 할 일과 완료율 게이지, 레벨/XP, 오늘 일정
+- **홈**: 주간 날짜 띠에서 날짜를 고르고, 카테고리(공부·연구·대학원 + 직접 추가)별로 묶인 할 일을 체크. 완료율, 오늘 일정, 가장 가까운 지원 마감 3개
 - **학점**: 포탈 성적을 붙여넣으면 누적 평점·전공 평점·4.0 환산·졸업 요건 게이지·학기별 추이·목표 시뮬레이터
-- **시간표**: 주간 시간표 + 월간 캘린더, 수업/연구/일/기타 색 구분
-- **더보기 → 설정**: 앱 이름, 언어(한/영), 테마, 현재 학기, 졸업 요건, 4.0 환산표, JSON 백업
-- 논문 · 연구 보드 · 마감 D-day · 대학원 지원 트래커는 다음 단계에서 추가
+- **시간표**: 주간 시간표 + 월간 캘린더, 수업/연구/일/기타 파스텔 색 구분
+- **대학원**: 지원할 학교를 표(데스크톱) 또는 카드(폰)로 한눈에 — 마감 D-day, GRE 필수 여부, TOEFL 최소 점수 충족 여부, 추천서 확보 수, SOP 상태, 지원비, 진행 상태. 마감이 7일 이내면 빨갛게, 지난 마감은 맨 아래
+- **설정**: 앱 이름, 언어(한/영), 테마, 현재 학기, 내 TOEFL 점수, 졸업 요건, 4.0 환산표, JSON 백업
+- 논문 · 연구 보드는 다음 단계에서 추가
 
 데이터는 본인 Google 계정으로 로그인한 Firebase에 저장되고, 기기마다 자동으로 동기화됩니다. 오프라인에서도 마지막으로 본 내용은 열립니다.
 
@@ -49,7 +50,7 @@
 npm install
 cp .env.example .env.local   # Firebase 웹 앱 키 5개 입력
 npm run dev                  # http://localhost:5173
-npm test                     # 파서·학점 계산·날짜·XP 단위 테스트
+npm test                     # 파서·학점 계산·날짜·XP·카테고리·대학원 로직 단위 테스트
 npm run build                # dist/ (PWA manifest + service worker 포함)
 npm run icons                # public/icons/icon.svg → PNG 아이콘 재생성
 ```
@@ -58,4 +59,5 @@ npm run icons                # public/icons/icon.svg → PNG 아이콘 재생성
 - 구조: `src/features/<기능>/` 폴더 하나가 기능 하나. 새 기능 = 새 폴더 + `App.tsx` 라우트 한 줄 + `components/layout/nav.ts` 메뉴 한 줄
 - 포탈 파서: `src/lib/parsers/` (순수 함수 + 실제 포탈 텍스트 픽스처로 테스트). 시간표 파서는 `parseTimetable.ts` 스텁 — 포탈 시간표 형식을 받으면 채운다
 - Firestore 규칙: `users/{uid}/**` 본인만 읽기/쓰기 (`firestore.rules`, `firebase deploy --only firestore:rules`)
+- 디자인 토큰: `src/index.css`의 `@theme` (페이퍼 팔레트 + 파스텔 6색 `sky/mint/pink/butter/lilac/peach`), UI 프리미티브는 `src/components/ui/`
 - 설계 문서: `docs/superpowers/specs/`, 구현 계획: `docs/superpowers/plans/`

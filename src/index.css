@@ -34,13 +34,6 @@
   --color-peach: #f7c6a9;
   --color-peach-text: #e39a6a;
 
-  /* TEMP aliases - removed in Task 11 */
-  --color-peach-deep: #e39a6a;
-  --color-lilac-deep: #a08bdc;
-  --color-mint-deep: #6fbf9a;
-  --color-butter-deep: #d1a93c;
-  --color-accent: #111111;
-
   --radius-card: 4px;
   --radius-pill: 3px;
   --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -60,7 +53,6 @@
     --color-line-strong: #333333;
     --color-primary: #f2f2f2;
     --color-on-primary: #111111;
-    --color-accent: #f2f2f2;
     --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.5);
   }
   html { font-family: var(--font-sans); }
