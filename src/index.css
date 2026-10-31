@@ -3,6 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --font-serif: "Noto Serif KR", "Pretendard Variable", serif;
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 
   --color-bg: #ffffff;
@@ -19,6 +20,21 @@
   --color-danger: #d86a8b;
   --color-success: #3da874;
   --color-warn: #c28a1b;
+
+  /* theme shades — default preset green (light); other presets / dark values override below via html[data-hue] */
+  --color-s1: #E3ECE2;
+  --color-s2: #C5D8C4;
+  --color-s3: #A3C0A4;
+  --color-s4: #789B7C;
+  --color-s5: #55795B;
+  --color-s6: #3A5A41;
+  --color-cover-bg: #EEF3EC;
+  --color-s1-on: var(--color-s6);
+  --color-s2-on: var(--color-s6);
+  --color-s3-on: var(--color-s6);
+  --color-s4-on: #ffffff;
+  --color-s5-on: #ffffff;
+  --color-s6-on: #ffffff;
 
   /* pastel palette: fill / text */
   --color-sky: #a9c6f0;
@@ -54,6 +70,106 @@
     --color-primary: #f2f2f2;
     --color-on-primary: #111111;
     --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.5);
+    --color-s1: #223527;
+    --color-s2: #2E4733;
+    --color-s3: #3F5E45;
+    --color-s4: #7FA486;
+    --color-s5: #A3C3A8;
+    --color-s6: #C9DECB;
+    --color-cover-bg: #182219;
+    --color-s4-on: #111111;
+    --color-s5-on: #111111;
+    --color-s6-on: #111111;
+  }
+  :root[data-hue="blue"] {
+    --color-s1: #E3E9F0;
+    --color-s2: #C4D2E1;
+    --color-s3: #9FB5CB;
+    --color-s4: #7591AE;
+    --color-s5: #526F8E;
+    --color-s6: #375069;
+    --color-cover-bg: #EEF1F5;
+  }
+  :root[data-hue="purple"] {
+    --color-s1: #E9E5F0;
+    --color-s2: #D1C9E1;
+    --color-s3: #B3A7CC;
+    --color-s4: #8E7FB0;
+    --color-s5: #6C5E8E;
+    --color-s6: #4E4269;
+    --color-cover-bg: #F2F0F6;
+  }
+  :root[data-hue="brown"] {
+    --color-s1: #EFE8E0;
+    --color-s2: #DCCDBC;
+    --color-s3: #C2AC94;
+    --color-s4: #A2866B;
+    --color-s5: #7E6650;
+    --color-s6: #5B4837;
+    --color-cover-bg: #F6F2EC;
+  }
+  :root[data-hue="rose"] {
+    --color-s1: #F1E4E6;
+    --color-s2: #E1C8CD;
+    --color-s3: #CBA6AE;
+    --color-s4: #AF7F8B;
+    --color-s5: #8D5F6B;
+    --color-s6: #67434D;
+    --color-cover-bg: #F6EEF0;
+  }
+  :root[data-hue="gray"] {
+    --color-s1: #EAEAEA;
+    --color-s2: #D3D3D3;
+    --color-s3: #B4B4B4;
+    --color-s4: #8E8E8E;
+    --color-s5: #6A6A6A;
+    --color-s6: #474747;
+    --color-cover-bg: #F2F2F2;
+  }
+  .dark[data-hue="blue"] {
+    --color-s1: #1F2A36;
+    --color-s2: #2A3A4B;
+    --color-s3: #3B5168;
+    --color-s4: #7E9AB8;
+    --color-s5: #A4BBD2;
+    --color-s6: #C8D6E4;
+    --color-cover-bg: #161D25;
+  }
+  .dark[data-hue="purple"] {
+    --color-s1: #2A2537;
+    --color-s2: #3A334C;
+    --color-s3: #4F4668;
+    --color-s4: #9387B8;
+    --color-s5: #B3A9CF;
+    --color-s6: #D0C9E2;
+    --color-cover-bg: #1D1926;
+  }
+  .dark[data-hue="brown"] {
+    --color-s1: #332A22;
+    --color-s2: #46392D;
+    --color-s3: #5E4D3D;
+    --color-s4: #B09377;
+    --color-s5: #CBB49C;
+    --color-s6: #E0D2C2;
+    --color-cover-bg: #221C16;
+  }
+  .dark[data-hue="rose"] {
+    --color-s1: #352529;
+    --color-s2: #493239;
+    --color-s3: #62434C;
+    --color-s4: #B88A96;
+    --color-s5: #D0ACB5;
+    --color-s6: #E3CCD2;
+    --color-cover-bg: #241A1D;
+  }
+  .dark[data-hue="gray"] {
+    --color-s1: #2A2A2A;
+    --color-s2: #383838;
+    --color-s3: #4A4A4A;
+    --color-s4: #9A9A9A;
+    --color-s5: #B8B8B8;
+    --color-s6: #D4D4D4;
+    --color-cover-bg: #1C1C1C;
   }
   html { font-family: var(--font-sans); }
   body {

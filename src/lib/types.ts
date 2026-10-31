@@ -39,6 +39,9 @@ export interface Course extends ParsedCourse {
 
 export type PaletteColor = 'sky' | 'mint' | 'pink' | 'butter' | 'lilac' | 'peach'
 
+/** Theme shade: 1 = lightest … 6 = darkest (light mode). */
+export type Shade = 1 | 2 | 3 | 4 | 5 | 6
+
 export interface Category {
   id: string
   name: string

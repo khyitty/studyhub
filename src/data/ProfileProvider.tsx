@@ -3,8 +3,10 @@ import { ProfileContext, useProfileDoc } from './useProfile'
 import { LangContext } from '../i18n/useT'
 import { useCategories } from '../features/todos/useCategories'
 import { DEFAULT_CATEGORIES, shouldSeedCategories } from '../lib/categories'
+import type { Hue } from '../lib/theme'
 
-function applyTheme(theme: 'system' | 'light' | 'dark') {
+function applyTheme(theme: 'system' | 'light' | 'dark', hue: Hue) {
+  document.documentElement.dataset.hue = hue
   const dark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
   document.documentElement.classList.toggle('dark', dark)
   const meta = document.querySelector('meta[name="theme-color"]')
@@ -26,17 +28,17 @@ function useSeedCategories(ctx: ReturnType<typeof useProfileDoc>) {
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
   const ctx = useProfileDoc()
-  const { theme, appName, lang } = ctx.profile
+  const { theme, themeHue, appName, lang } = ctx.profile
   useSeedCategories(ctx)
 
   useEffect(() => {
-    applyTheme(theme)
+    applyTheme(theme, themeHue)
     if (theme !== 'system') return
     const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    const onChange = () => applyTheme('system')
+    const onChange = () => applyTheme('system', themeHue)
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)
-  }, [theme])
+  }, [theme, themeHue])
 
   useEffect(() => {
     document.title = appName
