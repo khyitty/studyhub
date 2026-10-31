@@ -30,11 +30,13 @@
   },
   "timetable": {
     "title": "Schedule", "name": "Title", "week": "Week", "month": "Month", "thisWeek": "This week", "weekend": "Weekend", "add": "Add item", "edit": "Edit item",
-    "kind": "Type", "class": "Class", "research": "Research", "work": "Work", "other": "Other", "days": "Days", "start": "Start", "end": "End",
+    "kind": "Type", "days": "Days", "start": "Start", "end": "End",
     "place": "Place", "repeat": "Repeat", "weekly": "Weekly", "once": "Once", "date": "Date", "period": "Period", "from": "From", "to": "To",
     "pastePortal": "Paste from portal", "parserNotReady": "The portal timetable format isn't known yet. Show the copied text to Claude to fill in the parser.",
     "errEndBeforeStart": "End time is before start", "errNoDays": "Pick at least one day", "errNoDate": "Pick a date", "errNoTitle": "Enter a title", "deleteConfirm": "Delete this item?",
-    "dayNames": "Sun,Mon,Tue,Wed,Thu,Fri,Sat", "empty": "Add your first item"
+    "dayNames": "Sun,Mon,Tue,Wed,Thu,Fri,Sat", "empty": "Add your first item",
+    "manageKinds": "Manage kinds", "kindName": "Name", "addKind": "Add kind", "deleteKindConfirm": "Schedule items of this kind become 'Other'. Delete?"
+ 
   },
   "settings": {
     "title": "Settings", "appName": "App name", "language": "Language", "theme": "Theme", "themeSystem": "System", "themeLight": "Light", "themeDark": "Dark",

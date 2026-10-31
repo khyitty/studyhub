@@ -2,11 +2,11 @@ import { itemsOnDate, validateScheduleItem } from './schedule'
 import type { ScheduleItem } from '../../lib/types'
 
 const weekly: ScheduleItem = {
-  id: 'w', title: '회귀분석', kind: 'class', days: [1, 3], start: '09:00', end: '10:15', place: '정경관',
+  id: 'w', title: '회귀분석', kind: 'seed-class', days: [1, 3], start: '09:00', end: '10:15', place: '정경관',
   repeat: 'weekly', date: null, from: '2026-09-01', to: '2026-12-20',
 }
 const once: ScheduleItem = {
-  id: 'o', title: '미팅', kind: 'research', days: [], start: '14:00', end: '15:00', place: '',
+  id: 'o', title: '미팅', kind: 'seed-research', days: [], start: '14:00', end: '15:00', place: '',
   repeat: 'once', date: '2026-10-29', from: '2026-09-01', to: '2026-12-20',
 }
 const early: ScheduleItem = { ...weekly, id: 'e', title: '아침 세미나', days: [4], start: '08:00', end: '09:00' }
@@ -46,8 +46,9 @@ describe('itemsOnDate', () => {
   })
 })
 
-import { KIND_SHADE, KIND_STYLE } from './schedule'
-test('schedule kinds map to theme shades; borders use the lifted text shade', () => {
-  expect(KIND_SHADE).toEqual({ class: 2, research: 4, work: 1, other: 5 })
-  expect(KIND_STYLE.work).toEqual({ bg: 'bg-s1', text: 'text-s1-on', border: 'border-s4' })
+import { normalizeScheduleItem } from './schedule'
+test('normalizeScheduleItem maps legacy kinds and keeps unknown ids', () => {
+  expect(normalizeScheduleItem({ kind: 'class' }, 'a').kind).toBe('seed-class')
+  expect(normalizeScheduleItem({ kind: 'k9' }, 'b').kind).toBe('k9')
+  expect(normalizeScheduleItem({}, 'c').kind).toBe('seed-other')
 })

@@ -2,7 +2,8 @@ import { useMemo, useState } from 'react'
 import { IconChevronLeft, IconChevronRight } from '../../components/icons'
 import { useT } from '../../i18n/useT'
 import { addDays, startOfWeek, todayISO } from '../../lib/dates'
-import { KIND_STYLE, itemsOnDate, toMinutes, type ScheduleItem } from './schedule'
+import { kindOf, kindStyle, type Kind } from '../../lib/kinds'
+import { itemsOnDate, toMinutes, type ScheduleItem } from './schedule'
 
 const HOUR_PX = 44
 
@@ -29,9 +30,9 @@ function placeLanes(items: ScheduleItem[]): Placed[] {
   return placed
 }
 
-type Props = { items: ScheduleItem[]; onPick: (item: ScheduleItem) => void }
+type Props = { items: ScheduleItem[]; kinds: Kind[]; onPick: (item: ScheduleItem) => void }
 
-export function WeekView({ items, onPick }: Props) {
+export function WeekView({ items, kinds, onPick }: Props) {
   const t = useT()
   const today = todayISO()
   const [weekStart, setWeekStart] = useState(() => startOfWeek(today))
@@ -80,7 +81,7 @@ export function WeekView({ items, onPick }: Props) {
               {placed.map(({ item, lane, lanes }) => {
                 const top = ((toMinutes(item.start) - minHour * 60) / 60) * HOUR_PX
                 const h = ((toMinutes(item.end) - toMinutes(item.start)) / 60) * HOUR_PX
-                const st = KIND_STYLE[item.kind]
+                const st = kindStyle(kindOf(kinds, item.kind))
                 return (
                   <button key={item.id} type="button" onClick={() => onPick(item)}
                     className={`absolute overflow-hidden rounded-card border-l-[3px] px-1.5 py-0.5 text-left text-[11px] leading-tight ${st.text} ${st.border} ${st.bg}`}

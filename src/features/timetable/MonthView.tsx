@@ -2,11 +2,12 @@ import { useMemo, useState } from 'react'
 import { IconChevronLeft, IconChevronRight } from '../../components/icons'
 import { useLang, useT } from '../../i18n/useT'
 import { addDays, fromISO, startOfWeek, toISO, todayISO } from '../../lib/dates'
-import { KIND_STYLE, itemsOnDate, type ScheduleItem } from './schedule'
+import { kindOf, kindStyle, type Kind } from '../../lib/kinds'
+import { itemsOnDate, type ScheduleItem } from './schedule'
 
-type Props = { items: ScheduleItem[]; selected: string; onSelect: (iso: string) => void; onPick: (item: ScheduleItem) => void }
+type Props = { items: ScheduleItem[]; kinds: Kind[]; selected: string; onSelect: (iso: string) => void; onPick: (item: ScheduleItem) => void }
 
-export function MonthView({ items, selected, onSelect, onPick }: Props) {
+export function MonthView({ items, kinds, selected, onSelect, onPick }: Props) {
   const t = useT()
   const lang = useLang()
   const today = todayISO()
@@ -53,7 +54,7 @@ export function MonthView({ items, selected, onSelect, onPick }: Props) {
                 className={`flex min-h-12 flex-col items-center justify-start border-line py-1 text-sm ${i % 7 ? 'border-l' : ''} ${i >= 7 ? 'border-t' : ''} ${inMonth ? '' : 'text-ink-faint'} ${isSel ? 'bg-surface-2' : 'hover:bg-surface-2/60'}`}>
                 <span className={`flex h-6 w-6 items-center justify-center rounded-card tabular-nums ${iso === today ? 'bg-primary font-bold text-on-primary' : ''}`}>{Number(iso.slice(8, 10))}</span>
                 <span className="mt-0.5 flex h-2 gap-0.5">
-                  {once.slice(0, 3).map((it) => <span key={it.id} className={`h-1.5 w-1.5 rounded-[1px] ${KIND_STYLE[it.kind].bg}`} />)}
+                  {once.slice(0, 3).map((it) => <span key={it.id} className={`h-1.5 w-1.5 rounded-[1px] ${kindStyle(kindOf(kinds, it.kind)).bg}`} />)}
                 </span>
               </button>
             )
@@ -68,17 +69,18 @@ export function MonthView({ items, selected, onSelect, onPick }: Props) {
         ) : (
           <ul className="mt-1 divide-y divide-line">
             {dayItems.map((it) => {
-              const st = KIND_STYLE[it.kind]
+              const kind = kindOf(kinds, it.kind)
+              const st = kindStyle(kind)
               return (
                 <li key={it.id}>
                   <button type="button" onClick={() => onPick(it)} className="flex min-h-12 w-full items-center gap-3 py-2 text-left text-[13px] hover:bg-surface-2/60">
                     <span className="w-11 shrink-0 text-xs text-ink-muted tabular-nums">{it.start}</span>
-                    <span className={`h-[26px] w-[3px] shrink-0 ${st.bg}`} />
+                    <span className={`h-[26px] w-[3px] shrink-0 ${st.bar}`} />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-semibold">{it.title}</span>
                       <span className="block text-[11px] text-ink-muted">{it.start}–{it.end}{it.place ? ` · ${it.place}` : ''}</span>
                     </span>
-                    <span className={`rounded-pill px-2 py-0.5 text-[11px] font-semibold ${st.text} ${st.bg}`}>{t(`timetable.${it.kind}`)}</span>
+                    <span className={`rounded-pill px-2 py-0.5 text-[11px] font-semibold ${st.text} ${st.bg}`}>{kind.name}</span>
                   </button>
                 </li>
               )

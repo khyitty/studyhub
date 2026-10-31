@@ -3,7 +3,7 @@ import { useUserCollection } from '../../data/useUserCollection'
 import { itemsOnDate, normalizeScheduleItem, type ScheduleItem } from './schedule'
 
 export { validateScheduleItem, itemsOnDate } from './schedule'
-export type { ScheduleItem, ScheduleKind } from './schedule'
+export type { ScheduleItem } from './schedule'
 
 export type NewScheduleItem = Omit<ScheduleItem, 'id'>
 

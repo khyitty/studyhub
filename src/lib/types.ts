@@ -59,12 +59,11 @@ export interface Todo {
   categoryId: string | null
 }
 
-export type ScheduleKind = 'class' | 'research' | 'work' | 'other'
-
 export interface ScheduleItem {
   id: string
   title: string
-  kind: ScheduleKind
+  /** id of a `kinds` document (legacy 'class|research|work|other' is mapped on read) */
+  kind: string
   days: number[]
   start: string
   end: string

@@ -8,6 +8,7 @@ import { groupTodos } from '../../lib/categories'
 import { useTodos } from '../todos/useTodos'
 import { useCategories } from '../todos/useCategories'
 import { useSchedule } from '../timetable/useSchedule'
+import { useKinds } from '../timetable/useKinds'
 import { Cover } from './Cover'
 import { WeekStrip } from './WeekStrip'
 import { CategoryTodos } from './CategoryTodos'
@@ -27,6 +28,7 @@ export function HomePage() {
   const todos = useTodos(selected)
   const { categories } = useCategories()
   const schedule = useSchedule()
+  const { kinds } = useKinds()
   const { schools } = useSchools()
   const [manage, setManage] = useState(false)
 
@@ -78,7 +80,7 @@ export function HomePage() {
         />
         <div className="divide-y divide-line">
           <CompletionStat stats={todos.selectedStats} title={completionTitle} />
-          <TodaySchedule items={schedule.onDate(today)} />
+          <TodaySchedule items={schedule.onDate(today)} kinds={kinds} />
           <DeadlineList schools={schools} today={today} />
         </div>
       </div>

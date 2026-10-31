@@ -1,19 +1,9 @@
 import type { DocumentData } from 'firebase/firestore'
-import { SHADE_CLASS, textShade } from '../../lib/theme'
 import { isBetween, weekdayOf } from '../../lib/dates'
-import type { ScheduleItem, ScheduleKind, Shade } from '../../lib/types'
+import { LEGACY_KIND, OTHER_KIND_ID } from '../../lib/kinds'
+import type { ScheduleItem } from '../../lib/types'
 
-export type { ScheduleItem, ScheduleKind }
-
-export const KINDS: ScheduleKind[] = ['class', 'research', 'work', 'other']
-
-/** Theme shade per kind (shared by timetable blocks and the home schedule list). */
-export const KIND_SHADE: Record<ScheduleKind, Shade> = { class: 2, research: 4, work: 1, other: 5 }
-
-/** Tailwind classes per kind: block background (shade), text that sits on it, left border (lifted text shade). */
-export const KIND_STYLE: Record<ScheduleKind, { bg: string; text: string; border: string }> = Object.fromEntries(
-  KINDS.map((k) => { const s = KIND_SHADE[k]; return [k, { bg: SHADE_CLASS[s].fill, text: SHADE_CLASS[s].on, border: SHADE_CLASS[textShade(s)].border }] }),
-) as Record<ScheduleKind, { bg: string; text: string; border: string }>
+export type { ScheduleItem }
 
 export function toMinutes(hhmm: string): number {
   const [h, m] = hhmm.split(':').map(Number)
@@ -42,7 +32,7 @@ export function normalizeScheduleItem(raw: DocumentData, id: string): ScheduleIt
   return {
     id,
     title: String(raw.title ?? ''),
-    kind: KINDS.includes(raw.kind) ? raw.kind : 'other',
+    kind: LEGACY_KIND[String(raw.kind)] ?? String(raw.kind ?? OTHER_KIND_ID),
     days: Array.isArray(raw.days) ? raw.days.map(Number).filter((d: number) => d >= 1 && d <= 7) : [],
     start: String(raw.start ?? '09:00'),
     end: String(raw.end ?? '10:00'),

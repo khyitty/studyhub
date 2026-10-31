@@ -3,13 +3,15 @@ import { Button, Input, Modal } from '../../components/ui'
 import { useT } from '../../i18n/useT'
 import { useProfile } from '../../data/useProfile'
 import { todayISO } from '../../lib/dates'
-import { KINDS, KIND_STYLE, validateScheduleItem, type ScheduleItem, type ScheduleKind } from './schedule'
+import { kindStyle, type Kind } from '../../lib/kinds'
+import { validateScheduleItem, type ScheduleItem } from './schedule'
 import type { NewScheduleItem } from './useSchedule'
 
 type Props = {
   open: boolean
   onClose: () => void
   item: ScheduleItem | null
+  kinds: Kind[]
   defaultDate: string | null
   onSave: (item: NewScheduleItem) => Promise<void>
   onDelete?: (id: string) => Promise<void>
@@ -24,12 +26,12 @@ function Chip({ active, onClick, children, className = '' }: { active: boolean; 
   )
 }
 
-export function ScheduleForm({ open, onClose, item, defaultDate, onSave, onDelete }: Props) {
+export function ScheduleForm({ open, onClose, item, kinds, defaultDate, onSave, onDelete }: Props) {
   const t = useT()
   const { profile } = useProfile()
   const dayNames = t('timetable.dayNames').split(',') // Sun..Sat
   const blank = (): NewScheduleItem => ({
-    title: '', kind: 'class', days: [], start: '09:00', end: '10:15', place: '',
+    title: '', kind: kinds[0]?.id ?? 'seed-class', days: [], start: '09:00', end: '10:15', place: '',
     repeat: defaultDate ? 'once' : 'weekly', date: defaultDate ?? todayISO(), from: profile.termStart, to: profile.termEnd,
   })
   const [d, setD] = useState<NewScheduleItem>(blank)
@@ -78,12 +80,15 @@ export function ScheduleForm({ open, onClose, item, defaultDate, onSave, onDelet
         <div>
           <span className="mb-1 block text-sm font-semibold">{t('timetable.kind')}</span>
           <div className="flex flex-wrap gap-2">
-            {KINDS.map((k: ScheduleKind) => (
-              <button key={k} type="button" aria-pressed={d.kind === k} onClick={() => set('kind', k)}
-                className={`min-h-10 rounded-pill px-3 text-sm font-semibold transition ${KIND_STYLE[k].bg} ${KIND_STYLE[k].text} ${d.kind === k ? 'ring-2 ring-ink ring-offset-1 ring-offset-surface' : 'opacity-70 hover:opacity-100'}`}>
-                {t(`timetable.${k}`)}
-              </button>
-            ))}
+            {kinds.map((k) => {
+              const st = kindStyle(k)
+              return (
+                <button key={k.id} type="button" aria-pressed={d.kind === k.id} onClick={() => set('kind', k.id)}
+                  className={`min-h-10 rounded-pill px-3 text-sm font-semibold transition ${st.bg} ${st.text} ${d.kind === k.id ? 'ring-2 ring-ink ring-offset-1 ring-offset-surface' : 'opacity-70 hover:opacity-100'}`}>
+                  {k.name}
+                </button>
+              )
+            })}
           </div>
         </div>
 
