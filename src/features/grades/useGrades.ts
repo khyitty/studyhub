@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import type { DocumentData } from 'firebase/firestore'
 import { useUserCollection } from '../../data/useUserCollection'
 import { useProfile } from '../../data/useProfile'
@@ -8,6 +8,8 @@ import { parseTermGrades } from '../../lib/parsers/parseTermGrades'
 import { parseCourseGrades } from '../../lib/parsers/parseCourseGrades'
 import { assignTerms } from '../../lib/parsers/assignTerms'
 import type { Course, Grade, Term } from '../../lib/types'
+import { gridRows, majorNames, seedCatsFromCourses, shouldSeedCreditCats } from '../../lib/creditCats'
+import { useCreditCats } from './useCreditCats'
 
 export type TermDoc = Term & { id: string }
 
@@ -59,7 +61,8 @@ export function previewImport(termsText: string, coursesText: string) {
 }
 
 export function useGrades() {
-  const { profile } = useProfile()
+  const { profile, update: updateProfile, loading: profileLoading } = useProfile()
+  const creditCats = useCreditCats()
   const termsCol = useUserCollection<TermDoc>('terms', normalizeTerm)
   const coursesCol = useUserCollection<Course>('courses', normalizeCourse)
 
@@ -67,9 +70,22 @@ export function useGrades() {
   const courses = useMemo(() => applyRetakeRule(coursesCol.items), [coursesCol.items])
   const active = useMemo(() => activeCourses(courses), [courses])
   const cumulative = useMemo(() => gpaOf(active), [active])
-  const major = useMemo(() => majorGpa(active), [active])
+  const cats = creditCats.cats
+  const major = useMemo(() => majorGpa(active, majorNames(cats)), [active, cats])
   const s4 = useMemo(() => scale4(active, profile.gpa4Scale), [active, profile.gpa4Scale])
-  const progress = useMemo(() => gradProgress(active, profile.gradReq), [active, profile.gradReq])
+  const progress = useMemo(() => gradProgress(active, { total: profile.gradReq.total }), [active, profile.gradReq.total])
+  const rows = useMemo(() => gridRows(cats, courses), [cats, courses])
+  const firstYear = terms.length ? Number(terms[0].code.slice(0, 4)) : null
+
+  // one-time seed of the credit rows: from the user's existing courses, or the four defaults
+  const seeded = useRef(false)
+  const { put: putCat } = creditCats
+  useEffect(() => {
+    if (seeded.current) return
+    if (!shouldSeedCreditCats(profile, cats, creditCats.loading, coursesCol.loading, profileLoading)) return
+    seeded.current = true
+    void Promise.all(seedCatsFromCourses(coursesCol.items, terms).map(putCat)).then(() => updateProfile({ creditCatsSeeded: true }))
+  }, [profile, cats, creditCats.loading, coursesCol.loading, profileLoading, coursesCol.items, terms, putCat, updateProfile])
 
   const importPortal = useCallback(async (termsText: string, coursesText: string) => {
     const { terms: newTerms, assigned, warnings } = previewImport(termsText, coursesText)
@@ -86,6 +102,8 @@ export function useGrades() {
   return {
     terms, courses, active, cumulative, major, scale4: s4, progress,
     importPortal, addCourse, updateCourse, removeCourse,
+    cats, rows, firstYear,
+    addCat: creditCats.add, renameCat: creditCats.rename, updateCat: creditCats.update, removeCat: creditCats.remove, moveCat: creditCats.move,
     loading: termsCol.loading || coursesCol.loading,
   }
 }
