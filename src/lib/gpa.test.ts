@@ -31,7 +31,7 @@ describe('gpa', () => {
     expect(earnedCredits(all)).toBe(91)
   })
   test('major gpa covers 전공필수/전공선택 only', () => {
-    expect(majorGpa(all)).toEqual({ gpa: 4, credits: 30, points: 120 })
+    expect(majorGpa(all, ['전공필수', '전공선택'])).toEqual({ gpa: 4, credits: 30, points: 120 })
   })
   test('gpa100 conversion', () => {
     expect(gpa100(4.32)).toBe(98.2)
@@ -51,11 +51,7 @@ describe('gpa', () => {
     expect(gpaOf(activeCourses(ruled))).toEqual({ gpa: 4.25, credits: 77, points: 327 })
   })
   test('graduation progress buckets', () => {
-    expect(gradProgress(all, { total: 130, major: 60, liberal: 30 })).toEqual({
-      total: { earned: 91, required: 130 },
-      major: { earned: 39, required: 60 },
-      liberal: { earned: 49, required: 30 },
-    })
+    expect(gradProgress(all, { total: 130 })).toEqual({ total: { earned: 91, required: 130 } })
   })
   test('required average for a target gpa', () => {
     expect(requiredAverage(324, 77, 4.3, 39)).toBe(4.48)

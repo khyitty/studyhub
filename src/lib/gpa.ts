@@ -3,8 +3,6 @@ import { termOrder } from './parsers/termCode'
 
 export const GPA_EXCLUDED: Grade[] = ['P', 'S', 'NP', 'U']
 export const EARNED_EXCLUDED: Grade[] = ['F', 'NP', 'U']
-export const MAJOR_CATEGORIES = ['전공필수', '전공선택']
-export const LIBERAL_CATEGORIES = ['교양', '학문의기초']
 
 export const DEFAULT_SCALE4: Record<Grade, number> = {
   'A+': 4.0, A: 3.7, 'B+': 3.3, B: 3.0, 'C+': 2.3, C: 2.0, 'D+': 1.3, D: 1.0, F: 0, P: 0, NP: 0, S: 0, U: 0,
@@ -55,8 +53,9 @@ export function gpaOf(courses: Course[]): GpaResult {
   return { gpa: credits ? round2(points / credits) : null, credits, points }
 }
 
-export function majorGpa(courses: Course[]): GpaResult {
-  return gpaOf(courses.filter((c) => MAJOR_CATEGORIES.includes(c.category)))
+/** GPA over the courses whose category is one of the major rows' names (see creditCats.majorNames). */
+export function majorGpa(courses: Course[], majorNames: string[]): GpaResult {
+  return gpaOf(courses.filter((c) => majorNames.includes(c.category)))
 }
 
 export function gpa100(gpa: number): number {
@@ -78,14 +77,9 @@ export function earnedCredits(courses: Course[]): number {
   return courses.filter((c) => !EARNED_EXCLUDED.includes(c.grade)).reduce((s, c) => s + c.credits, 0)
 }
 
-export function gradProgress(courses: Course[], req: { total: number; major: number; liberal: number }) {
-  const earned = courses.filter((c) => !EARNED_EXCLUDED.includes(c.grade))
-  const sum = (list: Course[]) => list.reduce((s, c) => s + c.credits, 0)
-  return {
-    total: { earned: sum(earned), required: req.total },
-    major: { earned: sum(earned.filter((c) => MAJOR_CATEGORIES.includes(c.category))), required: req.major },
-    liberal: { earned: sum(earned.filter((c) => LIBERAL_CATEGORIES.includes(c.category))), required: req.liberal },
-  }
+/** Total credits toward graduation; per-category progress lives in the credit grid rows. */
+export function gradProgress(courses: Course[], req: { total: number }) {
+  return { total: { earned: earnedCredits(courses), required: req.total } }
 }
 
 export function termStats(courses: Course[], termCode: TermCode): GpaResult {
