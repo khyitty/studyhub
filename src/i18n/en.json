@@ -57,5 +57,8 @@
   "papers": {
     "title": "Papers", "subtitle": "{n} papers · {read} read", "add": "Add paper", "edit": "Edit paper", "ref": "DOI or arXiv link", "fetch": "Fetch info", "fetching": "Fetching…", "fetchFailed": "Couldn't fetch — fill in by hand.", "paperTitle": "Title", "authors": "Authors", "authorsHint": "Comma-separated", "year": "Year", "venue": "Venue", "doi": "DOI", "url": "URL", "tags": "Tags", "status": "Status", "s_toread": "To read", "s_reading": "Reading", "s_read": "Read", "all": "All", "summary": "One-line summary", "quotes": "Key quotes", "quotesHint": "One per line", "notes": "Notes", "addedAt": "Added", "readAt": "Read on", "open": "Open link", "empty": "No papers yet. Paste a DOI to fill in the details.", "deleteConfirm": "Delete this paper?", "errTitle": "Title is required"
   },
+  "research": {
+    "title": "Research", "add": "Add project", "edit": "Edit project", "name": "Project name", "goal": "This week's goal", "goalPlaceholder": "One thing to finish this week", "nextTodos": "Next steps", "addTodo": "Add a step", "note": "Notes", "status": "Status", "s_active": "Active", "s_paused": "Paused", "s_done": "Done", "pause": "Pause", "resume": "Resume", "finish": "Mark done", "inactive": "Paused · done ({n})", "noActive": "No active projects", "empty": "No projects yet. Create one and jot down next steps — they show up on Home too.", "deleteConfirm": "Linked todos stay. Delete?", "errName": "Project name is required"
+  },
   "more": { "title": "More", "settings": "Settings" }
 }

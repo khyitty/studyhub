@@ -14,3 +14,9 @@ test('newTodoDoc defaults date to the selected date and category to null', () =>
   expect(newTodoDoc('x', '2026-11-03', { categoryId: 'c1', date: '2026-11-05' })).toMatchObject({ categoryId: 'c1', date: '2026-11-05' })
   expect(newTodoDoc('   ', '2026-11-03')).toBeNull()
 })
+
+test('newTodoDoc carries a project source when given one', () => {
+  const source = { type: 'project' as const, refId: 'p1', label: 'P' }
+  expect(newTodoDoc('x', '2026-10-31', { source })?.source).toEqual(source)
+  expect(newTodoDoc('x', '2026-10-31')?.source).toBeNull()
+})

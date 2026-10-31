@@ -118,3 +118,17 @@ export interface Paper {
   addedAt: string
   readAt: string | null
 }
+
+export type ProjectStatus = 'active' | 'paused' | 'done'
+
+/** A research project on the board; its todos are plain todos with `source: { type: 'project', refId }`. */
+export interface Project {
+  id: string
+  name: string
+  /** this week's one-line goal */
+  goal: string
+  status: ProjectStatus
+  note: string
+  order: number
+  createdAt: string
+}

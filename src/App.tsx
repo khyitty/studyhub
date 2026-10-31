@@ -4,7 +4,6 @@ import { AuthProvider, useAuth } from './features/auth/AuthProvider'
 import { LoginPage } from './features/auth/LoginPage'
 import { ProfileProvider } from './data/ProfileProvider'
 import { Layout } from './components/layout/Layout'
-import { Placeholder } from './components/layout/Placeholder'
 import { MorePage } from './features/more/MorePage'
 import { SettingsPage } from './features/settings/SettingsPage'
 import { GradesPage } from './features/grades/GradesPage'
@@ -12,6 +11,7 @@ import { HomePage } from './features/home/HomePage'
 import { TimetablePage } from './features/timetable/TimetablePage'
 import { GradPage } from './features/grad/GradPage'
 import { PapersPage } from './features/papers/PapersPage'
+import { ResearchPage } from './features/research/ResearchPage'
 
 function Gate() {
   const { user, loading } = useAuth()
@@ -25,7 +25,7 @@ function Gate() {
           <Route path="grades" element={<GradesPage />} />
           <Route path="timetable" element={<TimetablePage />} />
           <Route path="papers" element={<PapersPage />} />
-          <Route path="research" element={<Placeholder titleKey="nav.research" />} />
+          <Route path="research" element={<ResearchPage />} />
           <Route path="grad" element={<GradPage />} />
           <Route path="more" element={<MorePage />} />
           <Route path="settings" element={<SettingsPage />} />

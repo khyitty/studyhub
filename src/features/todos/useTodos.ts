@@ -34,7 +34,7 @@ export function useTodos(selectedDate: string = todayISO()) {
   const selected = useMemo(() => todosOn(todos, selectedDate), [todos, selectedDate])
   const selectedStats = useMemo(() => completion(selected), [selected])
 
-  const add = useCallback(async (title: string, opts?: { categoryId?: string | null; date?: string }) => {
+  const add = useCallback(async (title: string, opts?: { categoryId?: string | null; date?: string; source?: Todo['source'] }) => {
     const docData = newTodoDoc(title, selectedDate, opts)
     if (!docData) return
     await col.add(docData)

@@ -13,13 +13,15 @@ type Props = {
   onToggle: () => void
   onUpdate: (patch: Patch) => void
   onRemove: () => void
+  /** the research board renders todos inside their project card, so the label is redundant there */
+  hideSource?: boolean
 }
 
 type Menu = 'closed' | 'main' | 'category' | 'date'
 
 const menuItem = 'flex min-h-10 w-full items-center px-3 text-left text-sm hover:bg-surface-2'
 
-export function TodoRow({ todo, shade, categories, onToggle, onUpdate, onRemove }: Props) {
+export function TodoRow({ todo, shade, categories, onToggle, onUpdate, onRemove, hideSource = false }: Props) {
   const t = useT()
   const [menu, setMenu] = useState<Menu>('closed')
   const [editing, setEditing] = useState(false)
@@ -62,6 +64,7 @@ export function TodoRow({ todo, shade, categories, onToggle, onUpdate, onRemove 
       ) : (
         <button type="button" onClick={onToggle} className={`min-w-0 flex-1 py-1 text-left text-sm leading-snug break-keep ${todo.done ? 'text-ink-faint line-through' : ''}`}>
           {todo.title}
+          {!hideSource && todo.source?.label && <span className="ml-1.5 text-[11px] font-medium text-ink-muted no-underline">{todo.source.label}</span>}
         </button>
       )}
       <button type="button" aria-label="more" aria-haspopup="menu" aria-expanded={menu !== 'closed'}

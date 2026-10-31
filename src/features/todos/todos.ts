@@ -12,7 +12,7 @@ export function completion(list: Todo[]): { done: number; total: number; ratio: 
 }
 
 /** Builds a new todo document; null when the title is blank. Date defaults to the selected date, not today. */
-export function newTodoDoc(title: string, selectedDate: string, opts?: { categoryId?: string | null; date?: string }): Omit<Todo, 'id'> | null {
+export function newTodoDoc(title: string, selectedDate: string, opts?: { categoryId?: string | null; date?: string; source?: Todo['source'] }): Omit<Todo, 'id'> | null {
   const clean = title.trim()
   if (!clean) return null
   return {
@@ -20,7 +20,7 @@ export function newTodoDoc(title: string, selectedDate: string, opts?: { categor
     date: opts?.date ?? selectedDate,
     done: false,
     doneAt: null,
-    source: null,
+    source: opts?.source ?? null,
     createdAt: new Date().toISOString(),
     categoryId: opts?.categoryId ?? null,
   }

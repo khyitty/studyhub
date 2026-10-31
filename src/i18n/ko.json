@@ -57,5 +57,8 @@
   "papers": {
     "title": "논문", "subtitle": "{n}편 · 읽음 {read}편", "add": "논문 추가", "edit": "논문 수정", "ref": "DOI 또는 arXiv 주소", "fetch": "정보 가져오기", "fetching": "가져오는 중…", "fetchFailed": "정보를 못 가져왔어요. 직접 입력해 주세요.", "paperTitle": "제목", "authors": "저자", "authorsHint": "쉼표로 구분", "year": "연도", "venue": "학회지 · 학회", "doi": "DOI", "url": "URL", "tags": "태그", "status": "상태", "s_toread": "읽을 것", "s_reading": "읽는 중", "s_read": "읽음", "all": "전체", "summary": "한 줄 요약", "quotes": "핵심 인용", "quotesHint": "한 줄에 하나", "notes": "메모", "addedAt": "추가일", "readAt": "읽은 날", "open": "링크 열기", "empty": "아직 논문이 없어요. DOI를 붙여넣으면 정보가 채워져요.", "deleteConfirm": "이 논문을 삭제할까요?", "errTitle": "제목을 입력해 주세요"
   },
+  "research": {
+    "title": "연구", "add": "프로젝트 추가", "edit": "프로젝트 수정", "name": "프로젝트 이름", "goal": "이번 주 목표", "goalPlaceholder": "이번 주에 끝낼 한 가지", "nextTodos": "다음 할 일", "addTodo": "할 일 추가", "note": "메모", "status": "상태", "s_active": "진행 중", "s_paused": "일시중지", "s_done": "완료", "pause": "일시중지", "resume": "재개", "finish": "완료로", "inactive": "일시중지 · 완료 {n}개", "noActive": "진행 중인 프로젝트가 없어요", "empty": "진행 중인 프로젝트가 없어요. 프로젝트를 만들고 다음 할 일을 적어두면 홈 할 일에도 보여요.", "deleteConfirm": "삭제해도 연결된 할 일은 남아요. 삭제할까요?", "errName": "프로젝트 이름을 입력해 주세요"
+  },
   "more": { "title": "더보기", "settings": "설정" }
 }
