@@ -15,7 +15,7 @@
 - 시간표 종류를 사용자가 관리(추가·수정·삭제·색).
 - 논문 데이터베이스(/papers)와 연구 보드(/research).
 - 레벨·XP 제거(완료 콘페티는 유지).
-- 배포 주소 `studyinghub.vercel.app`.
+- 배포 주소: 사용자가 Vercel 대시보드에서 추가하는 빈 이름(기본 제안 `studying-hub.vercel.app`; `studyhub`·`studyinghub`는 이미 다른 사람이 사용 중).
 
 **비목표**
 - 사진 업로드 커버(Storage 안 씀), 자유 색상 피커, 실험 로그·주간 리뷰·미팅 노트(다음 라운드), 앱스토어 출시(별도 논의), 포탈 시간표 파서.
@@ -112,7 +112,7 @@
 - 사이드바·탭바 구성은 그대로. `/papers`, `/research`가 Placeholder에서 실제 페이지로.
 
 ## 10. 배포 주소
-- `studyinghub.vercel.app`을 프로젝트 도메인으로 추가(기존 `studyhub-brown-nu` 주소도 당분간 살려둠). Firebase 승인 도메인에 새 주소 추가(사용자/CLI). README 주소 갱신.
+- `studying-hub.vercel.app`(또는 사용자가 고른 다른 빈 이름)을 프로젝트 도메인으로 추가(기존 `studyhub-brown-nu` 주소도 당분간 살려둠). `studyinghub.vercel.app`은 이미 사용 중이라 불가. Firebase 승인 도메인에 새 주소 추가(사용자/CLI). README 주소 갱신.
 
 ## 11. 내가 정한 것(사용자 확인용)
 - 기본 테마 초록, 기본 커버 잎.

@@ -2,7 +2,7 @@
   "nav": { "home": "Home", "grades": "Grades", "timetable": "Schedule", "papers": "Papers", "research": "Research", "grad": "Grad school", "more": "More", "settings": "Settings" },
   "common": {
     "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit", "add": "Add", "close": "Close", "confirm": "OK",
-    "loading": "Loading…", "saved": "Saved", "error": "Something went wrong", "comingSoon": "Coming soon",
+    "loading": "Loading…", "saved": "Saved", "error": "Something went wrong",
     "today": "Today", "yes": "Yes", "no": "No", "required": "Required", "optional": "Optional", "search": "Search", "empty": "Nothing here yet", "prev": "Previous", "next": "Next"
   },
   "home": {
@@ -45,10 +45,12 @@
     "currentTerm": "Current term", "termCode": "Term code", "termCodeHint": "e.g. 2026-2 (1, S, 2, W)", "termStart": "Term start", "termEnd": "Term end",
     "gradReq": "Graduation requirements (credits)", "gradReqHint": "Check your department's requirements and enter them here", "reqTotal": "Total",
     "portalGpa": "Portal cumulative GPA (optional)", "portalGpaHint": "Enter the GPA shown on the portal to compare with the computed one", "scale4": "4.0 scale table",
-    "data": "Data", "export": "Export JSON", "import": "Import JSON", "importConfirm": "Importing replaces all existing data. Continue?",
+    "data": "Data", "export": "Export JSON", "import": "Import JSON",
     "importDone": "Imported", "importError": "Could not read file: {msg}", "account": "Account", "signOut": "Sign out", "version": "Version",
     "grad": "Grad school", "toefl": "My TOEFL score (optional)", "toeflHint": "Compared with each school's minimum",
-    "themeHue": "Accent", "cover": "Home cover", "hue_green": "Green", "hue_blue": "Blue", "hue_purple": "Purple", "hue_brown": "Brown", "hue_rose": "Rose", "hue_gray": "Gray", "cover_leaf": "Leaf", "cover_wave": "Wave", "cover_grid": "Grid", "cover_solid": "Solid", "cover_none": "None"
+    "themeHue": "Accent", "cover": "Home cover", "hue_green": "Green", "hue_blue": "Blue", "hue_purple": "Purple", "hue_brown": "Brown", "hue_rose": "Rose", "hue_gray": "Gray", "cover_leaf": "Leaf", "cover_wave": "Wave", "cover_grid": "Grid", "cover_solid": "Solid", "cover_none": "None",
+    "importConfirm": "Everything in the file replaces your data; collections missing from the file are left alone. Continue?"
+ 
   },
   "auth": { "title": "StudyHub", "tagline": "Grades, to-dos, schedule and grad apps in one place", "google": "Continue with Google", "busy": "Signing in…" },
   "grad": {

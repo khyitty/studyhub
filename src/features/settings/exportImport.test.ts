@@ -13,7 +13,7 @@ describe('exportImport', () => {
     expect(typeof parsed.exportedAt).toBe('string')
     expect(parsed.profile.xp).toBe(30)
     expect(parsed.collections.terms).toHaveLength(1)
-    expect(Object.keys(parsed.collections).sort()).toEqual(['categories', 'courses', 'schedule', 'schools', 'terms', 'todos'])
+    expect(Object.keys(parsed.collections).sort()).toEqual(['categories', 'courses', 'creditCats', 'kinds', 'papers', 'projects', 'schedule', 'schools', 'terms', 'todos'])
   })
 
   test('validateImport round-trips serialized data', () => {
@@ -31,19 +31,24 @@ describe('exportImport', () => {
     expect(() => validateImport(JSON.stringify({ version: EXPORT_VERSION }))).toThrow(/collections/)
   })
 
-  test('validateImport fills missing collections with empty arrays', () => {
-    const data = validateImport(JSON.stringify({ version: EXPORT_VERSION, collections: { terms: [] } }))
-    expect(data.collections.courses).toEqual([])
-    expect(data.collections.todos).toEqual([])
+  test('validateImport leaves absent collections undefined and keeps present-but-empty arrays', () => {
+    const data = validateImport(JSON.stringify({ version: EXPORT_VERSION, collections: { terms: [], kinds: [] } }))
+    expect(data.collections.terms).toEqual([])
+    expect(data.collections.kinds).toEqual([])
+    expect(data.collections.creditCats).toBeUndefined()
+    expect(data.collections.categories).toBeUndefined()
   })
 
-  test('serialize includes categories and schools', () => {
+  test('serialize writes all ten collections', () => {
     const parsed = JSON.parse(serialize({ ...sample, collections: { ...sample.collections, categories: [{ id: 'c', name: '공부' }], schools: [] } } as never))
-    expect(Object.keys(parsed.collections).sort()).toEqual(['categories', 'courses', 'schedule', 'schools', 'terms', 'todos'])
+    expect(Object.keys(parsed.collections).sort()).toEqual(['categories', 'courses', 'creditCats', 'kinds', 'papers', 'projects', 'schedule', 'schools', 'terms', 'todos'])
   })
-  test('old backup without categories/schools still imports with empty arrays', () => {
+  test('old phase-1 backup leaves the v2 collections untouched (undefined, not emptied)', () => {
     const data = validateImport(JSON.stringify({ version: EXPORT_VERSION, collections: { terms: [], courses: [], todos: [], schedule: [] } }))
-    expect(data.collections.categories).toEqual([])
-    expect(data.collections.schools).toEqual([])
+    expect(data.collections.kinds).toBeUndefined()
+    expect(data.collections.creditCats).toBeUndefined()
+    expect(data.collections.papers).toBeUndefined()
+    expect(data.collections.projects).toBeUndefined()
+    expect(data.collections.terms).toEqual([])
   })
 })

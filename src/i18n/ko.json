@@ -2,7 +2,7 @@
   "nav": { "home": "홈", "grades": "학점", "timetable": "시간표", "papers": "논문", "research": "연구", "grad": "대학원", "more": "더보기", "settings": "설정" },
   "common": {
     "save": "저장", "cancel": "취소", "delete": "삭제", "edit": "수정", "add": "추가", "close": "닫기", "confirm": "확인",
-    "loading": "불러오는 중…", "saved": "저장됐어요", "error": "문제가 생겼어요", "comingSoon": "준비 중이에요",
+    "loading": "불러오는 중…", "saved": "저장됐어요", "error": "문제가 생겼어요",
     "today": "오늘", "yes": "예", "no": "아니오", "required": "필수", "optional": "선택", "search": "검색", "empty": "아직 없어요", "prev": "이전", "next": "다음"
   },
   "home": {
@@ -45,10 +45,12 @@
     "currentTerm": "현재 학기", "termCode": "학기 코드", "termCodeHint": "예: 2026-2 (1, S, 2, W)", "termStart": "학기 시작", "termEnd": "학기 종료",
     "gradReq": "졸업 요건 (학점)", "gradReqHint": "학과 졸업 요건을 확인해서 입력하세요", "reqTotal": "총학점",
     "portalGpa": "포탈 누적 평점 (선택)", "portalGpaHint": "포탈에 표시된 누적 평점을 적으면 계산값과 비교해요", "scale4": "4.0 환산표",
-    "data": "데이터", "export": "JSON 내보내기", "import": "JSON 가져오기", "importConfirm": "가져오면 기존 데이터가 모두 바뀌어요. 계속할까요?",
+    "data": "데이터", "export": "JSON 내보내기", "import": "JSON 가져오기",
     "importDone": "가져왔어요", "importError": "파일을 읽을 수 없어요: {msg}", "account": "계정", "signOut": "로그아웃", "version": "버전",
     "grad": "대학원", "toefl": "내 TOEFL 점수 (선택)", "toeflHint": "대학원 지원 표에서 최소 점수와 비교해요",
-    "themeHue": "테마 색", "cover": "홈 커버", "hue_green": "초록", "hue_blue": "파랑", "hue_purple": "보라", "hue_brown": "갈색", "hue_rose": "로즈", "hue_gray": "회색", "cover_leaf": "잎", "cover_wave": "물결", "cover_grid": "격자", "cover_solid": "단색", "cover_none": "없음"
+    "themeHue": "테마 색", "cover": "홈 커버", "hue_green": "초록", "hue_blue": "파랑", "hue_purple": "보라", "hue_brown": "갈색", "hue_rose": "로즈", "hue_gray": "회색", "cover_leaf": "잎", "cover_wave": "물결", "cover_grid": "격자", "cover_solid": "단색", "cover_none": "없음",
+    "importConfirm": "파일에 있는 항목은 모두 바뀌고, 파일에 없는 항목은 그대로 둬요. 계속할까요?"
+ 
   },
   "auth": { "title": "StudyHub", "tagline": "학점 · 할 일 · 시간표 · 대학원 지원을 한 곳에서", "google": "Google로 계속하기", "busy": "로그인 중…" },
   "grad": {
