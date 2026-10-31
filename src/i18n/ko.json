@@ -14,8 +14,8 @@
   "grades": {
     "title": "학점", "import": "포탈 붙여넣기", "importTerms": "학기별 성적 표", "importCourses": "과목별 성적 표", "preview": "미리보기",
     "cumulative": "누적 평점", "major": "전공 평점", "earned": "취득 학점", "scale4": "4.0 환산", "portalGpa": "포탈: {gpa}",
-    "portalMismatch": "포탈 평점과 {diff} 차이가 나요", "gradReq": "졸업 요건", "reqTotal": "총학점", "reqMajor": "전공", "reqLiberal": "교양",
-    "trend": "학기별 추이", "termGpa": "학기 평점", "cumGpa": "누적 평점", "terms": "학기", "addCourse": "과목 추가", "editCourse": "과목 수정",
+    "portalMismatch": "포탈 평점과 {diff} 차이가 나요",
+    "trend": "학기별 추이", "termGpa": "학기 평점", "cumGpa": "누적 평점", "addCourse": "과목 추가", "editCourse": "과목 수정",
     "course": "과목명", "code": "학수번호", "section": "분반", "category": "이수구분", "area": "교과영역", "credits": "학점", "score": "점수",
     "grade": "등급", "point": "평점", "term": "학기", "retake": "재수강으로 대체됨", "simulator": "목표 시뮬레이터", "target": "목표 평점",
     "remaining": "남은 학점", "needAvg": "남은 학점 평균 {avg} 필요", "unreachable": "남은 학점으로는 도달할 수 없어요", "planned": "예상 과목",
@@ -23,10 +23,12 @@
     "warnings": "확인이 필요해요", "replaceConfirm": "저장하면 기존 포탈 데이터가 이 내용으로 바뀌어요. 직접 입력한 과목은 그대로 남아요.",
     "imported": "{n}개 과목을 가져왔어요", "impossible": "4.5를 넘어야 해서 불가능해요", "pasteTermsHint": "포탈 > 성적조회 > 학기별 성적 표를 전체 선택해 복사해서 붙여넣기",
     "pasteCoursesHint": "포탈 > 성적조회 > 과목별 성적 표를 전체 선택해 복사해서 붙여넣기", "courseCount": "{n}과목", "creditSum": "{n}학점",
-    "nothingParsed": "읽을 수 있는 내용이 없어요. 표 전체를 복사했는지 확인해 주세요", "errNoTerms": "학기별 성적 표가 비어 있어요. 두 표를 모두 붙여넣어야 저장할 수 있어요", "errNoCourses": "과목별 성적 표가 비어 있어요. 두 표를 모두 붙여넣어야 저장할 수 있어요", "unassigned": "학기 미배정", "assignTerm": "학기 선택",
-    "deleteConfirm": "이 과목을 삭제할까요?", "setReqHint": "설정에서 졸업 요건을 입력하면 게이지가 채워져요", "creditsOf": "{earned} / {required}학점",
+    "nothingParsed": "읽을 수 있는 내용이 없어요. 표 전체를 복사했는지 확인해 주세요", "errNoTerms": "학기별 성적 표가 비어 있어요. 두 표를 모두 붙여넣어야 저장할 수 있어요", "errNoCourses": "과목별 성적 표가 비어 있어요. 두 표를 모두 붙여넣어야 저장할 수 있어요",
+    "deleteConfirm": "이 과목을 삭제할까요?", "creditsOf": "{earned} / {required}학점",
     "manual": "직접 입력", "noTerm": "학기 없음", "addPlanned": "예상 과목 추가", "currentCum": "현재 {gpa}",
-    "subtitle": "{from} ~ {to} · {n}개 학기", "portalMatch": "포탈과 일치", "portalDiff": "포탈과 {diff} 차이", "chartLegend": "학기 · 누적"
+    "subtitle": "{from} ~ {to} · {n}개 학기", "portalMatch": "포탈과 일치", "portalDiff": "포탈과 {diff} 차이", "chartLegend": "학기 · 누적",
+    "unassigned": "미배정", "creditCats": "이수구분", "addCreditCat": "이수구분 추가", "editCreditCat": "이수구분 편집", "catName": "이름", "catRequired": "필요 학점", "catMajor": "본전공", "catOrder": "순서", "deleteCatConfirm": "줄을 지워도 과목은 남아 '기타'에 보여요. 지울까요?", "otherCat": "기타", "na": "N/A"
+ 
   },
   "timetable": {
     "title": "시간표", "name": "제목", "week": "주간", "month": "월간", "thisWeek": "이번 주", "weekend": "주말", "add": "일정 추가", "edit": "일정 수정",

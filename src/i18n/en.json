@@ -14,8 +14,8 @@
   "grades": {
     "title": "Grades", "import": "Paste from portal", "importTerms": "Term summary table", "importCourses": "Course table", "preview": "Preview",
     "cumulative": "Cumulative GPA", "major": "Major GPA", "earned": "Credits earned", "scale4": "4.0 scale", "portalGpa": "Portal: {gpa}",
-    "portalMismatch": "Differs from portal by {diff}", "gradReq": "Graduation requirements", "reqTotal": "Total", "reqMajor": "Major", "reqLiberal": "Liberal arts",
-    "trend": "GPA by term", "termGpa": "Term GPA", "cumGpa": "Cumulative", "terms": "Terms", "addCourse": "Add course", "editCourse": "Edit course",
+    "portalMismatch": "Differs from portal by {diff}",
+    "trend": "GPA by term", "termGpa": "Term GPA", "cumGpa": "Cumulative", "addCourse": "Add course", "editCourse": "Edit course",
     "course": "Course", "code": "Code", "section": "Section", "category": "Category", "area": "Area", "credits": "Credits", "score": "Score",
     "grade": "Grade", "point": "Points", "term": "Term", "retake": "Replaced by retake", "simulator": "Target simulator", "target": "Target GPA",
     "remaining": "Remaining credits", "needAvg": "Need {avg} average on remaining credits", "unreachable": "Not reachable with remaining credits", "planned": "Planned courses",
@@ -23,10 +23,12 @@
     "warnings": "Please check", "replaceConfirm": "Saving replaces existing portal data with this content. Manually added courses are kept.",
     "imported": "Imported {n} courses", "impossible": "Not possible: it would take more than 4.5", "pasteTermsHint": "Portal > Grades > select the whole term table, copy, and paste here",
     "pasteCoursesHint": "Portal > Grades > select the whole course table, copy, and paste here", "courseCount": "{n} courses", "creditSum": "{n} credits",
-    "nothingParsed": "Nothing readable. Make sure you copied the whole table", "errNoTerms": "The term table is empty. Paste both tables to save", "errNoCourses": "The course table is empty. Paste both tables to save", "unassigned": "No term assigned", "assignTerm": "Pick a term",
-    "deleteConfirm": "Delete this course?", "setReqHint": "Enter graduation requirements in Settings to fill the gauges", "creditsOf": "{earned} / {required} credits",
+    "nothingParsed": "Nothing readable. Make sure you copied the whole table", "errNoTerms": "The term table is empty. Paste both tables to save", "errNoCourses": "The course table is empty. Paste both tables to save",
+    "deleteConfirm": "Delete this course?", "creditsOf": "{earned} / {required} credits",
     "manual": "Manual", "noTerm": "No term", "addPlanned": "Add planned course", "currentCum": "Now {gpa}",
-    "subtitle": "{from} – {to} · {n} terms", "portalMatch": "Matches portal", "portalDiff": "{diff} off portal", "chartLegend": "term · cumulative"
+    "subtitle": "{from} – {to} · {n} terms", "portalMatch": "Matches portal", "portalDiff": "{diff} off portal", "chartLegend": "term · cumulative",
+    "unassigned": "Unassigned", "creditCats": "Categories", "addCreditCat": "Add category", "editCreditCat": "Edit category", "catName": "Name", "catRequired": "Required credits", "catMajor": "Major", "catOrder": "Order", "deleteCatConfirm": "Courses stay and show under Other. Delete?", "otherCat": "Other", "na": "N/A"
+ 
   },
   "timetable": {
     "title": "Schedule", "name": "Title", "week": "Week", "month": "Month", "thisWeek": "This week", "weekend": "Weekend", "add": "Add item", "edit": "Edit item",

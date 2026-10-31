@@ -56,7 +56,7 @@ export function ImportModal({ open, onClose, g }: { open: boolean; onClose: () =
         {preview && !empty && (
           <div className="space-y-2">
             <table className="w-full text-sm">
-              <thead className="text-xs text-ink-muted"><tr><th className="py-1 text-left">{t('grades.term')}</th><th className="text-right">{t('grades.terms')}</th><th className="text-right">{t('grades.credits')}</th></tr></thead>
+              <thead className="text-xs text-ink-muted"><tr><th className="py-1 text-left">{t('grades.term')}</th><th className="text-right">{t('grades.course')}</th><th className="text-right">{t('grades.credits')}</th></tr></thead>
               <tbody>
                 {preview.terms.map((tm) => {
                   const mine = preview.assigned.filter((c) => c.termCode === tm.code)

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Button, Input, Modal, Select } from '../../components/ui'
 import { useLang, useT } from '../../i18n/useT'
 import { POINT_OF } from '../../lib/gpa'
-import { KNOWN_CATEGORIES } from '../../lib/parsers/parseCourseGrades'
 import { termLabel } from '../../lib/parsers/termCode'
 import { GRADES, type Course, type Grade, type TermCode } from '../../lib/types'
 import type { NewCourse, TermDoc } from './useGrades'
@@ -12,25 +11,29 @@ type Props = {
   onClose: () => void
   course: Course | null
   terms: TermDoc[]
+  /** credit-grid row names; the select offers these plus the course's own value and "기타" ('') */
+  categories: string[]
   defaultTerm: TermCode | null
+  defaultCategory: string | null
   onSave: (c: NewCourse) => Promise<void>
   onDelete?: (id: string) => Promise<void>
 }
 
-const blank = (termCode: TermCode | null): NewCourse => ({
-  code: '', section: '', name: '', category: '전공선택', area: '', credits: 3, score: null, grade: 'A+', point: POINT_OF['A+'], termCode,
+const blank = (termCode: TermCode | null, category: string): NewCourse => ({
+  code: '', section: '', name: '', category, area: '', credits: 3, score: null, grade: 'A+', point: POINT_OF['A+'], termCode,
 })
 
-export function CourseForm({ open, onClose, course, terms, defaultTerm, onSave, onDelete }: Props) {
+export function CourseForm({ open, onClose, course, terms, categories, defaultTerm, defaultCategory, onSave, onDelete }: Props) {
   const t = useT()
   const lang = useLang()
-  const [d, setD] = useState<NewCourse>(() => blank(defaultTerm))
+  const initialCategory = defaultCategory ?? categories[0] ?? ''
+  const [d, setD] = useState<NewCourse>(() => blank(defaultTerm, initialCategory))
   const [busy, setBusy] = useState(false)
 
   useEffect(() => {
     if (!open) return
-    setD(course ? { code: course.code, section: course.section, name: course.name, category: course.category, area: course.area, credits: course.credits, score: course.score, grade: course.grade, point: course.point, termCode: course.termCode } : blank(defaultTerm))
-  }, [open, course, defaultTerm])
+    setD(course ? { code: course.code, section: course.section, name: course.name, category: course.category, area: course.area, credits: course.credits, score: course.score, grade: course.grade, point: course.point, termCode: course.termCode } : blank(defaultTerm, initialCategory))
+  }, [open, course, defaultTerm, initialCategory])
 
   const set = <K extends keyof NewCourse>(k: K, v: NewCourse[K]) => setD((x) => ({ ...x, [k]: v }))
   const valid = d.name.trim().length > 0 && d.credits >= 0
@@ -50,7 +53,7 @@ export function CourseForm({ open, onClose, course, terms, defaultTerm, onSave, 
   }
 
   const termOptions = [...terms].sort((a, b) => b.order - a.order)
-  const categories = KNOWN_CATEGORIES.includes(d.category) || d.category === '' ? KNOWN_CATEGORIES : [d.category, ...KNOWN_CATEGORIES]
+  const options = d.category && !categories.includes(d.category) ? [...categories, d.category] : categories
 
   return (
     <Modal open={open} onClose={onClose} title={t(course ? 'grades.editCourse' : 'grades.addCourse')}
@@ -67,7 +70,8 @@ export function CourseForm({ open, onClose, course, terms, defaultTerm, onSave, 
             {termOptions.map((tm) => <option key={tm.code} value={tm.code}>{termLabel(tm.code, lang)}</option>)}
           </Select>
           <Select label={t('grades.category')} value={d.category} onChange={(e) => set('category', e.target.value)}>
-            {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+            {options.map((c) => <option key={c} value={c}>{c}</option>)}
+            <option value="">{t('grades.otherCat')}</option>
           </Select>
           <Input label={t('grades.credits')} type="number" inputMode="numeric" min={0} max={9} value={d.credits} onChange={(e) => set('credits', Number(e.target.value))} />
           <Select label={t('grades.grade')} value={d.grade} onChange={(e) => set('grade', e.target.value as Grade)}>
