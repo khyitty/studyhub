@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Button, Confetti } from '../../components/ui'
 import { useLang, useT } from '../../i18n/useT'
 import { useAuth } from '../auth/AuthProvider'
-import { useProfile } from '../../data/useProfile'
-import { levelProgress } from '../../lib/xp'
 import { formatDateHeading, formatShortDate, todayISO } from '../../lib/dates'
 import { groupTodos } from '../../lib/categories'
 import { useTodos } from '../todos/useTodos'
@@ -21,14 +19,12 @@ export function HomePage() {
   const t = useT()
   const lang = useLang()
   const { user } = useAuth()
-  const { profile } = useProfile()
   const today = todayISO()
   const [selected, setSelected] = useState(today)
   const todos = useTodos(selected)
   const { categories } = useCategories()
   const schedule = useSchedule()
   const { schools } = useSchools()
-  const lp = levelProgress(profile.xp)
   const [manage, setManage] = useState(false)
 
   // confetti once when today's completion crosses to 100%
@@ -48,14 +44,9 @@ export function HomePage() {
   return (
     <div className="space-y-5">
       <Confetti fire={burst} />
-      <header className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h1 className="text-[22px] font-bold tracking-[-0.4px]">{formatDateHeading(selected, lang)}</h1>
-          <p className="mt-1 text-[13px] text-ink-muted">{t('home.summary', { name, date: dateWord, total: todos.selectedStats.total, done: todos.selectedStats.done })}</p>
-        </div>
-        <span className="shrink-0 rounded-pill border border-line-strong px-2.5 py-1 text-xs font-semibold tabular-nums">
-          {t('home.level', { level: lp.level })} · {t('home.xp', { current: lp.current, needed: lp.needed })}
-        </span>
+      <header className="min-w-0">
+        <h1 className="text-[22px] font-bold tracking-[-0.4px]">{formatDateHeading(selected, lang)}</h1>
+        <p className="mt-1 text-[13px] text-ink-muted">{t('home.summary', { name, date: dateWord, total: todos.selectedStats.total, done: todos.selectedStats.done })}</p>
       </header>
 
       {todos.overdue.length > 0 && (

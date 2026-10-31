@@ -9,7 +9,6 @@ export interface Profile {
   themeHue: Hue
   /** home cover pattern */
   cover: Cover
-  xp: number
   currentTerm: TermCode
   termStart: string
   termEnd: string
@@ -32,7 +31,6 @@ export const DEFAULT_PROFILE: Profile = {
   theme: 'system',
   themeHue: 'green',
   cover: 'leaf',
-  xp: 0,
   currentTerm: '2026-2',
   termStart: '2026-09-01',
   termEnd: '2026-12-20',
@@ -46,13 +44,11 @@ export const DEFAULT_PROFILE: Profile = {
   toeflScore: null,
 }
 
-/** Fill defaults for missing fields; xp is stored with increment() so it is clamped on read. */
+/** Fill defaults for missing fields. Legacy `xp` in the document is ignored. */
 export function normalizeProfile(raw: Partial<Profile> | undefined): Profile {
-  const xp = typeof raw?.xp === 'number' && Number.isFinite(raw.xp) ? Math.max(0, raw.xp) : 0
   return {
     ...DEFAULT_PROFILE,
     ...raw,
-    xp,
     themeHue: HUES.includes(raw?.themeHue as Hue) ? (raw!.themeHue as Hue) : DEFAULT_PROFILE.themeHue,
     cover: COVERS.includes(raw?.cover as Cover) ? (raw!.cover as Cover) : DEFAULT_PROFILE.cover,
     gradReq: { ...DEFAULT_PROFILE.gradReq, ...(raw?.gradReq ?? {}) },

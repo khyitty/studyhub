@@ -6,10 +6,9 @@
     "today": "오늘", "yes": "예", "no": "아니오", "required": "필수", "optional": "선택", "search": "검색", "empty": "아직 없어요", "prev": "이전", "next": "다음"
   },
   "home": {
-    "greeting": "안녕, {name}", "level": "Lv.{level}", "xp": "{current} / {needed} XP", "todayTodos": "오늘 할 일",
+    "greeting": "안녕, {name}", "todayTodos": "오늘 할 일",
     "todaySchedule": "오늘 일정", "progress": "오늘 완료율", "allDone": "오늘 할 일을 다 했어요!", "noTodos": "오늘 할 일을 추가해 보세요",
-    "noSchedule": "오늘 일정이 없어요", "overdue": "지난 할 일 {count}개", "moveToToday": "오늘로 옮기기", "levelUp": "레벨 {level} 달성!",
-    "addTodo": "할 일 추가", "todoPlaceholder": "무엇을 할까요?",
+    "noSchedule": "오늘 일정이 없어요", "overdue": "지난 할 일 {count}개", "moveToToday": "오늘로 옮기기", "addTodo": "할 일 추가", "todoPlaceholder": "무엇을 할까요?",
     "summary": "안녕, {name}. {date} 할 일 {total}개 중 {done}개 끝냈어요.", "todos": "할 일", "completion": "오늘 완료율", "completionOn": "{date} 완료율", "deadlines": "마감 D-day", "noSchools": "대학원 지원에서 학교를 추가해 보세요", "addTodoHere": "할 일 추가", "other": "기타", "manageCategories": "카테고리 관리", "categoryName": "이름", "categoryColor": "색", "addCategory": "카테고리 추가", "deleteCategoryConfirm": "삭제하면 이 카테고리의 할 일은 '기타'로 옮겨져요. 삭제할까요?", "moveDate": "날짜 옮기기", "changeCategory": "카테고리 바꾸기", "prevWeek": "이전 주", "nextWeek": "다음 주", "backToToday": "오늘"
   },
   "grades": {

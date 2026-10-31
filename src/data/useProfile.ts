@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { doc, increment, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'
+import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useUid } from '../features/auth/AuthProvider'
 import { DEFAULT_PROFILE, normalizeProfile, type Profile } from './profile'
@@ -10,8 +10,6 @@ export type { Profile } from './profile'
 export interface ProfileCtx {
   profile: Profile
   update: (patch: Partial<Profile>) => Promise<void>
-  /** Atomic xp change (server-side increment), safe offline and across devices. */
-  addXp: (delta: number) => Promise<void>
   loading: boolean
 }
 
@@ -38,14 +36,11 @@ export function useProfileDoc(): ProfileCtx {
   const update = async (patch: Partial<Profile>) => {
     await updateDoc(doc(db, 'users', uid), patch)
   }
-  const addXp = async (delta: number) => {
-    await updateDoc(doc(db, 'users', uid), { xp: increment(delta) })
-  }
 
-  return { profile, update, addXp, loading }
+  return { profile, update, loading }
 }
 
-export const ProfileContext = createContext<ProfileCtx>({ profile: DEFAULT_PROFILE, update: async () => {}, addXp: async () => {}, loading: true })
+export const ProfileContext = createContext<ProfileCtx>({ profile: DEFAULT_PROFILE, update: async () => {}, loading: true })
 
 export function useProfile(): ProfileCtx {
   return useContext(ProfileContext)

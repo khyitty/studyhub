@@ -1,10 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import type { DocumentData } from 'firebase/firestore'
 import { useUserCollection } from '../../data/useUserCollection'
-import { useProfile } from '../../data/useProfile'
-import { useToast } from '../../components/ui'
-import { useT } from '../../i18n/useT'
-import { XP_TODO, applyXp, levelFor } from '../../lib/xp'
 import { todayISO } from '../../lib/dates'
 import type { Todo } from '../../lib/types'
 import { completion, newTodoDoc, todosOn } from './todos'
@@ -29,9 +25,6 @@ export function normalizeTodo(raw: DocumentData, id: string): Todo {
 /** @param selectedDate drives `selected`/`selectedStats`; `today`/`completionRatio` always use today (confetti). */
 export function useTodos(selectedDate: string = todayISO()) {
   const col = useUserCollection<Todo>('todos', normalizeTodo)
-  const { profile, addXp } = useProfile()
-  const toast = useToast()
-  const t = useT()
   const today = todayISO()
 
   const todos = useMemo(() => [...col.items].sort((a, b) => a.createdAt.localeCompare(b.createdAt)), [col.items])
@@ -53,13 +46,8 @@ export function useTodos(selectedDate: string = todayISO()) {
     const todo = col.items.find((x) => x.id === id)
     if (!todo) return
     const done = !todo.done
-    const delta = done ? XP_TODO : -XP_TODO
-    // atomic increment: two quick taps or an offline queue never read a stale xp
-    await Promise.all([col.update(id, { done, doneAt: done ? new Date().toISOString() : null }), addXp(delta)])
-    const before = profile.xp
-    const lv = levelFor(applyXp(before, delta))
-    if (lv > levelFor(before)) toast.show(t('home.levelUp', { level: lv }))
-  }, [col, profile.xp, addXp, toast, t])
+    await col.update(id, { done, doneAt: done ? new Date().toISOString() : null })
+  }, [col])
 
   const remove = useCallback((id: string) => col.remove(id), [col])
 
