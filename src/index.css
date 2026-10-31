@@ -31,8 +31,8 @@
   --color-cover-bg: #EEF3EC;
   --color-s1-on: var(--color-s6);
   --color-s2-on: var(--color-s6);
-  --color-s3-on: var(--color-s6);
-  --color-s4-on: #ffffff;
+  --color-s3-on: #111111;
+  --color-s4-on: #111111;
   --color-s5-on: #ffffff;
   --color-s6-on: #ffffff;
 
@@ -63,6 +63,7 @@
     --color-s5: #A3C3A8;
     --color-s6: #C9DECB;
     --color-cover-bg: #182219;
+    --color-s3-on: var(--color-s6);
     --color-s4-on: #111111;
     --color-s5-on: #111111;
     --color-s6-on: #111111;

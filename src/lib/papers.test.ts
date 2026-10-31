@@ -49,3 +49,15 @@ test('filterPapers: status, tag, query over title/authors/tags, newest first', (
 test('normalizePaper defaults', () => {
   expect(normalizePaper({}, 'x')).toMatchObject({ id: 'x', title: '', authors: [], year: null, status: 'toread', tags: [], quotes: [], readAt: null })
 })
+
+import { withReadAt } from './papers'
+test('withReadAt stamps readAt when the status becomes read, clears it when it leaves read, else untouched', () => {
+  expect(withReadAt({ status: 'read', notes: 'x' }, 'toread', '2026-10-31T00:00:00Z')).toEqual({ status: 'read', notes: 'x', readAt: '2026-10-31T00:00:00Z' })
+  expect(withReadAt({ status: 'reading' }, 'read', 'now')).toEqual({ status: 'reading', readAt: null })
+  expect(withReadAt({ status: 'read' }, 'read', 'now')).toEqual({ status: 'read' })
+  expect(withReadAt({ notes: 'y' }, 'toread', 'now')).toEqual({ notes: 'y' })
+})
+test('fromArxiv treats the API error entry as a failed lookup', () => {
+  const xml = `<feed xmlns="http://www.w3.org/2005/Atom"><entry><id>http://arxiv.org/api/errors#incorrect_id_format_for_1</id><title>Error</title><summary>incorrect id format for 1</summary></entry></feed>`
+  expect(fromArxiv(xml)).toBeNull()
+})

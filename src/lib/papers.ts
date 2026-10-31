@@ -69,6 +69,8 @@ export function fromArxiv(xml: string): PaperMeta | null {
   if (!entry) return null
   const text = (tag: string, el: Element = entry) => (el.getElementsByTagName(tag)[0]?.textContent ?? '').replace(/\s+/g, ' ').trim()
   const rawId = text('id')
+  // an unknown id comes back as a feed with a single error entry titled "Error"
+  if (rawId.includes('/api/errors')) return null
   const idMatch = rawId.match(/(\d{4}\.\d{4,5})(?:v\d+)?/)
   const arxivId = idMatch ? idMatch[1] : rawId.replace(/^.*\/abs\//, '')
   const authors = Array.from(entry.getElementsByTagName('author')).map((a) => text('name', a)).filter(Boolean)
@@ -115,4 +117,10 @@ export function filterPapers(papers: Paper[], f: PaperFilter): Paper[] {
 
 export function allTags(papers: Paper[]): string[] {
   return [...new Set(papers.flatMap((p) => p.tags))].sort()
+}
+
+/** Status transitions stamp `readAt`: entering `read` records now, leaving it clears; no change → untouched. */
+export function withReadAt<T extends { status?: PaperStatus }>(patch: T, currentStatus: PaperStatus, now: string): T & { readAt?: string | null } {
+  if (!patch.status || patch.status === currentStatus) return patch
+  return { ...patch, readAt: patch.status === 'read' ? now : null }
 }

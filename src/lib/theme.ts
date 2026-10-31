@@ -41,3 +41,27 @@ export const HUE_RAMP: Record<Hue, { light: string[]; dark: string[]; cover: str
   rose: { light: ['#F1E4E6', '#E1C8CD', '#CBA6AE', '#AF7F8B', '#8D5F6B', '#67434D'], dark: ['#352529', '#493239', '#62434C', '#B88A96', '#D0ACB5', '#E3CCD2'], cover: '#F6EEF0', coverDark: '#241A1D' },
   gray: { light: ['#EAEAEA', '#D3D3D3', '#B4B4B4', '#8E8E8E', '#6A6A6A', '#474747'], dark: ['#2A2A2A', '#383838', '#4A4A4A', '#9A9A9A', '#B8B8B8', '#D4D4D4'], cover: '#F2F2F2', coverDark: '#1C1C1C' },
 }
+
+/** Text color that sits on each shade: the darkest shade itself, or plain black/white. Must match the `--color-sN-on` rules in index.css. */
+export type OnColor = 's6' | '#111111' | '#ffffff'
+export const ON_COLOR: Record<'light' | 'dark', Record<Shade, OnColor>> = {
+  // shades 3–4 sit around mid-lightness: neither s6 nor white reaches 4.5:1 on them, so plain black text
+  light: { 1: 's6', 2: 's6', 3: '#111111', 4: '#111111', 5: '#ffffff', 6: '#ffffff' },
+  dark: { 1: 's6', 2: 's6', 3: 's6', 4: '#111111', 5: '#111111', 6: '#111111' },
+}
+
+export function onColorHex(hue: Hue, shade: Shade, mode: 'light' | 'dark'): string {
+  const on = ON_COLOR[mode][shade]
+  return on === 's6' ? HUE_RAMP[hue][mode][5] : on
+}
+
+/** WCAG 2.x contrast ratio between two #rrggbb colors (1–21). */
+export function contrastRatio(a: string, b: string): number {
+  const lum = (hex: string) => {
+    const n = parseInt(hex.slice(1), 16)
+    const ch = (v: number) => { const c = v / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4 }
+    return 0.2126 * ch((n >> 16) & 255) + 0.7152 * ch((n >> 8) & 255) + 0.0722 * ch(n & 255)
+  }
+  const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x)
+  return (hi + 0.05) / (lo + 0.05)
+}
