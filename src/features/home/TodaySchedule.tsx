@@ -21,7 +21,7 @@ export function TodaySchedule({ items }: { items: ScheduleItem[] }) {
     <section className="py-4">
       <header className="flex items-center justify-between">
         <h2 className="text-sm font-bold">{t('home.todaySchedule')}</h2>
-        <Link to="/timetable" className="text-xs text-ink-muted hover:text-ink">{t('nav.timetable')} ›</Link>
+        <Link to="/timetable" className="text-xs text-ink-muted hover:text-s6">{t('nav.timetable')} ›</Link>
       </header>
       {items.length === 0 ? (
         <p className="py-3 text-[13px] text-ink-muted">{t('home.noSchedule')}</p>

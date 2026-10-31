@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { Button, Confetti } from '../../components/ui'
 import { useLang, useT } from '../../i18n/useT'
 import { useAuth } from '../auth/AuthProvider'
+import { useProfile } from '../../data/useProfile'
 import { formatDateHeading, formatShortDate, todayISO } from '../../lib/dates'
 import { groupTodos } from '../../lib/categories'
 import { useTodos } from '../todos/useTodos'
 import { useCategories } from '../todos/useCategories'
 import { useSchedule } from '../timetable/useSchedule'
+import { Cover } from './Cover'
 import { WeekStrip } from './WeekStrip'
 import { CategoryTodos } from './CategoryTodos'
 import { CompletionStat } from './CompletionStat'
@@ -19,6 +21,7 @@ export function HomePage() {
   const t = useT()
   const lang = useLang()
   const { user } = useAuth()
+  const { profile } = useProfile()
   const today = todayISO()
   const [selected, setSelected] = useState(today)
   const todos = useTodos(selected)
@@ -42,10 +45,12 @@ export function HomePage() {
   const completionTitle = isToday ? t('home.completion') : t('home.completionOn', { date: dateWord })
 
   return (
+    <>
+      <Cover kind={profile.cover} />
     <div className="space-y-5">
       <Confetti fire={burst} />
-      <header className="min-w-0">
-        <h1 className="text-[22px] font-bold tracking-[-0.4px]">{formatDateHeading(selected, lang)}</h1>
+      <header className={`min-w-0 ${profile.cover === 'none' ? '' : '-mt-1.5'}`}>
+        <h1 className="font-serif text-[24px] font-bold tracking-[-0.3px]">{formatDateHeading(selected, lang)}</h1>
         <p className="mt-1 text-[13px] text-ink-muted">{t('home.summary', { name, date: dateWord, total: todos.selectedStats.total, done: todos.selectedStats.done })}</p>
       </header>
 
@@ -80,5 +85,6 @@ export function HomePage() {
 
       <CategoryManager open={manage} onClose={() => setManage(false)} />
     </div>
+    </>
   )
 }

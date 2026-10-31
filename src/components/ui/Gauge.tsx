@@ -7,7 +7,7 @@ type Props = {
   hideLabel?: boolean
 }
 
-export function Gauge({ value, label, size = 'sm', color = 'var(--color-primary)', hideLabel = false }: Props) {
+export function Gauge({ value, label, size = 'sm', color = 'var(--color-s5)', hideLabel = false }: Props) {
   const v = Math.min(1, Math.max(0, Number.isFinite(value) ? value : 0))
   const pct = Math.round(v * 100)
   const complete = v >= 1 ? { 'data-complete': 'true' } : {}

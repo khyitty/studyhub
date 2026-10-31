@@ -48,7 +48,7 @@ export function GpaChart({ g }: { g: Grades }) {
             <Tooltip labelFormatter={(_, p) => (p?.[0]?.payload as { full?: string } | undefined)?.full ?? ''}
               contentStyle={{ borderRadius: 4, border: '1px solid var(--color-line-strong)', background: 'var(--color-surface)', color: 'var(--color-ink)', boxShadow: 'none', fontSize: 12 }} />
             <Line type="monotone" dataKey="term" name={t('grades.termGpa')} stroke="var(--color-ink)" strokeWidth={2.2} dot={{ r: 3.5, fill: 'var(--color-ink)', strokeWidth: 0 }} connectNulls />
-            <Line type="monotone" dataKey="cum" name={t('grades.cumGpa')} stroke="var(--color-ink-faint)" strokeWidth={2} dot={false} connectNulls />
+            <Line type="monotone" dataKey="cum" name={t('grades.cumGpa')} stroke="var(--color-s4)" strokeWidth={2} dot={false} connectNulls />
           </LineChart>
         </ResponsiveContainer>
       </div>

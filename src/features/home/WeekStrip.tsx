@@ -26,7 +26,7 @@ export function WeekStrip({ selected, onSelect }: { selected: string; onSelect: 
           const isSel = iso === selected
           const weekend = i >= 5
           const cls = isToday
-            ? 'bg-primary text-on-primary'
+            ? 'bg-s6 text-s6-on'
             : isSel ? 'border border-ink text-ink' : weekend ? 'text-ink-faint hover:bg-surface-2' : 'text-ink hover:bg-surface-2'
           return (
             <button key={iso} type="button" aria-pressed={isSel} aria-label={iso}

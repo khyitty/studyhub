@@ -13,7 +13,7 @@ export function TabBar() {
               to={to}
               end={to === '/'}
               className={({ isActive }) =>
-                `flex min-h-14 flex-col items-center justify-center gap-1 text-[11px] font-semibold transition ${isActive ? 'text-ink' : 'text-ink-muted'}`
+                `flex min-h-14 flex-col items-center justify-center gap-1 text-[11px] font-semibold transition ${isActive ? 'text-s6' : 'text-ink-muted'}`
               }
             >
               {({ isActive }) => (

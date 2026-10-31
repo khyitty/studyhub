@@ -11,7 +11,7 @@ export function DeadlineList({ schools, today }: { schools: School[]; today: str
     <section className="py-4">
       <header className="flex items-center justify-between">
         <h2 className="text-sm font-bold">{t('home.deadlines')}</h2>
-        <Link to="/grad" className="text-xs text-ink-muted hover:text-ink">{t('nav.grad')} ›</Link>
+        <Link to="/grad" className="text-xs text-ink-muted hover:text-s6">{t('nav.grad')} ›</Link>
       </header>
       {schools.length === 0 ? (
         <Link to="/grad" className="block py-3 text-[13px] text-ink-muted hover:text-ink">{t('home.noSchools')}</Link>

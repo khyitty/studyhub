@@ -21,7 +21,7 @@ export function LoginPage() {
   return (
     <main className="flex min-h-dvh flex-col items-center justify-center gap-6 bg-bg px-6 text-center">
       <div>
-        <h1 className="text-[22px] font-bold tracking-[-0.4px]">{t('auth.title')}</h1>
+        <h1 className="font-serif text-[24px] font-bold tracking-[-0.3px]">{t('auth.title')}</h1>
         <p className="mt-2 text-sm text-ink-muted">{t('auth.tagline')}</p>
       </div>
       <Button onClick={go} disabled={busy} className="w-full max-w-xs">
