@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { IconCheck } from '../../components/icons'
 import { useT } from '../../i18n/useT'
-import { PALETTE_CLASS } from '../../lib/categories'
-import type { Category, PaletteColor, Todo } from '../../lib/types'
+import { SHADE_CLASS, textShade } from '../../lib/theme'
+import type { Category, Shade, Todo } from '../../lib/types'
 
 type Patch = Partial<Pick<Todo, 'title' | 'categoryId' | 'date'>>
 
 type Props = {
   todo: Todo
-  color: PaletteColor | null
+  shade: Shade | null
   categories: Category[]
   onToggle: () => void
   onUpdate: (patch: Patch) => void
@@ -19,7 +19,7 @@ type Menu = 'closed' | 'main' | 'category' | 'date'
 
 const menuItem = 'flex min-h-10 w-full items-center px-3 text-left text-sm hover:bg-surface-2'
 
-export function TodoRow({ todo, color, categories, onToggle, onUpdate, onRemove }: Props) {
+export function TodoRow({ todo, shade, categories, onToggle, onUpdate, onRemove }: Props) {
   const t = useT()
   const [menu, setMenu] = useState<Menu>('closed')
   const [editing, setEditing] = useState(false)
@@ -33,10 +33,10 @@ export function TodoRow({ todo, color, categories, onToggle, onUpdate, onRemove 
     return () => document.removeEventListener('keydown', onKey)
   }, [menu])
 
-  const cls = color ? PALETTE_CLASS[color] : null
+  // filled box uses the shade itself; the thin outline uses the lifted text shade so light shades stay visible
   const box = todo.done
-    ? `${cls ? cls.fill : 'bg-ink-faint'} text-white`
-    : `border-[1.5px] bg-transparent ${cls ? cls.border : 'border-line-strong'}`
+    ? shade ? `${SHADE_CLASS[shade].fill} ${SHADE_CLASS[shade].on}` : 'bg-ink-faint text-white'
+    : `border-[1.5px] bg-transparent ${shade ? SHADE_CLASS[textShade(shade)].border : 'border-line-strong'}`
 
   const commitTitle = () => {
     const clean = draft.trim()
@@ -87,7 +87,7 @@ export function TodoRow({ todo, color, categories, onToggle, onUpdate, onRemove 
                 {categories.map((c) => (
                   <button key={c.id} type="button" role="menuitemradio" aria-checked={todo.categoryId === c.id} className={`${menuItem} gap-2`}
                     onClick={() => { onUpdate({ categoryId: c.id }); setMenu('closed') }}>
-                    <span className={`h-2.5 w-2.5 rounded-[2px] ${PALETTE_CLASS[c.color].fill}`} />{c.name}
+                    <span className={`h-2.5 w-2.5 rounded-[2px] ${SHADE_CLASS[c.shade].fill}`} />{c.name}
                   </button>
                 ))}
                 <button type="button" role="menuitemradio" aria-checked={todo.categoryId === null} className={`${menuItem} gap-2`}

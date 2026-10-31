@@ -5,8 +5,8 @@ import type { Grades } from './useGrades'
 
 const ROWS = [
   { key: 'total', labelKey: 'grades.reqTotal', color: 'var(--color-ink)' },
-  { key: 'major', labelKey: 'grades.reqMajor', color: 'var(--color-sky)' },
-  { key: 'liberal', labelKey: 'grades.reqLiberal', color: 'var(--color-mint)' },
+  { key: 'major', labelKey: 'grades.reqMajor', color: 'var(--color-s5)' },
+  { key: 'liberal', labelKey: 'grades.reqLiberal', color: 'var(--color-s3)' },
 ] as const
 
 export function GradGauges({ g }: { g: Grades }) {

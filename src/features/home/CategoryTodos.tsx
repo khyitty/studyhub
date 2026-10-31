@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { useT } from '../../i18n/useT'
-import { PALETTE_CLASS, type TodoGroup } from '../../lib/categories'
+import type { TodoGroup } from '../../lib/categories'
+import { SHADE_CLASS, textShade } from '../../lib/theme'
 import { formatShortDate } from '../../lib/dates'
 import type { Category, Todo } from '../../lib/types'
 import { TodoRow } from '../todos/TodoRow'
@@ -72,14 +73,14 @@ export function CategoryTodos({ groups, categories, selected, isToday, stats, on
       </header>
       <div className="mt-2 space-y-5">
         {groups.map((g) => {
-          const color = g.category?.color ?? null
+          const shade = g.category?.shade ?? null
           const label = g.category ? g.category.name : t('home.other')
           return (
             <div key={g.id}>
-              <h3 className={`text-xs font-bold ${color ? PALETTE_CLASS[color].text : 'text-ink-muted'}`}>{label}</h3>
+              <h3 className={`text-xs font-bold ${shade ? SHADE_CLASS[textShade(shade)].text : 'text-ink-muted'}`}>{label}</h3>
               <ul className="mt-1">
                 {g.todos.map((todo) => (
-                  <TodoRow key={todo.id} todo={todo} color={color} categories={categories}
+                  <TodoRow key={todo.id} todo={todo} shade={shade} categories={categories}
                     onToggle={() => onToggle(todo.id)} onUpdate={(p) => onUpdate(todo.id, p)} onRemove={() => onRemove(todo.id)} />
                 ))}
                 <AddRow onAdd={(title) => onAdd(title, g.category?.id ?? null)} />

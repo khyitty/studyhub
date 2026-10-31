@@ -1,18 +1,18 @@
 import type { DocumentData } from 'firebase/firestore'
-import { PALETTE_CLASS } from '../../lib/categories'
+import { SHADE_CLASS, textShade } from '../../lib/theme'
 import { isBetween, weekdayOf } from '../../lib/dates'
-import type { PaletteColor, ScheduleItem, ScheduleKind } from '../../lib/types'
+import type { ScheduleItem, ScheduleKind, Shade } from '../../lib/types'
 
 export type { ScheduleItem, ScheduleKind }
 
 export const KINDS: ScheduleKind[] = ['class', 'research', 'work', 'other']
 
-/** Pastel color per kind (shared by timetable blocks and the home schedule list). */
-export const KIND_COLOR: Record<ScheduleKind, PaletteColor> = { class: 'sky', research: 'mint', work: 'butter', other: 'lilac' }
+/** Theme shade per kind (shared by timetable blocks and the home schedule list). */
+export const KIND_SHADE: Record<ScheduleKind, Shade> = { class: 2, research: 4, work: 1, other: 5 }
 
-/** Tailwind classes per kind, derived from the pastel palette: block background, darker text, left border. */
+/** Tailwind classes per kind: block background (shade), text that sits on it, left border (lifted text shade). */
 export const KIND_STYLE: Record<ScheduleKind, { bg: string; text: string; border: string }> = Object.fromEntries(
-  KINDS.map((k) => { const c = PALETTE_CLASS[KIND_COLOR[k]]; return [k, { bg: c.fill, text: c.text, border: c.border }] }),
+  KINDS.map((k) => { const s = KIND_SHADE[k]; return [k, { bg: SHADE_CLASS[s].fill, text: SHADE_CLASS[s].on, border: SHADE_CLASS[textShade(s)].border }] }),
 ) as Record<ScheduleKind, { bg: string; text: string; border: string }>
 
 export function toMinutes(hhmm: string): number {

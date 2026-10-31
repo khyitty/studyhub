@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { useT } from '../../i18n/useT'
-import { PALETTE_CLASS } from '../../lib/categories'
-import { KIND_COLOR, toMinutes, type ScheduleItem } from '../timetable/schedule'
+import { SHADE_CLASS, textShade } from '../../lib/theme'
+import { KIND_SHADE, toMinutes, type ScheduleItem } from '../timetable/schedule'
 
 function nowMinutes() {
   const d = new Date()
@@ -33,7 +33,7 @@ export function TodaySchedule({ items }: { items: ScheduleItem[] }) {
             return (
               <li key={it.id} className={`flex items-center gap-3 py-1.5 text-[13px] ${past ? 'text-ink-faint' : ''}`}>
                 <span className={`w-11 shrink-0 text-xs tabular-nums ${past ? '' : 'text-ink-muted'}`}>{it.start}</span>
-                <span className={`h-[26px] w-[3px] shrink-0 ${PALETTE_CLASS[KIND_COLOR[it.kind]].fill}`} />
+                <span className={`h-[26px] w-[3px] shrink-0 ${SHADE_CLASS[textShade(KIND_SHADE[it.kind])].fill}`} />
                 <span className="min-w-0 flex-1">
                   <span className={`block truncate ${live ? 'font-bold' : ''}`}>{it.title}</span>
                   {it.place && <span className="block truncate text-[11px] text-ink-muted">{it.place}</span>}

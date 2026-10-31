@@ -1,7 +1,7 @@
-import { groupTodos, shouldSeedCategories, OTHER_GROUP_ID, DEFAULT_CATEGORIES } from './categories'
+import { groupTodos, shouldSeedCategories, normalizeCategory, OTHER_GROUP_ID, DEFAULT_CATEGORIES } from './categories'
 import type { Category, Todo } from './types'
 
-const cat = (id: string, order: number): Category => ({ id, name: id, color: 'sky', order })
+const cat = (id: string, order: number): Category => ({ id, name: id, shade: 2, order })
 const todo = (id: string, categoryId: string | null): Todo => ({ id, title: id, date: '2026-10-29', done: false, doneAt: null, source: null, createdAt: id, categoryId })
 
 describe('groupTodos', () => {
@@ -28,11 +28,18 @@ describe('shouldSeedCategories', () => {
     expect(shouldSeedCategories({ categoriesSeeded: false }, [], true, false)).toBe(false)
     expect(shouldSeedCategories({ categoriesSeeded: false }, [], false, true)).toBe(false)
   })
-  test('default categories are 공부/연구/대학원', () => {
-    expect(DEFAULT_CATEGORIES.map((c) => [c.name, c.color])).toEqual([['공부', 'sky'], ['연구', 'mint'], ['대학원', 'pink']])
+  test('default categories: 공부 2, 연구 3, 대학원 4', () => {
+    expect(DEFAULT_CATEGORIES.map((c) => [c.name, c.shade])).toEqual([['공부', 2], ['연구', 3], ['대학원', 4]])
   })
 })
 
 test('default categories carry fixed ids so seeding twice overwrites instead of duplicating', () => {
   expect(DEFAULT_CATEGORIES.map((c) => c.id)).toEqual(['seed-study', 'seed-research', 'seed-grad'])
+})
+
+test('normalizeCategory: legacy color → shade, numeric shade kept, junk → 2', () => {
+  expect(normalizeCategory({ name: 'a', color: 'mint', order: 0 }, 'x').shade).toBe(3)
+  expect(normalizeCategory({ name: 'a', shade: 6, order: 0 }, 'x').shade).toBe(6)
+  expect(normalizeCategory({ name: 'a', color: 'red', order: 0 }, 'x').shade).toBe(2)
+  expect(normalizeCategory({ name: 'a', shade: 9, order: 0 }, 'x').shade).toBe(2)
 })

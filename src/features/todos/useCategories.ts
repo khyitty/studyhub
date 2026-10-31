@@ -4,7 +4,7 @@ import { db } from '../../firebase'
 import { useUid } from '../auth/AuthProvider'
 import { useUserCollection } from '../../data/useUserCollection'
 import { normalizeCategory } from '../../lib/categories'
-import type { Category, PaletteColor } from '../../lib/types'
+import type { Category, Shade } from '../../lib/types'
 
 const BATCH = 450
 
@@ -13,9 +13,9 @@ export function useCategories() {
   const col = useUserCollection<Category>('categories', normalizeCategory)
   const categories = useMemo(() => [...col.items].sort((a, b) => a.order - b.order), [col.items])
 
-  const add = useCallback(async (name: string, color: PaletteColor, order?: number) => {
+  const add = useCallback(async (name: string, shade: Shade, order?: number) => {
     const next = categories.length ? Math.max(...categories.map((c) => c.order)) + 1 : 0
-    return col.add({ name: name.trim(), color, order: order ?? next })
+    return col.add({ name: name.trim(), shade, order: order ?? next })
   }, [col, categories])
 
   /** Idempotent create with a fixed id (used for the default seed). */
@@ -24,7 +24,7 @@ export function useCategories() {
     return setDoc(doc(db, 'users', uid, 'categories', id), data)
   }, [uid])
 
-  const update = useCallback((id: string, patch: Partial<Pick<Category, 'name' | 'color'>>) => col.update(id, patch), [col])
+  const update = useCallback((id: string, patch: Partial<Pick<Category, 'name' | 'shade'>>) => col.update(id, patch), [col])
 
   /** Delete a category; todos pointing at it become "other" (categoryId null). */
   const remove = useCallback(async (id: string) => {

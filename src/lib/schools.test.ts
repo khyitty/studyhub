@@ -1,4 +1,4 @@
-import { dday, ddayLabel, filterSchools, nearestDeadlines, normalizeSchool, recsStatus, sortSchools, toeflStatus } from './schools'
+import { dday, ddayLabel, filterSchools, nearestDeadlines, normalizeSchool, recsStatus, sortSchools, toeflStatus , STATUS_COLOR } from './schools'
 import type { School } from './types'
 const s = (id: string, deadline: string, status: School['status'] = 'preparing'): School =>
   ({ ...normalizeSchool({ name: id, program: 'Stat PhD', deadline, status }, id) })
@@ -43,4 +43,8 @@ test('gradSubtitle', () => {
   expect(gradSubtitle([], '2026-10-29', t)).toBe('')
   expect(gradSubtitle([s('a', '2026-10-01')], '2026-10-29', t)).toBe('1개 학교')
   expect(gradSubtitle([s('Stanford', '2026-12-01'), s('b', '2026-12-10')], '2026-10-29', t)).toBe('2개 학교 · 가장 가까운 마감 D-33 (Stanford)')
+})
+
+test('status colors are theme shades (interested/rejected uncolored)', () => {
+  expect(STATUS_COLOR).toEqual({ interested: null, preparing: 2, submitted: 4, accepted: 6, rejected: null })
 })

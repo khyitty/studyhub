@@ -2,8 +2,7 @@ import { useMemo, useState } from 'react'
 import { IconChevronLeft, IconChevronRight } from '../../components/icons'
 import { useT } from '../../i18n/useT'
 import { addDays, startOfWeek, todayISO } from '../../lib/dates'
-import { PALETTE_CLASS } from '../../lib/categories'
-import { KIND_COLOR, KIND_STYLE, itemsOnDate, toMinutes, type ScheduleItem } from './schedule'
+import { KIND_STYLE, itemsOnDate, toMinutes, type ScheduleItem } from './schedule'
 
 const HOUR_PX = 44
 
@@ -84,11 +83,11 @@ export function WeekView({ items, onPick }: Props) {
                 const st = KIND_STYLE[item.kind]
                 return (
                   <button key={item.id} type="button" onClick={() => onPick(item)}
-                    className={`absolute overflow-hidden rounded-card border-l-[3px] px-1.5 py-0.5 text-left text-[11px] leading-tight text-ink ${PALETTE_CLASS[KIND_COLOR[item.kind]].borderText} ${st.bg}`}
+                    className={`absolute overflow-hidden rounded-card border-l-[3px] px-1.5 py-0.5 text-left text-[11px] leading-tight ${st.text} ${st.border} ${st.bg}`}
                     style={{ top: top + 1, height: Math.max(h - 2, 18), left: `calc(${(lane / lanes) * 100}% + 2px)`, width: `calc(${100 / lanes}% - 4px)` }}
                     title={`${item.title} ${item.start}–${item.end}`}>
                     <span className="block truncate font-bold">{item.title}</span>
-                    {h >= 36 && <span className="block truncate text-ink/70">{item.place || `${item.start}–${item.end}`}</span>}
+                    {h >= 36 && <span className="block truncate opacity-70">{item.place || `${item.start}–${item.end}`}</span>}
                   </button>
                 )
               })}

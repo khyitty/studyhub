@@ -80,7 +80,7 @@ export function ScheduleForm({ open, onClose, item, defaultDate, onSave, onDelet
           <div className="flex flex-wrap gap-2">
             {KINDS.map((k: ScheduleKind) => (
               <button key={k} type="button" aria-pressed={d.kind === k} onClick={() => set('kind', k)}
-                className={`min-h-10 rounded-pill px-3 text-sm font-semibold text-ink transition ${KIND_STYLE[k].bg} ${d.kind === k ? 'ring-2 ring-ink ring-offset-1 ring-offset-surface' : 'opacity-70 hover:opacity-100'}`}>
+                className={`min-h-10 rounded-pill px-3 text-sm font-semibold transition ${KIND_STYLE[k].bg} ${KIND_STYLE[k].text} ${d.kind === k ? 'ring-2 ring-ink ring-offset-1 ring-offset-surface' : 'opacity-70 hover:opacity-100'}`}>
                 {t(`timetable.${k}`)}
               </button>
             ))}

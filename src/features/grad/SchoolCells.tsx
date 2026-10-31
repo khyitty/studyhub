@@ -1,6 +1,6 @@
 import { Tag } from '../../components/ui'
 import { useT } from '../../i18n/useT'
-import { PALETTE_CLASS } from '../../lib/categories'
+import { SHADE_CLASS } from '../../lib/theme'
 import { formatShortDate } from '../../lib/dates'
 import { STATUS_COLOR, dday, ddayLabel, recsStatus, toeflStatus } from '../../lib/schools'
 import type { GreReq, School, SchoolStatus, SopState } from '../../lib/types'
@@ -53,7 +53,7 @@ export function StatusCell({ status }: { status: SchoolStatus }) {
   const color = STATUS_COLOR[status]
   return (
     <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-      <span className={`h-2 w-2 rounded-[1px] ${color ? PALETTE_CLASS[color].fill : 'bg-ink-faint'}`} />
+      <span className={`h-2 w-2 rounded-[1px] ${color ? SHADE_CLASS[color].fill : 'bg-ink-faint'}`} />
       {t(`grad.s_${status}`)}
     </span>
   )

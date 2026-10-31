@@ -78,7 +78,7 @@ export function MonthView({ items, selected, onSelect, onPick }: Props) {
                       <span className="block truncate font-semibold">{it.title}</span>
                       <span className="block text-[11px] text-ink-muted">{it.start}–{it.end}{it.place ? ` · ${it.place}` : ''}</span>
                     </span>
-                    <span className={`rounded-pill px-2 py-0.5 text-[11px] font-semibold text-ink ${st.bg}`}>{t(`timetable.${it.kind}`)}</span>
+                    <span className={`rounded-pill px-2 py-0.5 text-[11px] font-semibold ${st.text} ${st.bg}`}>{t(`timetable.${it.kind}`)}</span>
                   </button>
                 </li>
               )

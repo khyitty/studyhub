@@ -46,8 +46,8 @@ describe('itemsOnDate', () => {
   })
 })
 
-import { KIND_COLOR, KIND_STYLE } from './schedule'
-test('schedule kinds map to pastel palette classes', () => {
-  expect(KIND_COLOR).toEqual({ class: 'sky', research: 'mint', work: 'butter', other: 'lilac' })
-  expect(KIND_STYLE.class).toEqual({ bg: 'bg-sky', text: 'text-sky-text', border: 'border-sky' })
+import { KIND_SHADE, KIND_STYLE } from './schedule'
+test('schedule kinds map to theme shades; borders use the lifted text shade', () => {
+  expect(KIND_SHADE).toEqual({ class: 2, research: 4, work: 1, other: 5 })
+  expect(KIND_STYLE.work).toEqual({ bg: 'bg-s1', text: 'text-s1-on', border: 'border-s4' })
 })

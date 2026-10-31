@@ -1,16 +1,17 @@
 import type { DocumentData } from 'firebase/firestore'
 import { fromISO } from './dates'
-import type { GreReq, PaletteColor, School, SchoolStatus, SopState } from './types'
+import type { GreReq, School, SchoolStatus, Shade, SopState } from './types'
 
 export const SCHOOL_STATUSES: SchoolStatus[] = ['interested', 'preparing', 'submitted', 'accepted', 'rejected']
 const GRE_REQS: GreReq[] = ['required', 'optional', 'none']
 const SOP_STATES: SopState[] = ['none', 'todo', 'draft', 'done']
 
-export const STATUS_COLOR: Record<SchoolStatus, PaletteColor | null> = {
+/** Theme shade per status; null = uncolored (ink-faint swatch). */
+export const STATUS_COLOR: Record<SchoolStatus, Shade | null> = {
   interested: null,
-  preparing: 'butter',
-  submitted: 'mint',
-  accepted: 'sky',
+  preparing: 2,
+  submitted: 4,
+  accepted: 6,
   rejected: null,
 }
 
