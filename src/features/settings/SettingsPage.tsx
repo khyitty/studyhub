@@ -8,6 +8,8 @@ import { isTermCode } from '../../lib/parsers/termCode'
 import { GRADES, type Grade } from '../../lib/types'
 import { GPA_EXCLUDED } from '../../lib/gpa'
 import { exportAll, importAll } from './exportImport'
+import { HuePicker } from './HuePicker'
+import { CoverPicker } from './CoverPicker'
 
 const SCALE_GRADES = GRADES.filter((g) => !GPA_EXCLUDED.includes(g))
 
@@ -91,6 +93,14 @@ export function SettingsPage() {
               <Segmented label={t('settings.theme')} value={profile.theme} onChange={(theme) => void update({ theme })}
                 options={[{ value: 'system', label: t('settings.themeSystem') }, { value: 'light', label: t('settings.themeLight') }, { value: 'dark', label: t('settings.themeDark') }]} />
             </div>
+            <div>
+              <span className="mb-1 block text-sm font-semibold">{t('settings.themeHue')}</span>
+              <HuePicker label={t('settings.themeHue')} value={profile.themeHue} onChange={(themeHue) => void update({ themeHue })} />
+            </div>
+            <div>
+              <span className="mb-1 block text-sm font-semibold">{t('settings.cover')}</span>
+              <CoverPicker label={t('settings.cover')} value={profile.cover} onChange={(cover) => void update({ cover })} />
+            </div>
           </div>
         </Card>
 
@@ -108,12 +118,8 @@ export function SettingsPage() {
         </Card>
 
         <Card title={t('settings.gradReq')}>
-          <div className="grid grid-cols-3 gap-3">
-            {(['total', 'major', 'liberal'] as const).map((k) => (
-              <Input key={k} label={t(`settings.req${k[0].toUpperCase()}${k.slice(1)}`)} type="number" inputMode="numeric" min={0}
-                value={draft.gradReq[k] || ''} onChange={(e) => set('gradReq', { ...draft.gradReq, [k]: num(e.target.value) })} />
-            ))}
-          </div>
+          <Input label={t('settings.reqTotal')} type="number" inputMode="numeric" min={0} className="sm:w-40"
+            value={draft.gradReq.total || ''} onChange={(e) => set('gradReq', { ...draft.gradReq, total: num(e.target.value) })} />
           <p className="mt-2 text-xs text-ink-muted">{t('settings.gradReqHint')}</p>
           <div className="mt-4">
             <Input label={t('settings.portalGpa')} type="number" inputMode="decimal" step="0.01" min={0} max={4.5} hint={t('settings.portalGpaHint')}
