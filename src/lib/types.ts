@@ -96,3 +96,25 @@ export interface School {
   professors: { name: string; note: string }[]
   createdAt: string
 }
+
+export type PaperStatus = 'toread' | 'reading' | 'read'
+
+export interface Paper {
+  id: string
+  title: string
+  authors: string[]
+  year: number | null
+  venue: string
+  doi: string
+  url: string
+  arxivId: string
+  tags: string[]
+  status: PaperStatus
+  /** one-line summary */
+  summary: string
+  /** key quotes, one per entry */
+  quotes: string[]
+  notes: string
+  addedAt: string
+  readAt: string | null
+}
